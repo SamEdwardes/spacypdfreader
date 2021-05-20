@@ -2,6 +2,18 @@
 
 Extract text from pdfs using spaCy and capture the page number as a spacy extension.
 
+**Links**
+
+- [GitHub](https://github.com/SamEdwardes/spaCyPDFreader)
+- [PyPi](https://pypi.org/project/spacypdfreader/)
+
+**Table of Contents**
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Implementation Notes](#implementation-notes)
+- [API Reference](#api-reference)
+
 ## Installation
 
 ```bash
@@ -10,88 +22,94 @@ pip install spacypdfreader
 
 ## Usage
 
-
 ```python
-import spacy
-from spacypdfreader import pdf_reader
-
-nlp = spacy.load("en_core_web_sm")
-doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+>>> import spacy
+>>> from spacypdfreader import pdf_reader
+>>>
+>>> nlp = spacy.load("en_core_web_sm")
+>>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Extracting text from <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span> pdf pages<span style="color: #808000; text-decoration-color: #808000">...</span>
-</pre>
-
-
-
-    100%|██████████| 4/4 [00:00<00:00,  5.97it/s]
-
-
+Each token will now have an additional extension `._.page_number` that indcates the pdf page number the token came from.
 
 ```python
-doc[0:10]
+>>> [print(f"Token: `{token}`, page number  {token._.page_number}") for token in doc[0:3]]
+Token: `Test`, page number  1
+Token: `PDF`, page number  1
+Token: `01`, page number  1
+[None, None, None]
 ```
 
+## Implementation Notes
 
+spaCyPDFreader behaves a litte bit different than your typical [spaCy custom component](https://spacy.io/usage/processing-pipelines#custom-components). Typically a spaCy component should receive and return a `spacy.tokens.Doc` object.
 
+spaCyPDFreader breaks this convention because the text must first be extracted from the PDF. Instead `pdf_reader` takes a path to a PDF file and a `spacy.Language` object as parameters and returns a `spacy.tokens.Doc` object. This allows users an easy way to extract text from PDF files while still allowing them use and customize all of the features spacy has to offer by allowing you to pass in the `spacy.Language` object.
 
-    Test PDF 01
-    
-    This is a simple test pdf
-
-
-
+Example of a "traditional" spaCy pipeline component [negspaCy](https://spacy.io/universe/project/negspacy):
 
 ```python
-for token in doc[0:10]:
-    print(f"Token: `{token}`, page number  {token._.page_number}")
+>>> import spacy
+>>> from negspacy.negation import Negex
+>>> 
+>>> nlp = spacy.load("en_core_web_sm")
+>>> nlp.add_pipe("negex", config={"ent_types":["PERSON","ORG"]})
+>>> 
+>>> doc = nlp("She does not like Steve Jobs but likes Apple products.")
 ```
 
-    Token: `Test`, page number  1
-    Token: `PDF`, page number  1
-    Token: `01`, page number  1
-    Token: `
-    
-    `, page number  1
-    Token: `This`, page number  1
-    Token: `is`, page number  1
-    Token: `a`, page number  1
-    Token: `simple`, page number  1
-    Token: `test`, page number  1
-    Token: `pdf`, page number  1
-
-
+Example of `spaCyPDFreader` usage:
 
 ```python
-doc[-10:]
+>>> import spacy
+>>> from spacypdfreader import pdf_reader
+>>>
+>>> nlp = spacy.load("en_core_web_sm")
+>>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 ```
 
+Note that the `nlp.add_pipe` is not used by spaCyPDFreader.
+
+## API Reference
+
+### spacypdfreader.pdf_reader
+
+Extract text from PDF files directly into a `spacy.Doc` object while capturing the page number of each token.
 
 
+| Name        | Type               | Description                                                                                |
+| ------------- | -------------------- | -------------------------------------------------------------------------------------------- |
+| `pdf_path`  | `str`              | Path to a PDF file.                                                                        |
+| `nlp`       | `spacy.Language`   | A spaCy Language object with a loaded pipeline. For example`spacy.load("en_core_web_sm")`. |
+| **RETURNS** | `spacy.tokens.Doc` | A spacy Doc object with the custom extension`._.page_number`.                              |
 
-    U3D or PRC and various other data formats.[15][16][17]
-    
+When using `spacypdfreader.pdf_reader` a `spacy.tokens.Doc` object with custom extensions is returned.
 
 
+| Extension   | Type   | Description   | Default   |
+| ------ | ------ | ------ | ------ |
+| token._.page_number |  int      | The PDF page number in which the token was extracted from. The first page is `1`.      |  `None`      |
 
-
+**Example**
 
 ```python
-for token in doc[-10:]:
-    print(f"Token: `{token}`, page number  {token._.page_number}")
+>>> import spacy
+>>> from spacypdfreader import pdf_reader
+>>>
+>>> nlp = spacy.load("en_core_web_sm")
+>>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 ```
 
-    Token: `U3D`, page number  4
-    Token: `or`, page number  4
-    Token: `PRC`, page number  4
-    Token: `and`, page number  4
-    Token: `various`, page number  4
-    Token: `other`, page number  4
-    Token: `data`, page number  4
-    Token: `formats.[15][16][17`, page number  4
-    Token: `]`, page number  4
-    Token: `
-    
-    `, page number  4
+Each token will now have an additional extension `._.page_number` that indcates the pdf page number the token came from.
+
+```python
+>>> [print(f"Token: `{token}`, page number  {token._.page_number}") for token in doc[0:3]]
+Token: `Test`, page number  1
+Token: `PDF`, page number  1
+Token: `01`, page number  1
+[None, None, None]
+```
 

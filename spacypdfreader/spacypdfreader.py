@@ -28,10 +28,10 @@ def get_number_of_pages(pdf_path: str) -> int:
 def pdf_reader(pdf_path: str, nlp: spacy.Language) -> spacy.tokens.Doc:
     pdf_path = os.path.normpath(pdf_path)
     num_pages = get_number_of_pages(pdf_path)
-    console.print(f"Extracting text from {num_pages} pdf pages...")
+    # console.print(f"Extracting text from {num_pages} pdf pages...")
     
     texts = []
-    for page_num in tqdm(range(num_pages)):
+    for page_num in track(range(num_pages), f"Extracting text from {num_pages} pdf pages..."):
         text = extract_text(pdf_path, page_numbers=[page_num])
         texts.append(text)
         

@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "A PDF to text extraction pipeline component for spaCy."
 authors = ["SamEdwardes <edwardes.s@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+repository = "https://github.com/SamEdwardes/spaCyPDFreader"
+keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
