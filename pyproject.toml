@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spacypdfreader"
-version = "0.1.0"
+version = "0.1.1"
 description = "A PDF to text extraction pipeline component for spaCy."
 authors = ["SamEdwardes <edwardes.s@gmail.com>"]
 license = "MIT"
@@ -9,17 +9,15 @@ repository = "https://github.com/SamEdwardes/spaCyPDFreader"
 keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-spacy = "^3.0.6"
-rich = "^10.2.2"
-"pdfminer.six" = "^20201018"
+python = "^3.7"
+spacy = "^3.0.0"
+rich = "^10.15.2"
+"pdfminer.six" = "^20211012"
 
 [tool.poetry.dev-dependencies]
-jupyterlab = "^3.0.16"
-pytest = "^6.2.4"
-ipywidgets = "^7.6.3"
+pytest = "^6.2.5"
 en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl"}
-nbconvert = "^6.0.7"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
