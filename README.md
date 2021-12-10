@@ -31,7 +31,7 @@ pip install spacypdfreader
 Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
 ```
 
-Each token will now have an additional extension `._.page_number` that indcates the pdf page number the token came from.
+Each token will now have an additional extension `._.page_number` that indicates the pdf page number the token came from.
 
 ```python
 >>> [print(f"Token: `{token}`, page number  {token._.page_number}") for token in doc[0:3]]
@@ -43,7 +43,7 @@ Token: `01`, page number  1
 
 ## Implementation Notes
 
-spaCyPDFreader behaves a litptle bit different than your typical [spaCy custom component](https://spacy.io/usage/processing-pipelines#custom-components). Typically a spaCy component should receive and return a `spacy.tokens.Doc` object.
+spaCyPDFreader behaves a little bit different than your typical [spaCy custom component](https://spacy.io/usage/processing-pipelines#custom-components). Typically a spaCy component should receive and return a `spacy.tokens.Doc` object.
 
 spaCyPDFreader breaks this convention because the text must first be extracted from the PDF. Instead `pdf_reader` takes a path to a PDF file and a `spacy.Language` object as parameters and returns a `spacy.tokens.Doc` object. This allows users an easy way to extract text from PDF files while still allowing them use and customize all of the features spacy has to offer by allowing you to pass in the `spacy.Language` object.
 
