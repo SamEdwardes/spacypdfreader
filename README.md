@@ -1,6 +1,6 @@
-# spaCyPDFreader
+# spacypdfreader
 
-Extract text from pdfs using spaCy and capture the page number as a spacy extension.
+Extract text from PDFs using spaCy and capture the page number as a spaCy extension.
 
 **Links**
 
@@ -43,7 +43,7 @@ Token: `01`, page number  1
 
 ## Implementation Notes
 
-spaCyPDFreader behaves a litte bit different than your typical [spaCy custom component](https://spacy.io/usage/processing-pipelines#custom-components). Typically a spaCy component should receive and return a `spacy.tokens.Doc` object.
+spaCyPDFreader behaves a litptle bit different than your typical [spaCy custom component](https://spacy.io/usage/processing-pipelines#custom-components). Typically a spaCy component should receive and return a `spacy.tokens.Doc` object.
 
 spaCyPDFreader breaks this convention because the text must first be extracted from the PDF. Instead `pdf_reader` takes a path to a PDF file and a `spacy.Language` object as parameters and returns a `spacy.tokens.Doc` object. This allows users an easy way to extract text from PDF files while still allowing them use and customize all of the features spacy has to offer by allowing you to pass in the `spacy.Language` object.
 
@@ -75,10 +75,10 @@ Note that the `nlp.add_pipe` is not used by spaCyPDFreader.
 ## API Reference
 
 ### Functions
+
 ### `spacypdfreader.pdf_reader`
 
 Extract text from PDF files directly into a `spacy.Doc` object while capturing the page number of each token.
-
 
 | Name        | Type               | Description                                                                                |
 | ------------- | -------------------- | -------------------------------------------------------------------------------------------- |
@@ -109,6 +109,3 @@ When using `spacypdfreader.pdf_reader` a `spacy.tokens.Doc` object with custom e
 | Extension   | Type   | Description   | Default   |
 | ------ | ------ | ------ | ------ |
 | token._.page_number |  int      | The PDF page number in which the token was extracted from. The first page is `1`.      |  `None`      |
-
-
-
