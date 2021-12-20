@@ -176,7 +176,6 @@ spacy = ">=3.0.0,<3.1.0"
 [package.source]
 type = "url"
 url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl"
-
 [[package]]
 name = "idna"
 version = "3.3"
@@ -292,6 +291,17 @@ all = ["google-cloud-storage (>=1.26.0,<2.0.0)", "boto3", "pytest", "pytest-cove
 gcs = ["google-cloud-storage (>=1.26.0,<2.0.0)"]
 s3 = ["boto3"]
 test = ["pytest", "pytest-coverage", "mock", "typer-cli"]
+
+[[package]]
+name = "pdf2image"
+version = "1.16.0"
+description = "A wrapper around the pdftoppm and pdftocairo command line tools to convert PDF to a PIL Image list."
+category = "main"
+optional = true
+python-versions = "*"
+
+[package.dependencies]
+pillow = "*"
 
 [[package]]
 name = "pdfminer.six"
@@ -694,10 +704,13 @@ python-versions = ">=3.6"
 docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
+[extras]
+pytesseract = ["pytesseract", "Pillow", "pdf2image"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "d62b0229ed5d169f440418cc7b3d1ef459e22166eb0b90a6557b5e0ca181bab5"
+content-hash = "520ed5b17c4125d4e3fdcdb422cc38712d70a1d1305980162a5bc82576acecdb"
 
 [metadata.files]
 atomicwrites = [
@@ -1001,6 +1014,10 @@ pathspec = [
 pathy = [
     {file = "pathy-0.6.1-py3-none-any.whl", hash = "sha256:25fd04cec6393661113086730ce69c789d121bea83ab1aa18452e8fd42faf29a"},
     {file = "pathy-0.6.1.tar.gz", hash = "sha256:838624441f799a06b446a657e4ecc9ebc3fdd05234397e044a7c87e8f6e76b1c"},
+]
+pdf2image = [
+    {file = "pdf2image-1.16.0-py3-none-any.whl", hash = "sha256:84f79f2b8fad943e36323ea4e937fcb05f26ded0caa0a01181df66049e42fb65"},
+    {file = "pdf2image-1.16.0.tar.gz", hash = "sha256:d58ed94d978a70c73c2bb7fdf8acbaf2a7089c29ff8141be5f45433c0c4293bb"},
 ]
 "pdfminer.six" = [
     {file = "pdfminer.six-20211012-py3-none-any.whl", hash = "sha256:d3efb75c0249b51c1bf795e3a8bddf1726b276c77bf75fb136adea471ee2825b"},

@@ -1,3 +1,7 @@
+"""
+Convert pdf to text using the pdfminer library.
+"""
+
 import os
 
 from pdfminer.high_level import extract_text
@@ -15,6 +19,9 @@ def get_number_of_pages(pdf_path: str) -> int:
 
 
 def parser(pdf_path: str, page_number: int, **kwargs):
+    # pdfminer uses zero indexed page numbers. Therefore need to remove 1
+    # from the page count.
+    page_number -= 1
     text = extract_text(pdf_path, page_numbers=[page_number], **kwargs)
     return text
     
