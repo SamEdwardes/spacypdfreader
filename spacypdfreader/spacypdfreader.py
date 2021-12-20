@@ -1,22 +1,32 @@
 import os
-from typing import Callable
 from dataclasses import dataclass, field
+from typing import Callable
 
 import spacy
 from pdfminer.high_level import extract_text
-from rich.console import Console
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfparser import PDFParser
 from rich.progress import track
 from spacy.tokens import Doc, Token
 
-from .parsers.pdfminer import get_number_of_pages
+from .console import console
 from .parsers import pdfminer
 from .parsers.base import BaseParser
 
-console = Console()
-
-
 if not Token.has_extension("page_number"):
     Token.set_extension("page_number", default=None)
+
+  
+def get_number_of_pages(pdf_path: str) -> int:
+    """
+    Find the number of pages in a pdf document.
+    """
+    with open(os.path.normpath(pdf_path), 'rb') as in_file:
+        parser = PDFParser(in_file)
+        doc = PDFDocument(parser)
+        num_pages =  len(list(PDFPage.create_pages(doc)))
+    return num_pages
 
 
 def pdf_reader(
@@ -25,6 +35,22 @@ def pdf_reader(
     pdf_parser: BaseParser = pdfminer.Parser,
     **kwargs
 ) -> spacy.tokens.Doc:
+    """Convert a PDF document to a spaCy Doc object.
+
+    Parameters
+    ----------
+    pdf_path :
+        [description]
+    nlp : 
+        [description]
+    pdf_parser
+        [description], by default pdfminer.Parser
+
+    Returns
+    -------
+    spacy.tokens.Doc
+        [description]
+    """
     
     console.rule(f"{pdf_path}")
     console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
