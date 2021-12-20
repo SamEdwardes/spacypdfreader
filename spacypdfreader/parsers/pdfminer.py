@@ -9,6 +9,10 @@ from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfparser import PDFParser
 
+from rich import inspect
+
+from .base import BaseParser
+
 
 def get_number_of_pages(pdf_path: str) -> int:
     with open(os.path.normpath(pdf_path), 'rb') as in_file:
@@ -18,10 +22,16 @@ def get_number_of_pages(pdf_path: str) -> int:
     return num_pages
 
 
-def parser(pdf_path: str, page_number: int, **kwargs):
-    # pdfminer uses zero indexed page numbers. Therefore need to remove 1
-    # from the page count.
-    page_number -= 1
-    text = extract_text(pdf_path, page_numbers=[page_number], **kwargs)
-    return text
+class Parser(BaseParser):
+    name: str = "pdfminer"
     
+    def pdf_to_text(self, **kwargs) -> str:
+        # pdfminer uses zero indexed page numbers. Therefore need to remove 1
+        # from the page count.
+        self.page_number -= 1
+        text = extract_text(self.pdf_path, page_numbers=[self.page_number], **kwargs)
+        return text
+        
+        
+
+

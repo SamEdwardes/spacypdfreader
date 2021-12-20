@@ -10,6 +10,7 @@ from spacy.tokens import Doc, Token
 
 from .parsers.pdfminer import get_number_of_pages
 from .parsers import pdfminer
+from .parsers.base import BaseParser
 
 console = Console()
 
@@ -21,23 +22,26 @@ if not Token.has_extension("page_number"):
 def pdf_reader(
     pdf_path: str, 
     nlp: spacy.Language, 
-    pdf_to_text_method: Callable = pdfminer.parser, 
+    pdf_parser: BaseParser = pdfminer.Parser,
     **kwargs
 ) -> spacy.tokens.Doc:
     
-    console.rule(f"Converting pdf to text")
-    console.print(f"Using: {pdf_to_text_method}...")
+    console.rule(f"{pdf_path}")
+    console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
     
     pdf_path = os.path.normpath(pdf_path)
     num_pages = get_number_of_pages(pdf_path)
     
+    # Convert pdf to text.
     console.print(f"Extracting text from {num_pages} pdf pages...")
     with console.status("Working..."):
         texts = []
         for page_num in range(1, num_pages + 1):
-            text = pdf_to_text_method(pdf_path, page_num, **kwargs)
+            parser = pdf_parser(pdf_path, page_num)
+            text = parser.pdf_to_text(**kwargs)
             texts.append(text)
 
+    # Convert text to spaCy Doc objects.
     console.print("Converting text to [blue bold]spaCy[/] Doc...")
     with console.status("Working..."):
         docs = [doc for doc in nlp.pipe(texts)]
@@ -48,5 +52,5 @@ def pdf_reader(
                 token._.page_number = page_num
 
             combined_doc = Doc.from_docs(docs)
-    console.print(":white_check_mark: Complete!")
+    console.print(":white_check_mark: [green]Complete!")
     return combined_doc
