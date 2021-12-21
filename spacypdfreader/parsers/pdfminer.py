@@ -2,8 +2,6 @@
 Convert pdf to text using the pdfminer library.
 """
 
-import os
-
 from rich import inspect
 
 from pdfminer.high_level import extract_text

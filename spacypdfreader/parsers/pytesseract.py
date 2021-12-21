@@ -55,7 +55,7 @@ class Parser(BaseParser):
             
             # Convert images to text.
             file_path = os.path.join(tmp_dir, file_name)
-            text = str(image_to_string(Image.open(file_path)))
+            text = str(image_to_string(Image.open(file_path), **kwargs))
         
         return text
         

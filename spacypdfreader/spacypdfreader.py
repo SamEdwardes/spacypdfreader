@@ -77,6 +77,7 @@ def pdf_reader(
             for token in doc:
                 token._.page_number = page_num
 
-            combined_doc = Doc.from_docs(docs)
+        combined_doc = Doc.from_docs(docs)
+        
     console.print(":white_check_mark: [green]Complete!")
     return combined_doc
