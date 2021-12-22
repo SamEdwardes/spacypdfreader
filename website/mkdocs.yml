@@ -1,0 +1,5 @@
+site_name: spacypdfreader
+site_description: PDF to spaCy text extraction.
+theme:
+  name: material
+
