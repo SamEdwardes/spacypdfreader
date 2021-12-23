@@ -19,9 +19,7 @@ if not Token.has_extension("page_number"):
 
   
 def get_number_of_pages(pdf_path: str) -> int:
-    """
-    Find the number of pages in a pdf document.
-    """
+    """Find the number of pages in a pdf document."""
     with open(os.path.normpath(pdf_path), 'rb') as in_file:
         parser = PDFParser(in_file)
         doc = PDFDocument(parser)
@@ -40,16 +38,16 @@ def pdf_reader(
     Parameters
     ----------
     pdf_path :
-        [description]
+        The path to a PDF file.
     nlp : 
-        [description]
+        The spaCy language object.
     pdf_parser
-        [description], by default pdfminer.Parser
+        The parser to convert PDF file to text. by default pdfminer.Parser
 
     Returns
     -------
     spacy.tokens.Doc
-        [description]
+        A spaCy Doc object.
     """
     
     console.rule(f"{pdf_path}")
