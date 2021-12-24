@@ -9,3 +9,9 @@ The documentation is built using pydoc-markdown. If you make a change to the doc
 ```bash
 pydoc-markdown --server --open
 ```
+
+Create a *requirements.txt file:
+
+```bash
+poetry export --without-hashes --output requirements.txt
+```

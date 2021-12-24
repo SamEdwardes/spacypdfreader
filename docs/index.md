@@ -1,6 +1,6 @@
 # spacypdfreader
 
-Easy PDF to text to *spaCy` text extraction in Python.
+Easy PDF to text to *spaCy* text extraction in Python.
 
 <hr></hr>
 
