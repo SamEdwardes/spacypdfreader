@@ -1,10 +1,7 @@
 [build]
 publish = "site"
 command = """
-restore_home_cache ".cache" "pip cache" &&
-restore_cwd_cache '.venv' 'python virtualenv' &&
-pip3 install -q poetry &&
-poetry config virtualenvs.in-project true &&
-poetry install -v &&
-pydoc-markdownrm build -d site
+curl -sSL https://install.python-poetry.org | python3 - &&
+poetry install &&
+poetry run pydoc-markdownrm build -d site
 """
