@@ -2,6 +2,6 @@
 publish = "site"
 command = """
 pip install -q poetry &&
-poetry install --dev
+poetry install
 poetry run pydoc-markdownrm build -d site
 """
