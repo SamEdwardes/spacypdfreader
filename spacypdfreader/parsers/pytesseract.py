@@ -14,7 +14,6 @@ from PIL import Image
 
 from pytesseract import image_to_string
 
-from ..console import console
 from .base import BaseParser
 
 
