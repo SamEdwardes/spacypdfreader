@@ -1,9 +1,7 @@
 """
 Convert pdf to text using the pytesseract library.
 
-Reference
----------
-https://www.geeksforgeeks.org/python-reading-contents-of-pdf-using-ocr-optical-character-recognition/
+
 """
 
 import os
@@ -17,11 +15,35 @@ from pytesseract import image_to_string
 from .base import BaseParser
 
 
-class Parser(BaseParser):
-    """Convert PDFs to text using pytesseract."""
+class PytesseractParser(BaseParser):
+    """Convert PDFs to text using pytesseract.
+    
+    The pytesseract library has the highest accuracy of all the PDF to text
+    parsers included in spacypdfreader. It takes a different approach than other
+    parsers. It first converts the PDF to an image, then runs an OCR engine on
+    the image to extract the text. pytesseract results in the best quality but
+    can be very slow compared to other parsers.
+    
+    See the [pytesseract](/parsers/#pytesseract) section in the docs for more
+    details.
+    
+    Args:
+        **kwargs: Arbitrary keyword arguments.
+        
+    Reference:
+        - https://www.geeksforgeeks.org/python-reading-contents-of-pdf-using-ocr-optical-character-recognition/
+    """
     name: str = "pytesseract"
     
     def pdf_to_text(self, **kwargs) -> str:
+        """Convert a PDF page to text.
+        
+        Args:
+            **kwargs: Arbitrary keyword arguments.
+
+        Returns:
+            A string respresentation of the PDf page.
+        """        
         with tempfile.TemporaryDirectory() as tmp_dir:
             
             # Convert pdf page to image.

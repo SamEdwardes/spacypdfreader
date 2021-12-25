@@ -9,7 +9,7 @@ from pdfminer.high_level import extract_text
 from .base import BaseParser
 
 
-class Parser(BaseParser):
+class PdfminerParser(BaseParser):
     name: str = "pdfminer"
     
     def pdf_to_text(self, **kwargs) -> str:

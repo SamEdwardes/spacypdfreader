@@ -35,21 +35,17 @@ def pdf_reader(
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
 
-    Parameters
-    ----------
-    pdf_path :
-        The path to a PDF file.
-    nlp : 
-        The spaCy language object.
-    pdf_parser
-        The parser to convert PDF file to text. by default pdfminer.Parser
+    Args:
+        pdf_path: Path to a PDF file.
+        nlp: A spaCy Language object with a loaded pipeline. For example
+            `spacy.load("en_core_web_sm")`.
+        pdf_parser: The parser to convert PDF file to text. Read the docs for
+            more detailsDefaults to pdfminer.Parser.
 
-    Returns
-    -------
-    spacy.tokens.Doc
-        A spaCy Doc object.
-    """
-    
+    Returns:
+        A spacy Doc object with the custom extension
+        `._.page_number`.
+    """        
     console.rule(f"{pdf_path}")
     console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
     

@@ -9,7 +9,7 @@ renderer:
   pages:
     - title: Home
       name: index
-      source: docs/index.md
+      source: README.md
     - title: Parsers
       source: docs/parsers.md
     - title: Contributing
@@ -20,17 +20,24 @@ renderer:
       children:
         - title: spacypdfreader
           contents:
-            - spacypdfreader.spacypdfreader
+            - spacypdfreader.spacypdfreader.pdf_reader
         - title: parsers
-          contents:
-            - spacypdfreader.parsers.base
-            - spacypdfreader.parsers.pdfminer
-            - spacypdfreader.parsers.pytesseract
+          children:
+            - title: spacypdfreader.parsers.base
+              contents:
+              - spacypdfreader.parsers.base.*
+            - title: Spacypdfreader.parsers.pdfminer
+              contents:
+                - spacypdfreader.parsers.pdfminer.*
+            - title: spacypdfreader.parsers.pytesseract
+              contents:
+                - spacypdfreader.parsers.pytesseract.*
 
   mkdocs_config:
-  
+
     site_name: spacypdfreader
     site_description: PDF to spaCy text extraction.
+    site_url: https://spacypdfreader.netlify.app
     repo_url: https://github.com/samedwardes/spacypdfreader
     
     theme:

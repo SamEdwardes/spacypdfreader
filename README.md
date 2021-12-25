@@ -1,26 +1,41 @@
 # spacypdfreader
 
-Extract text from PDFs using spaCy and capture the page number as a spaCy extension.
 
-**Links**
+Easy PDF to text to *spaCy* text extraction in Python.
 
-- [GitHub](https://github.com/SamEdwardes/spaCyPDFreader)
-- [PyPi](https://pypi.org/project/spacypdfreader/)
+<hr></hr>
 
-**Table of Contents**
+**Documentation:** [https://spacypdfreader.netlify.app](https://spacypdfreader.netlify.app)
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Implementation Notes](#implementation-notes)
-- [API Reference](#api-reference)
+**Source code:** [https://github.com/SamEdwardes/spaCyPDFreader](https://github.com/SamEdwardes/spaCyPDFreader)
+
+**PyPi:** [https://pypi.org/project/spacypdfreader/](https://pypi.org/project/spacypdfreader/)
+
+<hr></hr>
+
+*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* each token is annotated with PDF page number which it was extractedf from.
+
+The key features are:
+
+- **PDF to spaCy Doc object:** Convert a PDF document directly into a *spaCy* `Doc` object.
+- **Token._.page_number:** Each *spaCy* token will be annotated with the PDF page number from which it was extracted (`token._.page_number`).
+- **Multiple parsers:** Select between multiple built in PDF to text parsers or bring your own PDF to text parser.
 
 ## Installation
+
+Install *spacypdfreader* using pip:
 
 ```bash
 pip install spacypdfreader
 ```
 
-## Usage
+To install with the required pytesseract dependencies:
+
+```bash
+pip install 'spacypdfreader[pytesseract]'
+```
+
+## Example
 
 ```python
 >>> import spacy
@@ -28,18 +43,13 @@ pip install spacypdfreader
 >>>
 >>> nlp = spacy.load("en_core_web_sm")
 >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
-Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+>>> print(f"{doc[0]} -> page: {doc[0]._.page_number}")
+Test -> page: 1
 ```
 
-Each token will now have an additional extension `._.page_number` that indicates the pdf page number the token came from.
+## What is *spaCy*?
 
-```python
->>> [print(f"Token: `{token}`, page number  {token._.page_number}") for token in doc[0:3]]
-Token: `Test`, page number  1
-Token: `PDF`, page number  1
-Token: `01`, page number  1
-[None, None, None]
-```
+*spaCy* is a natural language processing (NLP) tool. It can be used to perform a variety of NLP tasks. For more informaiton check out the excellent documentation at [spacy.io](spacy.io)
 
 ## Implementation Notes
 
@@ -71,41 +81,3 @@ Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━�
 ```
 
 Note that the `nlp.add_pipe` is not used by spaCyPDFreader.
-
-## API Reference
-
-### Functions
-
-### `spacypdfreader.pdf_reader`
-
-Extract text from PDF files directly into a `spacy.Doc` object while capturing the page number of each token.
-
-| Name        | Type               | Description                                                                                |
-| ------------- | -------------------- | -------------------------------------------------------------------------------------------- |
-| `pdf_path`  | `str`              | Path to a PDF file.                                                                        |
-| `nlp`       | `spacy.Language`   | A spaCy Language object with a loaded pipeline. For example`spacy.load("en_core_web_sm")`. |
-| **RETURNS** | `spacy.tokens.Doc` | A spacy Doc object with the custom extension`._.page_number`.                              |
-
-**Example**
-
-```python
->>> import spacy
->>> from spacypdfreader import pdf_reader
->>>
->>> nlp = spacy.load("en_core_web_sm")
->>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
-Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
->>> [print(f"Token: `{token}`, page number  {token._.page_number}") for token in doc[0:3]]
-Token: `Test`, page number  1
-Token: `PDF`, page number  1
-Token: `01`, page number  1
-[None, None, None]
-```
-
-### Extensions
-
-When using `spacypdfreader.pdf_reader` a `spacy.tokens.Doc` object with custom extensions is returned.
-
-| Extension   | Type   | Description   | Default   |
-| ------ | ------ | ------ | ------ |
-| token._.page_number |  int      | The PDF page number in which the token was extracted from. The first page is `1`.      |  `None`      |
