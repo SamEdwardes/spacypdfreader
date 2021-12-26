@@ -17,21 +17,21 @@ from .parsers.base import BaseParser
 if not Token.has_extension("page_number"):
     Token.set_extension("page_number", default=None)
 
-  
+
 def get_number_of_pages(pdf_path: str) -> int:
     """Find the number of pages in a pdf document."""
-    with open(os.path.normpath(pdf_path), 'rb') as in_file:
+    with open(os.path.normpath(pdf_path), "rb") as in_file:
         parser = PDFParser(in_file)
         doc = PDFDocument(parser)
-        num_pages =  len(list(PDFPage.create_pages(doc)))
+        num_pages = len(list(PDFPage.create_pages(doc)))
     return num_pages
 
 
 def pdf_reader(
-    pdf_path: str, 
-    nlp: spacy.Language, 
+    pdf_path: str,
+    nlp: spacy.Language,
     pdf_parser: BaseParser = pdfminer.Parser,
-    **kwargs
+    **kwargs,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
 
@@ -45,13 +45,13 @@ def pdf_reader(
     Returns:
         A spacy Doc object with the custom extension
         `._.page_number`.
-    """        
+    """
     console.rule(f"{pdf_path}")
     console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
-    
+
     pdf_path = os.path.normpath(pdf_path)
     num_pages = get_number_of_pages(pdf_path)
-    
+
     # Convert pdf to text.
     console.print(f"Extracting text from {num_pages} pdf pages...")
     with console.status("Working..."):
@@ -72,6 +72,6 @@ def pdf_reader(
                 token._.page_number = page_num
 
         combined_doc = Doc.from_docs(docs)
-        
+
     console.print(":white_check_mark: [green]Complete!")
     return combined_doc
