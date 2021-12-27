@@ -1,5 +1,6 @@
 import os
 import tempfile
+from typing import Any
 
 from pdf2image import convert_from_path
 from PIL import Image
@@ -25,17 +26,17 @@ class PytesseractParser(BaseParser):
 
     name: str = "pytesseract"
 
-    def pdf_to_text(self, **kwargs) -> str:
+    def pdf_to_text(self, **kwargs: Any) -> str:
         """Convert a PDF page to text using the `image_to_string` function from
         pytesseract.
 
         Args:
             **kwargs: Arbitrary keyword arguments. See the pytesseract docs for
-            the [`image_to_string`](https://github.com/madmaze/pytesseract)
-            function for the available keyword arguments.
+                the [image_to_string](https://github.com/madmaze/pytesseract)
+                function for the available keyword arguments.
 
         Returns:
-            A string respresentation of the PDf page.
+            A string respresentation of the PDF page.
         """
         with tempfile.TemporaryDirectory() as tmp_dir:
 

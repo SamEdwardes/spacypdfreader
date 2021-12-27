@@ -27,9 +27,3 @@ mkdocs serve
 ```
 
 > See [https://docs.civicrm.org/dev/en/latest/extensions/documentation/#:readme-mirrored](https://docs.civicrm.org/dev/en/latest/extensions/documentation/#:readme-mirrored) for reference.
-
-### Publish the docs to netlify
-
-```bash
-poetry export --without-hashes --output requirements.txt
-```

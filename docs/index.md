@@ -16,7 +16,7 @@ Easy PDF to text to *spaCy* text extraction in Python.
 
 <hr></hr>
 
-*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* each token is annotated with PDF page number which it was extractedf from.
+*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* each token is annotated with PDF page number which it was extracted from.
 
 The key features are:
 
@@ -38,21 +38,21 @@ To install with the required pytesseract dependencies:
 pip install 'spacypdfreader[pytesseract]'
 ```
 
-## Example
+## Usage
 
 ```python
->>> import spacy
->>> from spacypdfreader import pdf_reader
->>>
->>> nlp = spacy.load("en_core_web_sm")
->>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
->>> print(f"{doc[0]} -> page: {doc[0]._.page_number}")
-Test -> page: 1
+import spacy
+from spacypdfreader import pdf_reader
+
+nlp = spacy.load("en_core_web_sm")
+doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+print(doc[0]._.page_number)  # 1
+print(doc[-1]._.page_number) # 4
 ```
 
 ## What is *spaCy*?
 
-*spaCy* is a natural language processing (NLP) tool. It can be used to perform a variety of NLP tasks. For more informaiton check out the excellent documentation at [spacy.io](spacy.io)
+*spaCy* is a natural language processing (NLP) tool. It can be used to perform a variety of NLP tasks. For more information check out the excellent documentation at [https://spacy.io](https://spacy.io).
 
 ## Implementation Notes
 
@@ -63,24 +63,22 @@ spaCyPDFreader breaks this convention because the text must first be extracted f
 Example of a "traditional" spaCy pipeline component [negspaCy](https://spacy.io/universe/project/negspacy):
 
 ```python
->>> import spacy
->>> from negspacy.negation import Negex
->>> 
->>> nlp = spacy.load("en_core_web_sm")
->>> nlp.add_pipe("negex", config={"ent_types":["PERSON","ORG"]})
->>> 
->>> doc = nlp("She does not like Steve Jobs but likes Apple products.")
+import spacy
+from negspacy.negation import Negex
+
+nlp = spacy.load("en_core_web_sm")
+nlp.add_pipe("negex", config={"ent_types":["PERSON","ORG"]})
+doc = nlp("She does not like Steve Jobs but likes Apple products.")
 ```
 
 Example of `spaCyPDFreader` usage:
 
 ```python
->>> import spacy
->>> from spacypdfreader import pdf_reader
->>>
->>> nlp = spacy.load("en_core_web_sm")
->>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
-Extracting text from 4 pdf pages... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+import spacy
+from spacypdfreader import pdf_reader
+nlp = spacy.load("en_core_web_sm")
+
+doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 ```
 
 Note that the `nlp.add_pipe` is not used by spaCyPDFreader.

@@ -31,13 +31,13 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
 plugins:
-- mkdocstrings:
-    handlers:
-      python:
-        selection:
-          filters:
-            - "!^_"  # exlude all members starting with _
-            - "^__init__$"  # but always include __init__ modules and methods
+  - mkdocstrings:
+      watch:
+        - spacypdfreader
+      handlers:
+        python:
+          rendering:
+            show_root_heading: true
 
 extra:
   social:
@@ -56,6 +56,4 @@ nav:
   - API reference:
     - api/spacy-extensions.md
     - api/spacypdfreader.spacypdfreader.md
-    - api/spacypdfreader.parsers.base.md
-    - api/spacypdfreader.parsers.pdfminer.md
-    - api/spacypdfreader.parsers.pytesseract.md
+    - api/spacypdfreader.parsers.md

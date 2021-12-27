@@ -1,3 +1,5 @@
-::: spacypdfreader.spacypdfreader.pdf_reader
+# spacypdfreader.spacypdfreader
 
-::: spacypdfreader.parsers.base.BaseParser
+## ::: spacypdfreader.spacypdfreader
+    rendering:
+      show_source: false
