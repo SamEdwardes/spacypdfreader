@@ -8,6 +8,7 @@ When using [spacypdfreader.pdf_reader][] custom attributes and methods are added
 
 | Extension   | Type   | Description   |
 | ------ | ------ | ------ |
+| `doc._.pdf_file_name` | `str` | The file name of the PDF document. |
 | `doc._.first_page` | `int` | The first page number of the PDF. |
 | `doc._.last_page` | `int` | The last page number of the PDF. |
 | `doc._.page_range` | `(int, int)` | The range of pages from the PDF. |

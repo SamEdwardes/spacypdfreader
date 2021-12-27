@@ -58,6 +58,7 @@ print(doc[0]._.page_number)  # 1
 print(doc[-1]._.page_number) # 4
 
 # Get page meta data about the PDF document.
+print(doc._.pdf_file_name)   # "tests/data/test_pdf_01.pdf"
 print(doc._.page_range)      # (1, 4)
 print(doc._.first_page)      # 1
 print(doc._.last_page)       # 4
