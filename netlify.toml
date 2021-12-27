@@ -3,5 +3,5 @@ publish = "site"
 command = """
 pip install -q poetry &&
 poetry install
-poetry run pydoc-markdown --build --site-dir ../../site
+poetry run mkdocs build -d site
 """
