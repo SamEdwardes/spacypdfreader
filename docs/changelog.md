@@ -6,8 +6,14 @@
     - [pytesseract](https://pypi.org/project/pytesseract/)
     - [textract](https://textract.readthedocs.io/en/stable/index.html)
 - Added the ability to bring your own pdf to text extraction engine.
+- Added new spacy extension attributes and methods:
+    - `doc._.page_range`
+    - `doc._.first_page`
+    - `doc._.last_page`
+    - `doc._.page(int)`
+- Built a new documentation site: https://spacypdfreader.netlify.app/
 
 ## 0.1.1 (2021-12-10)
 
-- v0.1.1 Python ^3.7 support by @SamEdwardes in https://github.com/SamEdwardes/spaCyPDFreader/pull/2
+- 0.1.1 Python ^3.7 support by @SamEdwardes in https://github.com/SamEdwardes/spaCyPDFreader/pull/2
 

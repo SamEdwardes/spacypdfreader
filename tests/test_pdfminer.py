@@ -12,6 +12,10 @@ def test_pdfminer():
     # Tokens.
     assert doc[0].text == "Test"
     assert doc[-4].text == "data"
+    # Doc attributes.
+    assert doc._.page_range == (1, 4)
+    assert doc._.first_page == 1
+    assert doc._.last_page == 4
     
 
 def test_pdfminer_with_params():
@@ -26,3 +30,7 @@ def test_pdfminer_with_params():
     # Tokens.
     assert doc[0].text == "Test"
     assert doc[-4].text == "data"
+    # Doc attributes.
+    assert doc._.page_range == (1, 4)
+    assert doc._.first_page == 1
+    assert doc._.last_page == 4

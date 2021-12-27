@@ -1,7 +1,8 @@
 import spacy
 
 from spacypdfreader import __version__
-from spacypdfreader.spacypdfreader import get_number_of_pages, pdf_reader
+from spacypdfreader._utils import _get_number_of_pages
+from spacypdfreader.spacypdfreader import pdf_reader
 
 
 def test_version():
@@ -9,8 +10,8 @@ def test_version():
 
 
 def test_get_number_of_pages():
-    assert get_number_of_pages("tests/data/wikipedia.pdf") == 18
-    assert get_number_of_pages("tests/data/test_pdf_01.pdf") == 4
+    assert _get_number_of_pages("tests/data/wikipedia.pdf") == 18
+    assert _get_number_of_pages("tests/data/test_pdf_01.pdf") == 4
     
 
 def test_page_numbers():
@@ -22,3 +23,7 @@ def test_page_numbers():
     # Tokens.
     assert doc[0].text == "Test"
     assert doc[-4].text == "data"
+    # Doc attributes.
+    assert doc._.page_range == (1, 4)
+    assert doc._.first_page == 1
+    assert doc._.last_page == 4

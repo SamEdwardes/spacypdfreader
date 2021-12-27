@@ -48,6 +48,7 @@ nlp = spacy.load("en_core_web_sm")
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 print(doc[0]._.page_number)  # 1
 print(doc[-1]._.page_number) # 4
+print(doc._.page(1))
 ```
 
 ## What is *spaCy*?

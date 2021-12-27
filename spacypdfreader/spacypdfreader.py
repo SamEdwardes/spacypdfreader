@@ -4,27 +4,32 @@ from typing import Callable
 
 import spacy
 from pdfminer.high_level import extract_text
-from pdfminer.pdfdocument import PDFDocument
-from pdfminer.pdfpage import PDFPage
-from pdfminer.pdfparser import PDFParser
+
 from rich.progress import track
-from spacy.tokens import Doc, Token
+from spacy.tokens import Doc, Token, Span
 
 from .console import console
 from .parsers import pdfminer
 from .parsers.base import BaseParser
+from ._utils import _filter_doc_by_page, _get_number_of_pages
+
+
+# Set up the spacy custom extensions.
 
 if not Token.has_extension("page_number"):
     Token.set_extension("page_number", default=None)
 
+if not Doc.has_extension("page"):
+    Doc.set_extension("page", method=_filter_doc_by_page)
 
-def get_number_of_pages(pdf_path: str) -> int:
-    """Find the number of pages in a pdf document."""
-    with open(os.path.normpath(pdf_path), "rb") as in_file:
-        parser = PDFParser(in_file)
-        doc = PDFDocument(parser)
-        num_pages = len(list(PDFPage.create_pages(doc)))
-    return num_pages
+if not Doc.has_extension("first_page"):
+    Doc.set_extension("first_page", getter=lambda doc: doc[0]._.page_number)
+
+if not Doc.has_extension("last_page"):
+    Doc.set_extension("last_page", getter=lambda doc: doc[-1]._.page_number)
+
+if not Doc.has_extension("page_range"):
+    Doc.set_extension("page_range", getter=lambda doc: (doc._.first_page, doc._.last_page))
 
 
 def pdf_reader(
@@ -43,14 +48,13 @@ def pdf_reader(
             more detailsDefaults to pdfminer.Parser.
 
     Returns:
-        A spacy Doc object with the custom extension
-        `._.page_number`.
+        A spacy Doc object with the custom extensions.
     """
     console.rule(f"{pdf_path}")
     console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
 
     pdf_path = os.path.normpath(pdf_path)
-    num_pages = get_number_of_pages(pdf_path)
+    num_pages = _get_number_of_pages(pdf_path)
 
     # Convert pdf to text.
     console.print(f"Extracting text from {num_pages} pdf pages...")
