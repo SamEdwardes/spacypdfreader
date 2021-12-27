@@ -32,7 +32,9 @@ if not Doc.has_extension("last_page"):
     Doc.set_extension("last_page", getter=lambda doc: doc[-1]._.page_number)
 
 if not Doc.has_extension("page_range"):
-    Doc.set_extension("page_range", getter=lambda doc: (doc._.first_page, doc._.last_page))
+    Doc.set_extension(
+        "page_range", getter=lambda doc: (doc._.first_page, doc._.last_page)
+    )
 
 
 def pdf_reader(

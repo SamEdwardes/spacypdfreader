@@ -41,10 +41,10 @@ def _filter_doc_by_page(doc: Doc, page_number: str) -> Span:
 
 def _get_number_of_pages(pdf_path: str) -> int:
     """Find the number of pages in a pdf document.
-    
+
     Args:
         pdf_path: Path to a PDF file.
-        
+
     Returns:
         The number of pages in a pdf file.
     """
