@@ -16,7 +16,7 @@ Easy PDF to text to *spaCy* text extraction in Python.
 
 <hr></hr>
 
-*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* each token is annotated with PDF page number which it was extracted from.
+*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* the token and doc objects from spacy are annoated with additional information about the pdf.
 
 The key features are:
 
@@ -26,6 +26,7 @@ The key features are:
     - `doc._.page_range`
     - `doc._.first_page`
     - `doc._.last_page`
+    - `doc._.pdf_file_name`
     - `doc._.page(int)`
 - **Multiple parsers:** Select between multiple built in PDF to text parsers or bring your own PDF to text parser.
 
@@ -57,6 +58,7 @@ print(doc[0]._.page_number)  # 1
 print(doc[-1]._.page_number) # 4
 
 # Get page meta data about the PDF document.
+print(doc._.pdf_file_name)   # "tests/data/test_pdf_01.pdf"
 print(doc._.page_range)      # (1, 4)
 print(doc._.first_page)      # 1
 print(doc._.last_page)       # 4
