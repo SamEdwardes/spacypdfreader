@@ -21,7 +21,12 @@ Easy PDF to text to *spaCy* text extraction in Python.
 The key features are:
 
 - **PDF to spaCy Doc object:** Convert a PDF document directly into a *spaCy* `Doc` object.
-- **Token._.page_number:** Each *spaCy* token will be annotated with the PDF page number from which it was extracted (`token._.page_number`).
+- **Custom spaCy attributes and methods:**
+    - `token._.page_number`
+    - `doc._.page_range`
+    - `doc._.first_page`
+    - `doc._.last_page`
+    - `doc._.page(int)`
 - **Multiple parsers:** Select between multiple built in PDF to text parsers or bring your own PDF to text parser.
 
 ## Installation
@@ -46,9 +51,18 @@ from spacypdfreader import pdf_reader
 
 nlp = spacy.load("en_core_web_sm")
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+
+# Get the page number of any token.
 print(doc[0]._.page_number)  # 1
 print(doc[-1]._.page_number) # 4
-print(doc._.page(1))
+
+# Get page meta data about the PDF document.
+print(doc._.page_range)      # (1, 4)
+print(doc._.first_page)      # 1
+print(doc._.last_page)       # 4
+
+# Get all of the text from a specific PDF page.
+print(doc._.page(4))         # "able to display the destination page (unless..."
 ```
 
 ## What is *spaCy*?
