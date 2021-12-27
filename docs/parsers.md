@@ -50,7 +50,7 @@ from spacypdfreader.parsers.pdfminer import PdfminerParser
 
 nlp = spacy.load("en_core_web_sm")
 params = {
-		"caching": False
+  "caching": False
 }
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
 ```
