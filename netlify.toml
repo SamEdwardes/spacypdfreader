@@ -1,7 +1,7 @@
 [build]
 publish = "site"
 command = """
-pip install -q poetry &&
-poetry install
-poetry run mkdocs build -d site
+pip install mkdocs-material &&
+pip install mkdocstrings &&
+mkdocs build -d site
 """
