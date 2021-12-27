@@ -6,18 +6,18 @@ class BaseParser:
     details.
 
     Args:
-        pdf_path: Path to a PDF file.
-        page_number: The page number of the PDF to convert from PDF to text.
+        pdf_path (str): Path to a PDF file.
+        page_number (int): The page number of the PDF to convert from PDF to text.
             Must be one digit based indexing (e.g. the first page of the PDF is
             page 1, as opposed to page 0).
 
     Attributes:
-        name: A string name representation of the class. Will only be used for
+        name (str): A string name representation of the class. Will only be used for
             information purposes by being printed to the terminal when running.
-        pdf_path: Path to a PDF file.
-        page_number: The page number of the PDF to convert from PDF to text.
+        pdf_path (str): Path to a PDF file.
+        page_number (int): The page number of the PDF to convert from PDF to text.
             Must be one digit based indexing (e.g. the first page of the PDF is
-            page 1, as opposed to page 0).
+            page 1, as opposed to page 0)..
 
     """
 

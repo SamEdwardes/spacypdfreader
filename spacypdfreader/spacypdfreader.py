@@ -30,7 +30,7 @@ def get_number_of_pages(pdf_path: str) -> int:
 def pdf_reader(
     pdf_path: str,
     nlp: spacy.Language,
-    pdf_parser: BaseParser = pdfminer.Parser,
+    pdf_parser: BaseParser = pdfminer.PdfminerParser,
     **kwargs,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.

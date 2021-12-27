@@ -23,6 +23,7 @@ en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/down
 black = "^21.12b0"
 mkdocs-material = "^8.1.3"
 pydoc-markdown = "^4.5.0"
+mkdocstrings = "^0.16.2"
 
 [tool.poetry.extras]
 pytesseract = ["pytesseract", "Pillow", "pdf2image"]

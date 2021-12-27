@@ -1,4 +1,15 @@
 [[package]]
+name = "astunparse"
+version = "1.6.3"
+description = "An AST unparser for Python"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.6.1,<2.0"
+
+[[package]]
 name = "atomicwrites"
 version = "1.4.0"
 description = "Atomic file writes."
@@ -57,6 +68,14 @@ python-versions = "*"
 
 [package.dependencies]
 numpy = ">=1.15.0"
+
+[[package]]
+name = "cached-property"
+version = "1.5.2"
+description = "A decorator for caching properties in classes."
+category = "dev"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "catalogue"
@@ -389,6 +408,18 @@ watchdog = ">=2.0"
 i18n = ["babel (>=2.9.0)"]
 
 [[package]]
+name = "mkdocs-autorefs"
+version = "0.3.0"
+description = "Automatically link across pages in MkDocs."
+category = "dev"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[package.dependencies]
+Markdown = ">=3.3,<4.0"
+mkdocs = ">=1.1,<2.0"
+
+[[package]]
 name = "mkdocs-material"
 version = "8.1.3"
 description = "A Material Design theme for MkDocs"
@@ -411,6 +442,23 @@ description = "Extension pack for Python Markdown."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
+
+[[package]]
+name = "mkdocstrings"
+version = "0.16.2"
+description = "Automatic documentation from sources, for MkDocs."
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+Jinja2 = ">=2.11.1,<4.0"
+Markdown = ">=3.3,<4.0"
+MarkupSafe = ">=1.1,<3.0"
+mkdocs = ">=1.2,<2.0"
+mkdocs-autorefs = ">=0.1,<0.4"
+pymdown-extensions = ">=6.3,<10.0"
+pytkdocs = ">=0.2.0,<0.13.0"
 
 [[package]]
 name = "murmurhash"
@@ -747,6 +795,22 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 six = ">=1.5"
 
 [[package]]
+name = "pytkdocs"
+version = "0.12.0"
+description = "Load Python objects documentation."
+category = "dev"
+optional = false
+python-versions = ">=3.6.1"
+
+[package.dependencies]
+astunparse = {version = ">=1.6,<2.0", markers = "python_version < \"3.9\""}
+cached-property = {version = ">=1.5,<2.0", markers = "python_version < \"3.8\""}
+typing-extensions = {version = ">=3.7,<4.0", markers = "python_version < \"3.8\""}
+
+[package.extras]
+numpy-style = ["docstring_parser (>=0.7,<1.0)"]
+
+[[package]]
 name = "pyyaml"
 version = "5.4.1"
 description = "YAML parser and emitter for Python"
@@ -1053,9 +1117,13 @@ pytesseract = ["pytesseract", "Pillow", "pdf2image"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "8ec2d82f2a8c5d26d43cc46f63b5d23b0dbde55fe2b3c9c59c27477614d884ef"
+content-hash = "98d734c79b41ed621e801b0d15337ea429e76bb2e201ce87af1bf4bb02435c5f"
 
 [metadata.files]
+astunparse = [
+    {file = "astunparse-1.6.3-py2.py3-none-any.whl", hash = "sha256:c2652417f2c8b5bb325c885ae329bdf3f86424075c4fd1a128674bc6fba4b8e8"},
+    {file = "astunparse-1.6.3.tar.gz", hash = "sha256:5ad93a8456f0d084c3456d059fd9a92cce667963232cbf763eac3bc5b7940872"},
+]
 atomicwrites = [
     {file = "atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
     {file = "atomicwrites-1.4.0.tar.gz", hash = "sha256:ae70396ad1a434f9c7046fd2dd196fc04b12f9e91ffb859164193be8b6168a7a"},
@@ -1085,6 +1153,10 @@ blis = [
     {file = "blis-0.7.5-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8345bd04777557ef385e2f2d1f14a19d53b2ea9ca5fe107a2cdc50d7bafb8eb2"},
     {file = "blis-0.7.5-cp39-cp39-win_amd64.whl", hash = "sha256:66204a19e38986645940c887498c7b5520efb5bbc6526bf1b8a58f7d3eb37da0"},
     {file = "blis-0.7.5.tar.gz", hash = "sha256:833e01e9eaff4c01aa6e049bbc1e6acb9eca6ee513d7b35b5bf135d49705ad33"},
+]
+cached-property = [
+    {file = "cached-property-1.5.2.tar.gz", hash = "sha256:9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1b499f7bd89a130"},
+    {file = "cached_property-1.5.2-py2.py3-none-any.whl", hash = "sha256:df4f613cf7ad9a588cc381aaf4a512d26265ecebd5eb9e1ba12f1319eb85a6a0"},
 ]
 catalogue = [
     {file = "catalogue-2.0.6-py3-none-any.whl", hash = "sha256:34ebb5cd2b98f7fa7421fa0eead3b84e577243532509b3fa8cd04abcc9f61d3c"},
@@ -1337,6 +1409,10 @@ mkdocs = [
     {file = "mkdocs-1.2.3-py3-none-any.whl", hash = "sha256:a1fa8c2d0c1305d7fc2b9d9f607c71778572a8b110fb26642aa00296c9e6d072"},
     {file = "mkdocs-1.2.3.tar.gz", hash = "sha256:89f5a094764381cda656af4298727c9f53dc3e602983087e1fe96ea1df24f4c1"},
 ]
+mkdocs-autorefs = [
+    {file = "mkdocs-autorefs-0.3.0.tar.gz", hash = "sha256:2f89556eb2107d72e3aff41b04dcaaf1125d407a33b8027fbc982137d248d37d"},
+    {file = "mkdocs_autorefs-0.3.0-py3-none-any.whl", hash = "sha256:261875003e49b5d708993fd2792a69d624cbc8cf7de49e96c81d3d9825977ca4"},
+]
 mkdocs-material = [
     {file = "mkdocs-material-8.1.3.tar.gz", hash = "sha256:b8014d8a77ba45879525e0e7619d0833d10897487a77d6697ef94240fed8c892"},
     {file = "mkdocs_material-8.1.3-py2.py3-none-any.whl", hash = "sha256:ee153b8130ae580acd57082af0e54d644fe2a37c62f2ec9400f77e389ac1b294"},
@@ -1344,6 +1420,10 @@ mkdocs-material = [
 mkdocs-material-extensions = [
     {file = "mkdocs-material-extensions-1.0.3.tar.gz", hash = "sha256:bfd24dfdef7b41c312ede42648f9eb83476ea168ec163b613f9abd12bbfddba2"},
     {file = "mkdocs_material_extensions-1.0.3-py3-none-any.whl", hash = "sha256:a82b70e533ce060b2a5d9eb2bc2e1be201cf61f901f93704b4acf6e3d5983a44"},
+]
+mkdocstrings = [
+    {file = "mkdocstrings-0.16.2-py3-none-any.whl", hash = "sha256:671fba8a6c7a8455562aae0a3fa85979fbcef261daec5b2bac4dd1479acc14df"},
+    {file = "mkdocstrings-0.16.2.tar.gz", hash = "sha256:3d8a86c283dfa21818d5b9579aa4e750eea6b5c127b43ad8b00cebbfb7f9634e"},
 ]
 murmurhash = [
     {file = "murmurhash-1.0.6-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:1431d817e1fff1ed35f8dc54dd5b4d70165ec98076de8aca351805f8037293f3"},
@@ -1572,6 +1652,10 @@ pytest = [
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
+]
+pytkdocs = [
+    {file = "pytkdocs-0.12.0-py3-none-any.whl", hash = "sha256:12cb4180d5eafc7819dba91142948aa7b85ad0a3ad0e956db1cdc6d6c5d0ef56"},
+    {file = "pytkdocs-0.12.0.tar.gz", hash = "sha256:746905493ff79482ebc90816b8c397c096727a1da8214a0ccff662a8412e91b3"},
 ]
 pyyaml = [
     {file = "PyYAML-5.4.1-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:3b2b1824fe7112845700f815ff6a489360226a5609b96ec2190a45e62a9fc922"},

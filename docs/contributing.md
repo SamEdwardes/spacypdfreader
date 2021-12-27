@@ -1,16 +1,34 @@
 # Contributing
 
-## Documentation
+## Code style
 
-## Generating API docs with pydoc-markdown
-
-The documentation is built using pydoc-markdown. If you make a change to the documentation please verify that it works and is rendered correctly by running:
+The black code formatter should be run against all code.
 
 ```bash
-pydoc-markdown --server --open
+black spacypdfreader
 ```
 
-Create a *requirements.txt file:
+## Documentation
+
+Documentation is built using [Material for mkdocs](https://squidfunk.github.io/mkdocs-material/). All of the documentations lives within the `docs/` directory.
+
+Note that the `README.md` and `docs/index.md` contain the exact same content. This is done by mirroring the `README.md` file:
+
+```bash
+ln ../README.md index.md
+```
+
+### Test the docs locally
+
+To test the docs locally run the following command:
+
+```bash
+mkdocs serve
+```
+
+> See [https://docs.civicrm.org/dev/en/latest/extensions/documentation/#:readme-mirrored](https://docs.civicrm.org/dev/en/latest/extensions/documentation/#:readme-mirrored) for reference.
+
+### Publish the docs to netlify
 
 ```bash
 poetry export --without-hashes --output requirements.txt
