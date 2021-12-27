@@ -19,6 +19,9 @@ from ._utils import _filter_doc_by_page, _get_number_of_pages
 if not Token.has_extension("page_number"):
     Token.set_extension("page_number", default=None)
 
+if not Doc.has_extension("pdf_file_name"):
+    Doc.set_extension("pdf_file_name", default=None)
+
 if not Doc.has_extension("page"):
     Doc.set_extension("page", method=_filter_doc_by_page)
 
@@ -76,6 +79,6 @@ def pdf_reader(
                 token._.page_number = page_num
 
         combined_doc = Doc.from_docs(docs)
-
+        combined_doc._.pdf_file_name = pdf_path
     console.print(":white_check_mark: [green]Complete!")
     return combined_doc

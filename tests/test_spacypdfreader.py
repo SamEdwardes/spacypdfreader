@@ -27,3 +27,4 @@ def test_page_numbers():
     assert doc._.page_range == (1, 4)
     assert doc._.first_page == 1
     assert doc._.last_page == 4
+    assert doc._.pdf_file_name == "tests/data/test_pdf_01.pdf"

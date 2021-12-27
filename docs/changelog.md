@@ -10,6 +10,7 @@
     - `doc._.page_range`
     - `doc._.first_page`
     - `doc._.last_page`
+    - `doc._.pdf_file_name`
     - `doc._.page(int)`
 - Built a new documentation site: https://spacypdfreader.netlify.app/
 
