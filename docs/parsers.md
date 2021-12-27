@@ -2,8 +2,8 @@
 
 Extracting text from PDF documents can be challenging. There are several different options in the python ecosystem. *spacypdfreader* makes it easy to extract text from PDF documents. At this time *spacypdfreader* has built in support for two options:
 
-- *pdfminer*: the default option ([GitHub]() | [PyPi]() | [Docs]())
-- *pytesseract*: alternative option ([GitHub]() | [PyPi]() | [Docs]())
+- *pdfminer*: the default option ([GitHub]() | [PyPi]() | [Docs](https://pdfminersix.readthedocs.io/en/latest/))
+- *pytesseract*: alternative option ([GitHub](https://github.com/madmaze/pytesseract) | [PyPi]())
 
 You can also bring your own custom PDF to text parser to use in *spacypdfreader*.
 
@@ -16,8 +16,8 @@ All PDF to text parsers have their tradeoffs. The table below summaries the pros
 |              | *pdfminer*                                                   | *pytesseract*                                                |
 | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | When to use  | ⚡️ When speed is more important than accuracy.                | 🎓 When accuracy is more important than speed.                |
-| Accuracy     | 👌**Medium:** from my experience *pdfminer* struggles with documents where the text is in one or more columns. | 👍 **High:** very good. Performs well on messy documents (e.g hand written text, pdfs with multiple columns of text on a single page). |
-| Speed        | 👌 **Medium:** the text extraction is not instant, but it does not take forever. | 👎 **Slow:** the text extraction is very slow and will take hours on hundres of pages. |
+| Accuracy     | 👌 **Medium:** from my experience *pdfminer* struggles with documents where the text is in one or more columns. | 👍 **High:** very good. Performs well on messy documents (e.g hand written text, PDFs with multiple columns of text on a single page). |
+| Speed        | 👌 **Medium:** the text extraction is not instant, but it does not take forever. | 👎 **Slow:** the text extraction is very slow and will take hours on hundreds of pages. |
 | Installation | 👍 **Easy:** pure python, if you have installed *spacypdfreader* you already have everything you need. | 👎 **Complicated:** relies on additional non-python dependencies that can be complicated for beginners to install. |
 | How it works | Text is extracted directly from PDF using only Python.       | Each pdf page is converted into an image. Optical character recognition is then run on each image. |
 
@@ -41,7 +41,7 @@ nlp = spacy.load("en_core_web_sm")
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 ```
 
-You could also be more verbose and pass in aditional parameters. For a list of availble parameters please refer to the pdfminer documentation for the [`extract_function`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text) function.
+You could also be more verbose and pass in additional parameters. For a list of available parameters please refer to the pdfminer documentation for the [`extract_function`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text) function.
 
 ```python
 import spacy
@@ -67,7 +67,7 @@ You can install most of the dependencies by pip installing *spacypdfreader* with
 pip install 'spacypdfreader[pytesseract]'
 ```
 
-Unfortunately this will not always install all of the depencies because some of them are non-python related. I find that installing pytesseract can be a little bit tricky for beginners. I will not go into detail here, but will instead provide a few links I have found helpful:
+Unfortunately this will not always install all of the dependencies because some of them are non-python related. I find that installing pytesseract can be a little bit tricky for beginners. I will not go into detail here, but will instead provide a few links I have found helpful:
 
 - []()
 - []()
@@ -89,7 +89,7 @@ doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
 
 *spacypdfreader* allows your to bring your custom PDF parser. *pypdf2* ([GitHub]() | [PyPi]() | [Docs]()) is a library that is currently not supported. However, you can still use it with *spacypdfreader*. The only requirement is that the parser must have a way for you to specify which page of the PDF document you would like to extract.
 
-The code below demonstrates how you could implement  *pypdf2* with only a few lines of code.
+The code below demonstrates how you could implement *pypdf2* with only a few lines of code.
 
 ```python
 import spacy

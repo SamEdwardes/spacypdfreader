@@ -16,7 +16,7 @@ Easy PDF to text to *spaCy* text extraction in Python.
 
 <hr></hr>
 
-*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* the token and doc objects from spacy are annoated with additional information about the pdf.
+*spacypdfreader* is a python library for extracting text from PDF documents into *spaCy* `Doc` objects. When you use *spacypdfreader* the token and doc objects from spacy are annotated with additional information about the pdf.
 
 The key features are:
 
