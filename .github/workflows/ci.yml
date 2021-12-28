@@ -15,5 +15,8 @@ jobs:
           python-version: 3.x
       - run: curl -sSL https://install.python-poetry.org | python3 -
       - run: poetry export --without-hashes --output requirements.txt
-      - run: pip install -r requirements.txt
+      # - run: pip install -r requirements.txt
+      - run: pip install wheel
+      - run: pip install mkdocs-material
+      - run: pip install mkdocstrings
       - run: mkdocs gh-deploy --force
