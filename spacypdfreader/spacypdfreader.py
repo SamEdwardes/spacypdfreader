@@ -1,6 +1,6 @@
 import os
 from dataclasses import dataclass, field
-from typing import Callable
+from typing import Any, Callable
 
 import spacy
 from pdfminer.high_level import extract_text
@@ -42,7 +42,7 @@ def pdf_reader(
     nlp: spacy.Language,
     pdf_parser: BaseParser = pdfminer.PdfminerParser,
     verbose: bool = False,
-    **kwargs,
+    **kwargs: Any,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
 
@@ -77,7 +77,7 @@ def pdf_reader(
     # Convert text to spaCy Doc objects.
     if verbose:
         console.print("Converting text to [blue bold]spaCy[/] Doc...")
-    
+
     docs = [doc for doc in nlp.pipe(texts)]
     for idx, doc in enumerate(docs):
         page_num = idx + 1
@@ -86,8 +86,8 @@ def pdf_reader(
 
     combined_doc = Doc.from_docs(docs)
     combined_doc._.pdf_file_name = pdf_path
-    
+
     if verbose:
         console.print(":white_check_mark: [green]Complete!")
-        
+
     return combined_doc
