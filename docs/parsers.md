@@ -52,7 +52,7 @@ nlp = spacy.load("en_core_web_sm")
 params = {
   "caching": False
 }
-doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
+doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser, **params)
 ```
 
 ## *pytesseract*

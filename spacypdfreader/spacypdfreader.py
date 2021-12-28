@@ -41,6 +41,7 @@ def pdf_reader(
     pdf_path: str,
     nlp: spacy.Language,
     pdf_parser: BaseParser = pdfminer.PdfminerParser,
+    verbose: bool = False,
     **kwargs,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
@@ -51,36 +52,42 @@ def pdf_reader(
             `spacy.load("en_core_web_sm")`.
         pdf_parser: The parser to convert PDF file to text. Read the docs for
             more detailsDefaults to pdfminer.Parser.
+        verbose: If True details will be printed to the terminal. By default,
+            False.
+        **kwargs: Arbitrary keyword arguments.
 
     Returns:
         A spacy Doc object with the custom extensions.
     """
-    console.rule(f"{pdf_path}")
-    console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
+    if verbose:
+        console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
 
     pdf_path = os.path.normpath(pdf_path)
     num_pages = _get_number_of_pages(pdf_path)
 
     # Convert pdf to text.
-    console.print(f"Extracting text from {num_pages} pdf pages...")
-    with console.status("Working..."):
-        texts = []
-        for page_num in range(1, num_pages + 1):
-            parser = pdf_parser(pdf_path, page_num)
-            text = parser.pdf_to_text(**kwargs)
-            texts.append(text)
+    if verbose:
+        console.print(f"Extracting text from {num_pages} pdf pages...")
+    texts = []
+    for page_num in range(1, num_pages + 1):
+        parser = pdf_parser(pdf_path, page_num)
+        text = parser.pdf_to_text(**kwargs)
+        texts.append(text)
 
     # Convert text to spaCy Doc objects.
-    console.print("Converting text to [blue bold]spaCy[/] Doc...")
-    with console.status("Working..."):
-        docs = [doc for doc in nlp.pipe(texts)]
+    if verbose:
+        console.print("Converting text to [blue bold]spaCy[/] Doc...")
+    
+    docs = [doc for doc in nlp.pipe(texts)]
+    for idx, doc in enumerate(docs):
+        page_num = idx + 1
+        for token in doc:
+            token._.page_number = page_num
 
-        for idx, doc in enumerate(docs):
-            page_num = idx + 1
-            for token in doc:
-                token._.page_number = page_num
-
-        combined_doc = Doc.from_docs(docs)
-        combined_doc._.pdf_file_name = pdf_path
-    console.print(":white_check_mark: [green]Complete!")
+    combined_doc = Doc.from_docs(docs)
+    combined_doc._.pdf_file_name = pdf_path
+    
+    if verbose:
+        console.print(":white_check_mark: [green]Complete!")
+        
     return combined_doc
