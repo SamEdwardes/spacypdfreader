@@ -1,6 +1,6 @@
 # spaCy custom extensions
 
-When using [spacypdfreader.pdf_reader][] custom attributes and methods are added to spacy objects.
+When using [spacypdfreader.spacypdfreader.pdf_reader][] custom attributes and methods are added to spacy objects.
 
 ## `spacy.Doc` 
 

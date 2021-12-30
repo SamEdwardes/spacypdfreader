@@ -1,6 +1,5 @@
 site_name: spacypdfreader
 site_description: PDF to spaCy text extraction.
-site_url: https://samedwardes.github.io/spacypdfreader/
 repo_url: https://github.com/samedwardes/spacypdfreader
 edit_uri: ''
 

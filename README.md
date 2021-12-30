@@ -3,7 +3,12 @@
 Easy PDF to text to *spaCy* text extraction in Python.
 
 <p>
-    <a href="https://pypi.org/project/spacypdfreader" target="_blank"><img src="https://img.shields.io/pypi/v/spacypdfreader?color=%2334D058&label=pypi%20package" alt="Package version"></a>
+    <a href="https://pypi.org/project/spacypdfreader" target="_blank">
+        <img src="https://img.shields.io/pypi/v/spacypdfreader?color=%2334D058&label=pypi%20package" alt="Package version">
+    </a>
+    <a href="https://github.com/SamEdwardes/spaCyPDFreader/actions/workflows/pytest.yml" target="_blank">
+        <img src="https://github.com/SamEdwardes/spaCyPDFreader/actions/workflows/pytest.yml/badge.svg" alt="pytest">
+    </a>
 </p>
 
 <hr></hr>
