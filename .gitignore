@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 .vscode/settings.json
 tmp.py
+
+# Added by Sam Edwardes
+docs/index.md
