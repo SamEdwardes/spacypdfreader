@@ -2,12 +2,14 @@
 
 Extracting text from PDF documents can be challenging. There are several different options in the python ecosystem. *spacypdfreader* makes it easy to extract text from PDF documents. At this time *spacypdfreader* has built in support for two options:
 
-- *pdfminer*: the default option ([GitHub]() | [PyPi]() | [Docs](https://pdfminersix.readthedocs.io/en/latest/))
-- *pytesseract*: alternative option ([GitHub](https://github.com/madmaze/pytesseract) | [PyPi]())
+- *pdfminer*: the default option ([GitHub](https://github.com/pdfminer/pdfminer.six) | [PyPi](https://pypi.org/project/pdfminer.six/) | [Docs](https://pdfminersix.readthedocs.io/en/latest/))
+- *pytesseract*: alternative option ([GitHub](https://github.com/madmaze/pytesseract) | [PyPi](https://pypi.org/project/pytesseract/))
 
 You can also bring your own custom PDF to text parser to use in *spacypdfreader*.
 
->  💁‍♂️ Would you like to see another parser added? Please submit an issue on [GitHub](https://github.com/SamEdwardes/spaCyPDFreader) and the maintainer will look into adding support.
+!!! tip
+
+    💁‍♂️ Would you like to see another parser added? Please submit an issue on [GitHub](https://github.com/SamEdwardes/spaCyPDFreader/issues/new/choose) and the maintainer will look into adding support.
 
 ## Comparison of built in parsers
 
@@ -67,10 +69,7 @@ You can install most of the dependencies by pip installing *spacypdfreader* with
 pip install 'spacypdfreader[pytesseract]'
 ```
 
-Unfortunately this will not always install all of the dependencies because some of them are non-python related. I find that installing pytesseract can be a little bit tricky for beginners. I will not go into detail here, but will instead provide a few links I have found helpful:
-
-- []()
-- []()
+Unfortunately this will not always install all of the dependencies because some of them are non-python related. I find that installing pytesseract can be a little bit tricky for beginners. Please refer to [https://github.com/madmaze/pytesseract#installation](https://github.com/madmaze/pytesseract#installation) for details on how to install *pytesseract* if the above does not work.
 
 **Usage**
 
@@ -87,39 +86,42 @@ doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
 
 ## Bring your own parser
 
-*spacypdfreader* allows your to bring your custom PDF parser. *pypdf2* ([GitHub]() | [PyPi]() | [Docs]()) is a library that is currently not supported. However, you can still use it with *spacypdfreader*. The only requirement is that the parser must have a way for you to specify which page of the PDF document you would like to extract.
+*spacypdfreader* allows your to bring your custom PDF parser. The only requirement is that the parser must have a way for you to specify which page of the PDF document you would like to extract.
 
-The code below demonstrates how you could implement *pypdf2* with only a few lines of code.
+The code below demonstrates the implementation of a new custom parser:
 
 ```python
-import spacy
-from spacypdfreader import pdf_reader
-from spacypdfreader.parsers.base import BaseParser
+from typing import Any
 
-class Parser(BaseParser):
-		name: str = "pypdf2"
-    
-    def pdf_to_text(self, **kwargs):
-      	text = do_this()
+import spacy
+from pdfminer.high_level import extract_text
+
+from spacypdfreader import pdf_reader
+from spacypdfreader.parsers.base import BaseParser # (1)
+
+
+class CustomParser(BaseParser): # (2)
+    name: str = "custom" # (3)
+
+    def pdf_to_text(self, **kwargs: Any) -> str: # (4)
+        # pdfminer uses zero indexed page numbers. Therefore need to remove 1
+        # from the page count.
+        self.page_number -= 1
+        text = extract_text(self.pdf_path, page_numbers=[self.page_number], **kwargs)
         return text
 
-nlp = spacy.load("en_core_web_sm")
-pdf_path = "tests/data/test_pdf_01.pdf"
-doc = pdf_reader(pdf_path, nlp, Parser)
 
+nlp = spacy.load("en_core_web_sm")
+doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, CustomParser)
+print(doc._.page_range)  # (1, 4)
 ```
 
-How does it work?
+1. `BaseParser` is the base class that all parsers inherit from in *spacypdfreader*.
+2. When creating a new class it must inherit from the `BaseParser` class.
+3. The new class must have a `name` attribute.
+4. The new class must have a method called `pdf_to_text`. This method should only convert one pdf page at a time.
 
-- `BaseParser` is the base class that all parsers inherit from in *spacypdfreader*.
-- Create a new class that inherits from the `BaseParser` class. This new class must have:
-    - A `name` attribute.
-    - A method called `pdf_to_text`. This method should only convert one pdf page at a time.
 
-> ⚠️ *spacypdfreader* uses "1 based indexing". The first page of the PDF is considered page 1, as opposed to page 0.
+!!! note
 
-For reference please refer to:
-
-- [spacypdfreader/parsers/pdfminer.py](): example of how `BaseParser` was used to enable *pdfminer*. Note that *pdfminer* uses 0 based indexing, so the `pdf_to_text` method needs to adjust accordingly.
-- [spacypdfreader/parsers/pytesseract.py]() example of how `BaseParser` was used to enable *pytesseract*.
-
+    *spacypdfreader* uses "1 based indexing". The first page of the PDF is considered page 1, as opposed to page 0.

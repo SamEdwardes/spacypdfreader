@@ -12,6 +12,7 @@ theme:
   features:
     - search.suggest
     - search.highlight
+    - content.code.annotate
   palette:
     - scheme: default
       primary: indigo
@@ -27,14 +28,16 @@ theme:
         name: Switch to light mode
 
 markdown_extensions:
+  - admonition
   - pymdownx.highlight:
       anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.details
 
 plugins:
-  - mkdocs-simple-hooks:
-      hooks:
-        on_pre_build: "docs.hooks:copy_readme"
+  - include-markdown
   - mkdocstrings:
       watch:
         - spacypdfreader
