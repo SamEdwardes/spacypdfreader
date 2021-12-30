@@ -37,6 +37,7 @@ markdown_extensions:
   - pymdownx.details
 
 plugins:
+  - search
   - include-markdown
   - mkdocstrings:
       watch:

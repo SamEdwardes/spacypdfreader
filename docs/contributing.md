@@ -22,4 +22,11 @@ mkdocs serve
 
 ### Publish the docs
 
-The docs are hosted on using GitHub pages at [https://samedwardes.github.io/spaCyPDFreader/contributing/](https://samedwardes.github.io/spaCyPDFreader/contributing/). Every commit or pull request against the main branch will trigger a build.
+The docs are hosted on using GitHub pages at [https://samedwardes.github.io/spaCyPDFreader/contributing/](https://samedwardes.github.io/spaCyPDFreader/contributing/).
+
+Run the following to update the docs:
+
+```bash
+mkdocs build
+mkdocs gh-deploy
+```
