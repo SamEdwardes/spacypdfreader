@@ -27,6 +27,7 @@ The docs are hosted on using GitHub pages at [https://samedwardes.github.io/spaC
 Run the following to update the docs:
 
 ```bash
+rm -rf site
 mkdocs build
 mkdocs gh-deploy
 ```
