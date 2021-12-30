@@ -8,7 +8,7 @@ Easy PDF to text to *spaCy* text extraction in Python.
 
 <hr></hr>
 
-**Documentation:** [https://spacypdfreader.netlify.app](https://spacypdfreader.netlify.app)
+**Documentation:** [https://samedwardes.github.io/spaCyPDFreader/](https://samedwardes.github.io/spaCyPDFreader/)
 
 **Source code:** [https://github.com/SamEdwardes/spaCyPDFreader](https://github.com/SamEdwardes/spaCyPDFreader)
 

@@ -1,10 +1,12 @@
-name: ci 
+name: Build documentation
 on:
   push:
     branches: 
-      - master
       - main
       - mkdocs-website
+  pull_request:
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest

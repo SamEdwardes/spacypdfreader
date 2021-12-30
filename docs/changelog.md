@@ -16,5 +16,5 @@
 
 ## 0.1.1 (2021-12-10)
 
-- 0.1.1 Python ^3.7 support by @SamEdwardes in https://github.com/SamEdwardes/spaCyPDFreader/pull/2
+- 0.1.1 Python ^3.7 support by @SamEdwardes in [https://github.com/SamEdwardes/spaCyPDFreader/pull/2](https://github.com/SamEdwardes/spaCyPDFreader/pull/2)
 
