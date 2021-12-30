@@ -9,6 +9,9 @@ Easy PDF to text to *spaCy* text extraction in Python.
     <a href="https://github.com/SamEdwardes/spaCyPDFreader/actions/workflows/pytest.yml" target="_blank">
         <img src="https://github.com/SamEdwardes/spaCyPDFreader/actions/workflows/pytest.yml/badge.svg" alt="pytest">
     </a>
+    <a href="https://github.com/SamEdwardes/spaCyPDFreader/actions/workflows/build-docs.yml" target="_blank">
+        <img src="https://github.com/SamEdwardes/spaCyPDFreader/actions/workflows/build-docs.yml/badge.svg" alt="build documentation">
+    </a>
 </p>
 
 <hr></hr>
