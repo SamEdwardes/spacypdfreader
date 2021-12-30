@@ -12,7 +12,7 @@
     - `doc._.last_page`
     - `doc._.pdf_file_name`
     - `doc._.page(int)`
-- Built a new documentation site: https://spacypdfreader.netlify.app/
+- Built a new documentation site: [https://samedwardes.github.io/spaCyPDFreader/](https://samedwardes.github.io/spaCyPDFreader/)
 
 ## 0.1.1 (2021-12-10)
 
