@@ -347,6 +347,20 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "mkdocs-simple-hooks"
+version = "0.1.4"
+description = "Define your own hooks for mkdocs, without having to create a new package."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mkdocs = ">=1"
+
+[package.extras]
+test = ["pytest (>=4.0)", "pytest-cov"]
+
+[[package]]
 name = "mkdocstrings"
 version = "0.16.2"
 description = "Automatic documentation from sources, for MkDocs."
@@ -918,7 +932,7 @@ pytesseract = ["pytesseract", "Pillow", "pdf2image"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "376c85a10f109cab821ce41f135984bf008abc0776d94a0188dc8a14ac36c057"
+content-hash = "fe9ac28e01c463531b2d285b3130a245b72630bbb7b57fc4b3a31b3d3a11f2d6"
 
 [metadata.files]
 astunparse = [
@@ -1194,6 +1208,10 @@ mkdocs-material = [
 mkdocs-material-extensions = [
     {file = "mkdocs-material-extensions-1.0.3.tar.gz", hash = "sha256:bfd24dfdef7b41c312ede42648f9eb83476ea168ec163b613f9abd12bbfddba2"},
     {file = "mkdocs_material_extensions-1.0.3-py3-none-any.whl", hash = "sha256:a82b70e533ce060b2a5d9eb2bc2e1be201cf61f901f93704b4acf6e3d5983a44"},
+]
+mkdocs-simple-hooks = [
+    {file = "mkdocs-simple-hooks-0.1.4.tar.gz", hash = "sha256:6ea689e91e0d02c70c593a826eaa080e4331011a494abec5c66b0dd9946ee1be"},
+    {file = "mkdocs_simple_hooks-0.1.4-py3-none-any.whl", hash = "sha256:95d39fba90d99a0890a2d41958b3389f883ff4823834fdce7ae000149954c0c8"},
 ]
 mkdocstrings = [
     {file = "mkdocstrings-0.16.2-py3-none-any.whl", hash = "sha256:671fba8a6c7a8455562aae0a3fa85979fbcef261daec5b2bac4dd1479acc14df"},

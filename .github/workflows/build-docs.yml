@@ -19,5 +19,4 @@ jobs:
       - run: poetry export --dev --without-hashes --extras pytesseract --output requirements.txt
       - run: pip install wheel
       - run: pip install -r requirements.txt
-      - run: cp README.md docs/index.md
       - run: mkdocs gh-deploy --force

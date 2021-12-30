@@ -32,6 +32,9 @@ markdown_extensions:
   - pymdownx.superfences
 
 plugins:
+  - mkdocs-simple-hooks:
+      hooks:
+        on_pre_build: "docs.hooks:copy_readme"
   - mkdocstrings:
       watch:
         - spacypdfreader
