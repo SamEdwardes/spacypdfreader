@@ -30,7 +30,7 @@ The key features are:
     - `doc._.page(int)`
 - **Multiple parsers:** Select between multiple built in PDF to text parsers or bring your own PDF to text parser.
 
-## Installation
+## Installation xxxx
 
 Install *spacypdfreader* using pip:
 
