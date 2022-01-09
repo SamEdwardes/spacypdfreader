@@ -1,7 +1,7 @@
 # spacypdfreader.parsers
 
-::: spacypdfreader.parsers.base
+::: spacypdfreader.parsers.base.BaseParser
 
-::: spacypdfreader.parsers.pdfminer
+::: spacypdfreader.parsers.pdfminer.PdfminerParser
 
-::: spacypdfreader.parsers.pytesseract
+::: spacypdfreader.parsers.pytesseract.PytesseractParser

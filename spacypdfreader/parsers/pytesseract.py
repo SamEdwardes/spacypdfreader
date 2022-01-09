@@ -19,9 +19,36 @@ class PytesseractParser(BaseParser):
     the image to extract the text. pytesseract results in the best quality but
     can be very slow compared to other parsers.
 
-    See the [pytesseract section](/parsers/#pytesseract) in the docs for more
-    details. For more details on pytesseract see the
-    [pytesseract docs](https://github.com/madmaze/pytesseract).
+    Refer to [spacypdfreader.parsers.base.BaseParser][] for a list of attributes
+    and the `__init__` method.
+
+    Examples:
+        To use `PytesseractParser` it must be explicitly imported and passed
+        into the `pdf_reader` function.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
+
+        For more fine tuning you can pass in additional parameters to 
+        pytesseract.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> params = {"nice": 1}
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser, **params)
+
+    Info:
+        See the [pytesseract section](/parsers/#pytesseract) in the docs for
+        more details on the implementation of pytesseract. For more details on
+        pytesseract see the
+        [pytesseract docs](https://github.com/madmaze/pytesseract).
     """
 
     name: str = "pytesseract"

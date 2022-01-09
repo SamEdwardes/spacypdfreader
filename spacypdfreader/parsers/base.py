@@ -2,8 +2,8 @@ class BaseParser:
     """The base parser class.
 
     The `BaseParser` is used to extend spacypdfreader with additional PDF to
-    text parsers. See [Parsers](/parsers) in the documentation for additional
-    details.
+    text parsers. See [Parsers](/parsers) section in the documentation for
+    additional details.
 
     Attributes:
         name: A string name representation of the class. Will only be used for
