@@ -312,8 +312,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#updates-checklist" class="md-nav__link">
-    Updates checklist
+  <a href="#deployment-checklist" class="md-nav__link">
+    Deployment checklist
   </a>
   
 </li>
@@ -463,8 +463,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#updates-checklist" class="md-nav__link">
-    Updates checklist
+  <a href="#deployment-checklist" class="md-nav__link">
+    Deployment checklist
   </a>
   
 </li>
@@ -517,7 +517,7 @@
                 
 
 <h1 id="contributing">Contributing</h1>
-<h2 id="updates-checklist">Updates checklist</h2>
+<h2 id="deployment-checklist">Deployment checklist</h2>
 <p>Before merging changes into main the following must be completed:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bump the version number in <em>pyproject.toml</em> and <em>spacypdfreader.<strong>init</strong>.py</em></li>
@@ -528,8 +528,8 @@
 <p>After merging the pull request:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new release on GitHub</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest package to PyPi: <code>poetry publish</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest docs to GitHub pages: <code>rm -rf site; mkdocs build; mkdocs gh-deploy;</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest package to PyPi: <code>poetry publish --build</code></li>
 </ul>
 <h2 id="code-style">Code style</h2>
 <p>The black code formatter should be run against all code.</p>
