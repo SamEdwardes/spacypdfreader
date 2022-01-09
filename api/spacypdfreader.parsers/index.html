@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../../fontawesome/solid/user-astronaut">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.5">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ee0f47ba.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
@@ -58,7 +58,7 @@
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -608,40 +608,6 @@ page 1, as opposed to page 0).</p></td>
       </tr>
   </tbody>
 </table>
-        <details class="quote">
-          <summary>Source code in <code>spacypdfreader/parsers/base.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">BaseParser</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;The base parser class.</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    The `BaseParser` is used to extend spacypdfreader with additional PDF to</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    text parsers. See [Parsers](/parsers) section in the documentation for</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    additional details.</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    Attributes:</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">        name: A string name representation of the class. Will only be used for</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">            information purposes by being printed to the terminal when running.</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">        pdf_path: Path to a PDF file.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sd">        page_number: The page number of the PDF to convert from PDF to text.</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">            Must be one digit based indexing (e.g. the first page of the PDF is</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">            page 1, as opposed to page 0).</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;base&quot;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">pdf_path</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">page_number</span><span class="p">:</span> <span class="nb">int</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdf_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">page_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sd">        Args:</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sd">            pdf_path: Path to a PDF file.</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="sd">            page_number: The page number of the PDF to convert from PDF to text.</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="sd">                Must be one digit based indexing (e.g. the first page of the PDF is</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sd">                page 1, as opposed to page 0).</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span> <span class="o">=</span> <span class="n">pdf_path</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">=</span> <span class="n">page_number</span>
-</code></pre></div>
-        </details>
 
 
 
@@ -701,16 +667,16 @@ page 1, as opposed to page 0).</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>spacypdfreader/parsers/base.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdf_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">page_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">        pdf_path: Path to a PDF file.</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">        page_number: The page number of the PDF to convert from PDF to text.</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">            Must be one digit based indexing (e.g. the first page of the PDF is</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">            page 1, as opposed to page 0).</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span> <span class="o">=</span> <span class="n">pdf_path</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">=</span> <span class="n">page_number</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdf_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">page_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="sd">    Args:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a><span class="sd">        pdf_path: Path to a PDF file.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="sd">        page_number: The page number of the PDF to convert from PDF to text.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="sd">            Must be one digit based indexing (e.g. the first page of the PDF is</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="__codelineno-0-7"></a><span class="sd">            page 1, as opposed to page 0).</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="__codelineno-0-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="__codelineno-0-9"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span> <span class="o">=</span> <span class="n">pdf_path</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="__codelineno-0-10"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">=</span> <span class="n">page_number</span>
 </code></pre></div>
         </details>
     </div>
@@ -754,29 +720,29 @@ and the <code>__init__</code> method.</p>
 <p><strong>Examples:</strong></p>
     <p><code>PdfminerParser</code> is the default PDF to text parser and will be
 automatically used unless otherwise specificied.</p>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">)</span>
 </code></pre></div>
     <p>To be more explicit import <code>PdfminerParser</code> and pass it into the
 <code>pdf_reader</code> function.</p>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pdfminer</span> <span class="kn">import</span> <span class="n">PdfminerParser</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PdfminerParser</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pdfminer</span> <span class="kn">import</span> <span class="n">PdfminerParser</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PdfminerParser</span><span class="p">)</span>
 </code></pre></div>
     <p>For more fine tuning you can pass in additional parameters to pdfminer.</p>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pdfminer</span> <span class="kn">import</span> <span class="n">PdfminerParser</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;caching&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PdfminerParser</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pdfminer</span> <span class="kn">import</span> <span class="n">PdfminerParser</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;caching&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="__codelineno-0-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PdfminerParser</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 </code></pre></div>
       <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -786,76 +752,6 @@ refer to the
 <a href="https://pdfminersix.readthedocs.io/en/latest/">pdfminer docs</a>.</p>
 </div>
 
-        <details class="quote">
-          <summary>Source code in <code>spacypdfreader/parsers/pdfminer.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">PdfminerParser</span><span class="p">(</span><span class="n">BaseParser</span><span class="p">):</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Convert PDFs to text using pdfminer.</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    The pdfminer library is &quot;pure python&quot; library for converting PDF into text.</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    pdfminer is relatively fast, but has low accuracy than other parsers such as</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    [pytesseract](/parsers/#pytesseract).</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    Refer to [spacypdfreader.parsers.base.BaseParser][] for a list of attributes</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    and the `__init__` method.</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    Examples:</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sd">        `PdfminerParser` is the default PDF to text parser and will be</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">        automatically used unless otherwise specificied.</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">        &gt;&gt;&gt; import spacy</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader import pdf_reader</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">        &gt;&gt;&gt;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sd">        &gt;&gt;&gt; doc = pdf_reader(&quot;tests/data/test_pdf_01.pdf&quot;, nlp)</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">        To be more explicit import `PdfminerParser` and pass it into the</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sd">        `pdf_reader` function.</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sd">        &gt;&gt;&gt; import spacy</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader import pdf_reader</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader.parsers.pdfminer import PdfminerParser</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sd">        &gt;&gt;&gt;</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="sd">        &gt;&gt;&gt; doc = pdf_reader(&quot;tests/data/test_pdf_01.pdf&quot;, nlp, PdfminerParser)</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="sd">        For more fine tuning you can pass in additional parameters to pdfminer.</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="sd">        &gt;&gt;&gt; import spacy</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader import pdf_reader</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader.parsers.pdfminer import PdfminerParser</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="sd">        &gt;&gt;&gt;</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="sd">        &gt;&gt;&gt; params = {&quot;caching&quot;: False}</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="sd">        &gt;&gt;&gt; doc = pdf_reader(&quot;tests/data/test_pdf_01.pdf&quot;, nlp, PdfminerParser, **params)</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="sd">    Info:</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="sd">        See the [pdfminer section](/parsers/#pdfminer) in the docs for more</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="sd">        details on the implementation of pdfminer. For more details on pdfminer</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="sd">        refer to the</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="sd">        [pdfminer docs](https://pdfminersix.readthedocs.io/en/latest/).</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pdfminer&quot;</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="k">def</span> <span class="nf">pdf_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="sd">&quot;&quot;&quot;Convert a PDF page to text using the `extract_text` function from</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="sd">        pdfminer.</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="sd">        Args:</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="sd">            **kwargs: Arbitrary keyword arguments. See the pdfminer docs for the</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="sd">                [extract_text](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text)</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="sd">                function for the available keywork arguments.</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="sd">        Returns:</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="sd">            A string respresentation of the PDF page.</span>
-<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>        <span class="c1"># pdfminer uses zero indexed page numbers. Therefore need to remove 1</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>        <span class="c1"># from the page count.</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>        <span class="n">text</span> <span class="o">=</span> <span class="n">extract_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span> <span class="n">page_numbers</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>        <span class="k">return</span> <span class="n">text</span>
-</code></pre></div>
-        </details>
 
 
 
@@ -923,23 +819,23 @@ function for the available keywork arguments.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>spacypdfreader/parsers/pdfminer.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">pdf_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Convert a PDF page to text using the `extract_text` function from</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">    pdfminer.</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">        **kwargs: Arbitrary keyword arguments. See the pdfminer docs for the</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">            [extract_text](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">            function for the available keywork arguments.</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">        A string respresentation of the PDF page.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="c1"># pdfminer uses zero indexed page numbers. Therefore need to remove 1</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="c1"># from the page count.</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">extract_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span> <span class="n">page_numbers</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">text</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">pdf_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Convert a PDF page to text using the `extract_text` function from</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="sd">    pdfminer.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="sd">    Args:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="sd">        **kwargs: Arbitrary keyword arguments. See the pdfminer docs for the</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="__codelineno-0-7"></a><span class="sd">            [extract_text](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="__codelineno-0-8"></a><span class="sd">            function for the available keywork arguments.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="__codelineno-0-10"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="__codelineno-0-11"></a><span class="sd">        A string respresentation of the PDF page.</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="__codelineno-0-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="__codelineno-0-13"></a>    <span class="c1"># pdfminer uses zero indexed page numbers. Therefore need to remove 1</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="__codelineno-0-14"></a>    <span class="c1"># from the page count.</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="__codelineno-0-15"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="__codelineno-0-16"></a>    <span class="n">text</span> <span class="o">=</span> <span class="n">extract_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span> <span class="n">page_numbers</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">text</span>
 </code></pre></div>
         </details>
     </div>
@@ -985,22 +881,22 @@ and the <code>__init__</code> method.</p>
 <p><strong>Examples:</strong></p>
     <p>To use <code>PytesseractParser</code> it must be explicitly imported and passed
 into the <code>pdf_reader</code> function.</p>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pytesseract</span> <span class="kn">import</span> <span class="n">PytesseractParser</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PytesseractParser</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pytesseract</span> <span class="kn">import</span> <span class="n">PytesseractParser</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PytesseractParser</span><span class="p">)</span>
 </code></pre></div>
-    <p>For more fine tuning you can pass in additional parameters to 
+    <p>For more fine tuning you can pass in additional parameters to
 pytesseract.</p>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pytesseract</span> <span class="kn">import</span> <span class="n">PytesseractParser</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nice&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PytesseractParser</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">spacy</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">spacypdfreader.parsers.pytesseract</span> <span class="kn">import</span> <span class="n">PytesseractParser</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nice&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="__codelineno-0-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">PytesseractParser</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 </code></pre></div>
       <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1010,81 +906,6 @@ pytesseract see the
 <a href="https://github.com/madmaze/pytesseract">pytesseract docs</a>.</p>
 </div>
 
-        <details class="quote">
-          <summary>Source code in <code>spacypdfreader/parsers/pytesseract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">PytesseractParser</span><span class="p">(</span><span class="n">BaseParser</span><span class="p">):</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Convert PDFs to text using pytesseract.</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="sd">    The pytesseract library has the highest accuracy of all the PDF to text</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    parsers included in spacypdfreader. It takes a different approach than other</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">    parsers. It first converts the PDF to an image, then runs an OCR engine on</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    the image to extract the text. pytesseract results in the best quality but</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    can be very slow compared to other parsers.</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    Refer to [spacypdfreader.parsers.base.BaseParser][] for a list of attributes</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    and the `__init__` method.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">    Examples:</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">        To use `PytesseractParser` it must be explicitly imported and passed</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">        into the `pdf_reader` function.</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">        &gt;&gt;&gt; import spacy</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader import pdf_reader</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader.parsers.pytesseract import PytesseractParser</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">        &gt;&gt;&gt;</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sd">        &gt;&gt;&gt; doc = pdf_reader(&quot;tests/data/test_pdf_01.pdf&quot;, nlp, PytesseractParser)</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sd">        For more fine tuning you can pass in additional parameters to </span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="sd">        pytesseract.</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sd">        &gt;&gt;&gt; import spacy</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader import pdf_reader</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="sd">        &gt;&gt;&gt; from spacypdfreader.parsers.pytesseract import PytesseractParser</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="sd">        &gt;&gt;&gt;</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="sd">        &gt;&gt;&gt; nlp = spacy.load(&quot;en_core_web_sm&quot;)</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="sd">        &gt;&gt;&gt; params = {&quot;nice&quot;: 1}</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="sd">        &gt;&gt;&gt; doc = pdf_reader(&quot;tests/data/test_pdf_01.pdf&quot;, nlp, PytesseractParser, **params)</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sd">    Info:</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="sd">        See the [pytesseract section](/parsers/#pytesseract) in the docs for</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="sd">        more details on the implementation of pytesseract. For more details on</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="sd">        pytesseract see the</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="sd">        [pytesseract docs](https://github.com/madmaze/pytesseract).</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;pytesseract&quot;</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="k">def</span> <span class="nf">pdf_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="sd">&quot;&quot;&quot;Convert a PDF page to text using the `image_to_string` function from</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="sd">        pytesseract.</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="sd">        Args:</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="sd">            **kwargs: Arbitrary keyword arguments. See the pytesseract docs for</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="sd">                the [image_to_string](https://github.com/madmaze/pytesseract)</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="sd">                function for the available keyword arguments.</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="sd">        Returns:</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="sd">            A string respresentation of the PDF page.</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>            <span class="c1"># Convert pdf page to image.</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>            <span class="n">file_name</span> <span class="o">=</span> <span class="n">convert_from_path</span><span class="p">(</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span>
-<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>                <span class="n">output_folder</span><span class="o">=</span><span class="n">tmp_dir</span><span class="p">,</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>                <span class="n">paths_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>                <span class="n">first_page</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span><span class="p">,</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>                <span class="n">last_page</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>
-<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>            <span class="c1"># Convert images to text.</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>            <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>
-<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>        <span class="k">return</span> <span class="n">text</span>
-</code></pre></div>
-        </details>
 
 
 
@@ -1152,34 +973,34 @@ function for the available keyword arguments.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>spacypdfreader/parsers/pytesseract.py</code></summary>
-          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">pdf_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Convert a PDF page to text using the `image_to_string` function from</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">    pytesseract.</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">        **kwargs: Arbitrary keyword arguments. See the pytesseract docs for</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">            the [image_to_string](https://github.com/madmaze/pytesseract)</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">            function for the available keyword arguments.</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">        A string respresentation of the PDF page.</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="c1"># Convert pdf page to image.</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="n">file_name</span> <span class="o">=</span> <span class="n">convert_from_path</span><span class="p">(</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="n">output_folder</span><span class="o">=</span><span class="n">tmp_dir</span><span class="p">,</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="n">paths_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="n">first_page</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span><span class="p">,</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="n">last_page</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="c1"># Convert images to text.</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="k">return</span> <span class="n">text</span>
+          <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="k">def</span> <span class="nf">pdf_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="__codelineno-0-2"></a>    <span class="sd">&quot;&quot;&quot;Convert a PDF page to text using the `image_to_string` function from</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="__codelineno-0-3"></a><span class="sd">    pytesseract.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="__codelineno-0-5"></a><span class="sd">    Args:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="__codelineno-0-6"></a><span class="sd">        **kwargs: Arbitrary keyword arguments. See the pytesseract docs for</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="__codelineno-0-7"></a><span class="sd">            the [image_to_string](https://github.com/madmaze/pytesseract)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="__codelineno-0-8"></a><span class="sd">            function for the available keyword arguments.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="__codelineno-0-10"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="__codelineno-0-11"></a><span class="sd">        A string respresentation of the PDF page.</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="__codelineno-0-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="__codelineno-0-13"></a>    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmp_dir</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="__codelineno-0-15"></a>        <span class="c1"># Convert pdf page to image.</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="__codelineno-0-16"></a>        <span class="n">file_name</span> <span class="o">=</span> <span class="n">convert_from_path</span><span class="p">(</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="__codelineno-0-17"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">pdf_path</span><span class="p">,</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="__codelineno-0-18"></a>            <span class="n">output_folder</span><span class="o">=</span><span class="n">tmp_dir</span><span class="p">,</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="__codelineno-0-19"></a>            <span class="n">paths_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="__codelineno-0-20"></a>            <span class="n">first_page</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span><span class="p">,</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="__codelineno-0-21"></a>            <span class="n">last_page</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">page_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="__codelineno-0-22"></a>        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="__codelineno-0-24"></a>        <span class="c1"># Convert images to text.</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="__codelineno-0-25"></a>        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="__codelineno-0-26"></a>        <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="__codelineno-0-27"></a>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="__codelineno-0-28"></a>    <span class="k">return</span> <span class="n">text</span>
 </code></pre></div>
         </details>
     </div>
@@ -1276,10 +1097,10 @@ function for the available keyword arguments.</p></td>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "content.code.annotate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b6ff8c07.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "content.code.annotate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5e13d264.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

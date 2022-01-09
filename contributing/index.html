@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../fontawesome/solid/user-astronaut">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.5">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ee0f47ba.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -58,7 +58,7 @@
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -312,6 +312,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#updates-checklist" class="md-nav__link">
+    Updates checklist
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#code-style" class="md-nav__link">
     Code style
   </a>
@@ -456,6 +463,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#updates-checklist" class="md-nav__link">
+    Updates checklist
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#code-style" class="md-nav__link">
     Code style
   </a>
@@ -503,22 +517,36 @@
                 
 
 <h1 id="contributing">Contributing</h1>
+<h2 id="updates-checklist">Updates checklist</h2>
+<p>Before merging changes into main the following must be completed:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bump the version number in <em>pyproject.toml</em> and <em>spacypdfreader.<strong>init</strong>.py</em></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Format the code: <code>black spacypdfreader</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run pytest: <code>pytest</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the docs locally: <code>mkdocs serve</code></li>
+</ul>
+<p>After merging the pull request:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new release on GitHub</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest package to PyPi: <code>poetry publish</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest docs to GitHub pages: <code>rm -rf site; mkdocs build; mkdocs gh-deploy;</code></li>
+</ul>
 <h2 id="code-style">Code style</h2>
 <p>The black code formatter should be run against all code.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>black spacypdfreader
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a>black spacypdfreader
 </code></pre></div>
 <h2 id="documentation">Documentation</h2>
 <p>Documentation is built using <a href="https://squidfunk.github.io/mkdocs-material/">Material for mkdocs</a>. All of the documentations lives within the <code>docs/</code> directory.</p>
 <h3 id="test-the-docs-locally">Test the docs locally</h3>
 <p>To test the docs locally run the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdocs serve
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="__codelineno-1-1"></a>mkdocs serve
 </code></pre></div>
 <h3 id="publish-the-docs">Publish the docs</h3>
 <p>The docs are hosted on using GitHub pages at <a href="https://samedwardes.github.io/spaCyPDFreader/contributing/">https://samedwardes.github.io/spaCyPDFreader/contributing/</a>.</p>
 <p>Run the following to update the docs:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm -rf site
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>mkdocs build
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>mkdocs gh-deploy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="__codelineno-2-1"></a>rm -rf site
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="__codelineno-2-2"></a>mkdocs build
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="__codelineno-2-3"></a>mkdocs gh-deploy
 </code></pre></div>
 
               
@@ -616,10 +644,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "content.code.annotate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b6ff8c07.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "content.code.annotate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.5e13d264.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>
