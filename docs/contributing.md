@@ -1,5 +1,20 @@
 # Contributing
 
+## Updates checklist
+
+Before merging changes into main the following must be completed:
+
+- [ ] Bump the version number in *pyproject.toml* and *spacypdfreader.__init__.py*
+- [ ] Format the code: `black spacypdfreader`
+- [ ] Run pytest: `pytest`
+- [ ] Check the docs locally: `mkdocs serve`
+
+After merging the pull request:
+
+- [ ] Create a new release on GitHub
+- [ ] Publish latest package to PyPi: `poetry publish`
+- [ ] Publish latest docs to GitHub pages: `rm -rf site; mkdocs build; mkdocs gh-deploy;`
+
 ## Code style
 
 The black code formatter should be run against all code.
