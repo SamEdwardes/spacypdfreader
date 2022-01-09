@@ -44,21 +44,6 @@ plugins:
         - spacypdfreader
       handlers:
         python:
-          setup_commands:
-            - import sys
-            - from unittest.mock import MagicMock as mock
-            - sys.modules["spacy"] = mock()
-            - sys.modules["spacy.tokens"] = mock()
-            - sys.modules["rich.console"] = mock()
-            - sys.modules["rich.progress"] = mock()
-            - sys.modules["pdfminer"] = mock()
-            - sys.modules["pdfminer.pdfparser"] = mock()
-            - sys.modules["pdfminer.pdfpage"] = mock()
-            - sys.modules["pdfminer.pdfdocument"] = mock()
-            - sys.modules["pdfminer.high_level"] = mock()
-            - sys.modules["pytesseract"] = mock()
-            - sys.modules["PIL"] = mock()
-            - sys.modules["pdf2image"] = mock()
           selection:
             filters:
               - "!^_"  # exlude all members starting with _
