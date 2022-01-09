@@ -33,7 +33,7 @@ class PytesseractParser(BaseParser):
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
 
-        For more fine tuning you can pass in additional parameters to 
+        For more fine tuning you can pass in additional parameters to
         pytesseract.
 
         >>> import spacy

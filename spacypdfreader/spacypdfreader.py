@@ -58,16 +58,16 @@ def pdf_reader(
 
     Returns:
         A spacy Doc object with the custom extensions.
-    
+
     Examples:
         By default pdfminer is used to extract text from the PDF.
-        
+
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
-        
+
         To be more explicit import `PdfminerParser` and pass it into the
         `pdf_reader` function.
 
@@ -77,17 +77,17 @@ def pdf_reader(
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
-        
+
         Alternative parsers can be used as well such as pytesseract.
-        
+
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
         >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
-        
-        For more fine tuning you can pass in additional parameters to 
+
+        For more fine tuning you can pass in additional parameters to
         pytesseract.
 
         >>> import spacy
