@@ -3,7 +3,7 @@
 ## 0.2.1 (2022-01-09)
 
 - Added examples to the API docs.
-- Added continuos deployment for GitHub pages.
+- Added continuous deployment for GitHub pages.
 
 ## 0.2.0 (2021-12-10)
 
