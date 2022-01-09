@@ -11,9 +11,44 @@ class PdfminerParser(BaseParser):
     pdfminer is relatively fast, but has low accuracy than other parsers such as
     [pytesseract](/parsers/#pytesseract).
 
-    See the [pdfminer section](/parsers/#pdfminer) in the docs for more
-    details. For more details on pdfminer see the
-    [pdfminer docs](https://pdfminersix.readthedocs.io/en/latest/).
+    Refer to [spacypdfreader.parsers.base.BaseParser][] for a list of attributes
+    and the `__init__` method.
+
+    Examples:
+        `PdfminerParser` is the default PDF to text parser and will be
+        automatically used unless otherwise specificied.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+
+        To be more explicit import `PdfminerParser` and pass it into the
+        `pdf_reader` function.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
+
+        For more fine tuning you can pass in additional parameters to pdfminer.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> params = {"caching": False}
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser, **params)
+
+    Info:
+        See the [pdfminer section](/parsers/#pdfminer) in the docs for more
+        details on the implementation of pdfminer. For more details on pdfminer
+        refer to the
+        [pdfminer docs](https://pdfminersix.readthedocs.io/en/latest/).
     """
 
     name: str = "pdfminer"
