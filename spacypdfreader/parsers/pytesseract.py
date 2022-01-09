@@ -23,34 +23,26 @@ class PytesseractParser(BaseParser):
     and the `__init__` method.
 
     Examples:
-        `PdfminerParser` is the default PDF to text parser and will be
-        automatically used unless otherwise specificied.
+        To use `PytesseractParser` it must be explicitly imported and passed
+        into the `pdf_reader` function.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
 
-        To be more explicit import `PdfminerParser` and pass it into the
-        `pdf_reader` function.
+        For more fine tuning you can pass in additional parameters to 
+        pytesseract.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
+        >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
-
-        For more fine tuning you can pass in additional parameters to pdfminer.
-
-        >>> import spacy
-        >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
-        >>>
-        >>> nlp = spacy.load("en_core_web_sm")
-        >>> params = {"caching": False}
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser, **params)
+        >>> params = {"nice": 1}
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser, **params)
 
     Info:
         See the [pytesseract section](/parsers/#pytesseract) in the docs for
