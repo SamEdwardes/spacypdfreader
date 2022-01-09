@@ -1,6 +1,6 @@
 # Contributing
 
-## Updates checklist
+## Deployment checklist
 
 Before merging changes into main the following must be completed:
 
@@ -12,8 +12,8 @@ Before merging changes into main the following must be completed:
 After merging the pull request:
 
 - [ ] Create a new release on GitHub
-- [ ] Publish latest package to PyPi: `poetry publish`
 - [ ] Publish latest docs to GitHub pages: `rm -rf site; mkdocs build; mkdocs gh-deploy;`
+- [ ] Publish latest package to PyPi: `poetry publish --build`
 
 ## Code style
 
