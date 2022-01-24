@@ -26,6 +26,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        sudo apt-get install -y poppler-utils
         curl -sSL https://install.python-poetry.org | python3 -
         poetry export --without-hashes --dev --extras pytesseract --output requirements.txt
         python -m pip install --upgrade pip
