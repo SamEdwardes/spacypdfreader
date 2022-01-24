@@ -24,12 +24,17 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+    - name: Install OCR and PDF dependencies
       run: |
         sudo apt-get install -y poppler-utils
+        sudo apt install tesseract-ocr -y
+        sudo apt install libtesseract-dev -y
+    - name: Install python dependencies
+      run: |
         curl -sSL https://install.python-poetry.org | python3 -
         poetry export --without-hashes --dev --extras pytesseract --output requirements.txt
         python -m pip install --upgrade pip
+        pip install wheel
         pip install -r requirements.txt
     - name: Test with pytest
       run: |
