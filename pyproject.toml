@@ -24,10 +24,10 @@ pytesseract = ["pytesseract", "Pillow", "pdf2image"]
 [tool.poetry.group.dev.dependencies]
 pytest = "^6.2.5"
 en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.1/en_core_web_sm-3.4.1-py3-none-any.whl"}
-black = "^21.12b0"
 mkdocs-material = "^9.1.1"
 mkdocs-include-markdown-plugin = "^4.0.3"
 mkdocstrings = {extras = ["python"], version = "^0.20.0"}
+shed = "^2023.3.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

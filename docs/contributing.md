@@ -5,7 +5,7 @@
 Before merging changes into main the following must be completed:
 
 - [ ] Bump the version number in *pyproject.toml* and *spacypdfreader.__init__.py*
-- [ ] Format the code: `black spacypdfreader`
+- [ ] Format the code: `poetry run shed`
 - [ ] Run pytest: `pytest`
 - [ ] Check the docs locally: `mkdocs serve`
 
