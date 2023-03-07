@@ -14,9 +14,9 @@ spacy = "^3.4"
 rich = "^10.15.2"
 "pdfminer.six" = "^20211012"
 pytesseract = {version = "^0.3.8", optional = true}
-Pillow = {version = "^8.4.0", optional = true}
 pdf2image = {version = "^1.16.0", optional = true}
 numpy = "^1.24.2"
+Pillow = {version = "^9.4.0", optional = true}
 
 [tool.poetry.extras]
 pytesseract = ["pytesseract", "Pillow", "pdf2image"]

@@ -1,12 +1,16 @@
 import os
 from dataclasses import dataclass, field
 from typing import Any, Callable
+from multiprocessing.pool import ThreadPool as Pool
 
 import spacy
 from pdfminer.high_level import extract_text
+from functools import partial
 
 from rich.progress import track
 from spacy.tokens import Doc, Token, Span
+
+from spacypdfreader.parsers import pytesseract
 
 from .console import console
 from .parsers import pdfminer
@@ -37,11 +41,23 @@ if not Doc.has_extension("page_range"):
     )
 
 
+def worker(
+        pdf_parser: pdfminer.PdfminerParser | pytesseract.PytesseractParser, 
+        pdf_path: str, 
+        page_num: int, 
+        **kwargs
+    ) -> str:
+    """A helper function to convert a single pdf page to text."""
+    parser = pdf_parser(pdf_path, page_num)
+    text = parser.pdf_to_text(**kwargs)
+    return text
+
 def pdf_reader(
     pdf_path: str,
     nlp: spacy.Language,
-    pdf_parser: BaseParser = pdfminer.PdfminerParser,
+    pdf_parser: pdfminer.PdfminerParser | pytesseract.PytesseractParser = pdfminer.PdfminerParser,
     verbose: bool = False,
+    n_processes: int | None = None,
     **kwargs: Any,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
@@ -107,11 +123,21 @@ def pdf_reader(
     # Convert pdf to text.
     if verbose:
         console.print(f"Extracting text from {num_pages} pdf pages...")
-    texts = []
-    for page_num in range(1, num_pages + 1):
-        parser = pdf_parser(pdf_path, page_num)
-        text = parser.pdf_to_text(**kwargs)
-        texts.append(text)
+
+    # Handle multiprocessing
+    if n_processes:
+        with Pool(n_processes) as p:
+            partial_worker = partial(worker, pdf_parser, pdf_path, **kwargs)
+            # args = [(pdf_parser, i) for i in range(1, num_pages + 1)]
+            args = list(range(1, num_pages + 1))
+            texts = p.map(partial_worker, args)
+    
+    # Handle non-multiprocessing
+    else:
+        texts = []
+        for page_num in range(1, num_pages + 1):
+            text = worker(pdf_parser=pdf_parser, pdf_path=pdf_path, page_num=page_num, **kwargs)
+            texts.append(text)
 
     # Convert text to spaCy Doc objects.
     if verbose:
