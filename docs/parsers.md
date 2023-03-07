@@ -11,6 +11,10 @@ You can also bring your own custom PDF to text parser to use in *spacypdfreader*
 
     💁‍♂️ Would you like to see another parser added? Please submit an issue on [GitHub](https://github.com/SamEdwardes/spaCyPDFreader/issues/new/choose) and the maintainer will look into adding support.
 
+!!! tip
+
+    Parsing big PDFs can be slow. For example, parsing a 166 page PDF document on an M1 mac took 166 seconds. If you are working with larger documents try breaking them into smaller documents and use multiprocessing.
+
 ## Comparison of built in parsers
 
 All PDF to text parsers have their tradeoffs. The table below summaries the pros and cons of the built in parsers.
