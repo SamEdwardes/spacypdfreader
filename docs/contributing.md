@@ -6,13 +6,13 @@ Before merging changes into main the following must be completed:
 
 - [ ] Bump the version number in *pyproject.toml* and *spacypdfreader.__init__.py*
 - [ ] Format the code: `poetry run shed`
-- [ ] Run pytest: `pytest`
-- [ ] Check the docs locally: `mkdocs serve`
+- [ ] Run pytest: `poetry run pytest`
+- [ ] Check the docs locally: `poetry run mkdocs serve`
 
 After merging the pull request:
 
 - [ ] Create a new release on GitHub
-- [ ] Publish latest docs to GitHub pages: `rm -rf site; mkdocs build; mkdocs gh-deploy;`
+- [ ] Publish latest docs to GitHub pages: `rm -rf site; poetry run mkdocs build; poetry run mkdocs gh-deploy;`
 - [ ] Publish latest package to PyPi: `poetry publish --build`
 
 ## Code style
@@ -32,7 +32,7 @@ Documentation is built using [Material for mkdocs](https://squidfunk.github.io/m
 To test the docs locally run the following command:
 
 ```bash
-mkdocs serve
+poetry run mkdocs serve
 ```
 
 ### Publish the docs
@@ -43,6 +43,6 @@ Run the following to update the docs:
 
 ```bash
 rm -rf site
-mkdocs build
-mkdocs gh-deploy
+poetry run mkdocs build
+poetry run mkdocs gh-deploy
 ```
