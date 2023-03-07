@@ -1819,4 +1819,4 @@ pytesseract = ["Pillow", "pdf2image", "pytesseract"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "f99ff19fa5f08041947efbb9ffac8287d56696f1c6c4fceaecb958f434ff3faa"
+content-hash = "f197c1d47073d7b0a3d097a628e1f08a75971fdb035723601bfbee399803151e"

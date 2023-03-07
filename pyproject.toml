@@ -10,7 +10,7 @@ keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
-spacy = "^3.4.2"
+spacy = "^3.4"
 rich = "^10.15.2"
 "pdfminer.six" = "^20211012"
 pytesseract = {version = "^0.3.8", optional = true}
