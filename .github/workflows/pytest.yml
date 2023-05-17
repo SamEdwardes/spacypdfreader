@@ -32,11 +32,11 @@ jobs:
         sudo apt install libtesseract-dev -y
     - name: Setup poetry
       run: |
-        curl -sSL https://install.python-poetry.org | python3 -
         python -m pip install --upgrade pip wheel setuptools
+        curl -sSL https://install.python-poetry.org | python3 -
     - name: Install dependencies
       run: |
-        poetry install
+        poetry install --all-extras
     - name: Test with pytest
       run: |
         poetry run pytest
