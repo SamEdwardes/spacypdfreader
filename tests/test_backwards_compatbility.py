@@ -1,9 +1,8 @@
-import spacy
-from spacypdfreader import __version__
-from spacypdfreader.parsers import pdfminer
-from spacypdfreader.parsers import pytesseract
-from spacypdfreader.spacypdfreader import pdf_reader
 import pytest
+import spacy
+
+from spacypdfreader.parsers import pdfminer, pytesseract
+from spacypdfreader.spacypdfreader import pdf_reader
 
 
 def pdf_assertions(doc: spacy.tokens.Doc):
@@ -18,6 +17,7 @@ def pdf_assertions(doc: spacy.tokens.Doc):
     assert doc._.first_page == 1
     assert doc._.last_page == 4
     assert doc._.pdf_file_name == "tests/data/test_pdf_01.pdf"
+
 
 # ------------------------------------------------------------------------------
 # pdfminer
@@ -34,5 +34,7 @@ def test_pdfminer():
 def test_pytesseract():
     nlp = spacy.load("en_core_web_sm")
     with pytest.deprecated_call():
-        doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.PytesseractParser)
+        doc = pdf_reader(
+            "tests/data/test_pdf_01.pdf", nlp, pytesseract.PytesseractParser
+        )
     pdf_assertions(doc)

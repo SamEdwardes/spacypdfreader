@@ -41,6 +41,7 @@ No action required, *pdfminer* will automatically be installed when you install 
 
 ```python
 import spacy
+
 from spacypdfreader import pdf_reader
 
 nlp = spacy.load("en_core_web_sm")
@@ -51,13 +52,12 @@ You could also be more verbose and pass in additional parameters. For a list of 
 
 ```python
 import spacy
+
 from spacypdfreader import pdf_reader
 from spacypdfreader.parsers.pdfminer import PdfminerParser
 
 nlp = spacy.load("en_core_web_sm")
-params = {
-  "caching": False
-}
+params = {"caching": False}
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser, **params)
 ```
 
@@ -81,6 +81,7 @@ To use *pytesseract* you must pass the *pytesseract* parser into the `pdf_parser
 
 ```python
 import spacy
+
 from spacypdfreader import pdf_reader
 from spacypdfreader.parsers.pytesseract import PytesseractParser
 

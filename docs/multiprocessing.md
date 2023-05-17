@@ -10,6 +10,7 @@ You can use multiprocessing with an parser.
 
 ```python
 import spacy
+
 from spacypdfreader.spacypdfreader import pdf_reader
 
 nlp = spacy.load("en_core_web_sm")
@@ -20,6 +21,7 @@ doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, n_processes=4)
 
 ```python
 import spacy
+
 from spacypdfreader.parsers import pytesseract
 from spacypdfreader.spacypdfreader import pdf_reader
 
@@ -34,6 +36,7 @@ import time
 from functools import wraps
 
 import spacy
+
 from spacypdfreader import pdf_reader
 from spacypdfreader.parsers import pytesseract
 
@@ -44,18 +47,21 @@ def timeit(func):
         start = time.perf_counter()
         result = func(*args, **kwargs)
         end = time.perf_counter()
-        print(f'Took {end - start:.6f} seconds to complete')
+        print(f"Took {end - start:.6f} seconds to complete")
         return result
+
     return wrapper
 
 
 nlp = spacy.load("en_core_web_sm")
 file_name = "tests/data/wikipedia.pdf"
 
+
 @timeit
 def bench(n_processes):
     doc = pdf_reader(file_name, nlp, pytesseract.parser, n_processes=n_processes)
     return doc
+
 
 # With no multiprocessing
 bench(None)

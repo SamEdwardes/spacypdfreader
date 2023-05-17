@@ -1,18 +1,15 @@
 import os
-from typing import Any, Callable
-from multiprocessing.pool import ThreadPool as Pool
-from rich import inspect
 import warnings
-import spacy
 from functools import partial
+from multiprocessing.pool import ThreadPool as Pool
+from typing import Any, Callable
 
+import spacy
 from spacy.tokens import Doc, Token
 
-
+from ._utils import _filter_doc_by_page, _get_number_of_pages
 from .console import console
 from .parsers import pdfminer, pytesseract
-from ._utils import _filter_doc_by_page, _get_number_of_pages
-
 
 # Set up the spacy custom extensions.
 
@@ -58,9 +55,9 @@ def pdf_reader(
         n_processes: The number of process to use for multi-processing. If `None`,
             multi-processing will not be used.
         **kwargs: Arbitrary keyword arguments to pass to the underlying functions
-            that extract text from the PDFs. If using pdfminer (the default) 
-            `**kwargs` will be passed to 
-            [`pdfminer.high_level.extract_text`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text). If using 
+            that extract text from the PDFs. If using pdfminer (the default)
+            `**kwargs` will be passed to
+            [`pdfminer.high_level.extract_text`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text). If using
             `spacypdfreader.parsers.pytesseract.parser` `**kwargs` will
             be passed to
             [`pytesseract.image_to_string`](https://github.com/madmaze/pytesseract/blob/8fe7cd1faf4abc0946cb69813d535198772dbb6c/pytesseract/pytesseract.py#L409-L426).
@@ -106,7 +103,7 @@ def pdf_reader(
         >>> nlp = spacy.load("en_core_web_sm")
         >>> params = {"nice": 1}
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, **params)
-        
+
         You can speed up spacypdfreader by using multiple processes.
 
         >>> import spacy
@@ -116,35 +113,36 @@ def pdf_reader(
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4)
     """
-    # For backwards compatibility, if someone passes in PdfMinerParser or 
+    # For backwards compatibility, if someone passes in PdfMinerParser or
     # PyTesseractParser replace with the correct function
     if pdf_parser.__name__ == "PdfminerParser":
         warnings.warn(
             "`spacypdfreader.parser.pdfminer.PdfminerParser` has been depreciated "
             "in favour of `spacypdfreader.parser.pdfminer.parser`. Please use "
-            "`spacypdfreader.parser.pdfminer.parser` in the future.", 
-            DeprecationWarning, 
-            stacklevel=2
+            "`spacypdfreader.parser.pdfminer.parser` in the future.",
+            DeprecationWarning,
+            stacklevel=2,
         )
         pdf_parser = pdfminer.parser
     elif pdf_parser.__name__ == "PytesseractParser":
         warnings.warn(
             "`spacypdfreader.parser.pdfminer.PytesseractParser` has been depreciated "
             "in favour of `spacypdfreader.parser.pytesseract.parser`. Please use "
-            "`spacypdfreader.parser.pytesseract.parser` in the future.", 
-            DeprecationWarning, 
-            stacklevel=2
+            "`spacypdfreader.parser.pytesseract.parser` in the future.",
+            DeprecationWarning,
+            stacklevel=2,
         )
         pdf_parser = pytesseract.parser
-    
+
     if verbose:
-        console.print(f"PDF to text engine: [blue bold]{pdf_parser.__module__}.{pdf_parser.__name__}[/]...")
+        console.print(
+            f"PDF to text engine: [blue bold]{pdf_parser.__module__}.{pdf_parser.__name__}[/]..."
+        )
 
     pdf_path = os.path.normpath(pdf_path)
     num_pages = _get_number_of_pages(pdf_path)
     if verbose:
         console.print(f"Extracting text from {num_pages} pdf pages...")
-
 
     # Handle multiprocessing
     if n_processes:
@@ -152,7 +150,7 @@ def pdf_reader(
             partial_worker = partial(pdf_parser, pdf_path, **kwargs)
             args = list(range(1, num_pages + 1))
             texts = p.map(partial_worker, args)
-    
+
     # Handle non-multiprocessing
     else:
         texts = []

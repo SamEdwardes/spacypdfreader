@@ -1,5 +1,5 @@
 import spacy
-from spacypdfreader import __version__
+
 from spacypdfreader.parsers import pdfminer
 from spacypdfreader.spacypdfreader import pdf_reader
 
@@ -46,12 +46,16 @@ def test_pdfminer_multi():
 def test_pdfminer_multi_with_params():
     params = {"caching": False}
     nlp = spacy.load("en_core_web_sm")
-    doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pdfminer.parser, n_processes=4, **params)
+    doc = pdf_reader(
+        "tests/data/test_pdf_01.pdf", nlp, pdfminer.parser, n_processes=4, **params
+    )
     pdf_assertions(doc)
 
 
 def test_pdfminer_multi_same_as_single():
     nlp = spacy.load("en_core_web_sm")
-    doc_multi = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pdfminer.parser, n_processes=4)
+    doc_multi = pdf_reader(
+        "tests/data/test_pdf_01.pdf", nlp, pdfminer.parser, n_processes=4
+    )
     doc_single = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pdfminer.parser)
     assert doc_multi.text == doc_single.text

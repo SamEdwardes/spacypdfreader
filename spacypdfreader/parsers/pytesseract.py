@@ -4,7 +4,6 @@ from pathlib import Path
 from pdf2image import convert_from_path
 from PIL import Image
 from pytesseract import image_to_string
-from pathlib import Path
 
 
 def parser(pdf_path: str, page_number: int, **kwargs):
@@ -18,10 +17,10 @@ def parser(pdf_path: str, page_number: int, **kwargs):
 
     Parameters:
         pdf_path: Path to a PDF file.
-        page_number: The page number of the PDF to convert from PDF to text. Must be one 
-            digit based indexing (e.g. the first page of the PDF is page 1, as 
+        page_number: The page number of the PDF to convert from PDF to text. Must be one
+            digit based indexing (e.g. the first page of the PDF is page 1, as
             opposed to page 0).
-        **kwargs: `**kwargs` will be passed to 
+        **kwargs: `**kwargs` will be passed to
             [`pytesseract.image_to_string`](https://github.com/madmaze/pytesseract/blob/8fe7cd1faf4abc0946cb69813d535198772dbb6c/pytesseract/pytesseract.py#L409-L426).
 
     Returns:
@@ -54,7 +53,7 @@ def parser(pdf_path: str, page_number: int, **kwargs):
         more details on the implementation of pytesseract. For more details on
         pytesseract see the [pytesseract docs](https://github.com/madmaze/pytesseract).
     """
-     
+
     with tempfile.TemporaryDirectory() as tmp_dir:
         # Convert pdf page to image.
         file_name = convert_from_path(
@@ -71,7 +70,9 @@ def parser(pdf_path: str, page_number: int, **kwargs):
 
     return text
 
+
 class PytesseractParser:
     """This class has bee included for backwards compatibility. Do not use."""
+
     def __init__(self):
         return None

@@ -59,6 +59,7 @@ pip install 'spacypdfreader[pytesseract]'
 
 ```python
 import spacy
+
 from spacypdfreader import pdf_reader
 
 nlp = spacy.load("en_core_web_sm")
@@ -66,16 +67,16 @@ doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 
 # Get the page number of any token.
 print(doc[0]._.page_number)  # 1
-print(doc[-1]._.page_number) # 4
+print(doc[-1]._.page_number)  # 4
 
 # Get page meta data about the PDF document.
-print(doc._.pdf_file_name)   # "tests/data/test_pdf_01.pdf"
-print(doc._.page_range)      # (1, 4)
-print(doc._.first_page)      # 1
-print(doc._.last_page)       # 4
+print(doc._.pdf_file_name)  # "tests/data/test_pdf_01.pdf"
+print(doc._.page_range)  # (1, 4)
+print(doc._.first_page)  # 1
+print(doc._.last_page)  # 4
 
 # Get all of the text from a specific PDF page.
-print(doc._.page(4))         # "able to display the destination page (unless..."
+print(doc._.page(4))  # "able to display the destination page (unless..."
 ```
 
 ## What is *spaCy*?
@@ -95,7 +96,7 @@ import spacy
 from negspacy.negation import Negex
 
 nlp = spacy.load("en_core_web_sm")
-nlp.add_pipe("negex", config={"ent_types":["PERSON","ORG"]})
+nlp.add_pipe("negex", config={"ent_types": ["PERSON", "ORG"]})
 doc = nlp("She does not like Steve Jobs but likes Apple products.")
 ```
 
@@ -103,7 +104,9 @@ Example of `spaCyPDFreader` usage:
 
 ```python
 import spacy
+
 from spacypdfreader import pdf_reader
+
 nlp = spacy.load("en_core_web_sm")
 
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)

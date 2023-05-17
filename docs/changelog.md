@@ -8,6 +8,7 @@
 
     ```python
     import spacy
+
     from spacypdfreader.parsers import pytesseract
     from spacypdfreader.spacypdfreader import pdf_reader
 
