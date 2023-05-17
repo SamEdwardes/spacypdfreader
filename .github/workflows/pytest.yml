@@ -30,13 +30,13 @@ jobs:
         sudo apt-get install -y poppler-utils
         sudo apt install tesseract-ocr -y
         sudo apt install libtesseract-dev -y
-    - name: Install python dependencies
+    - name: Setup poetry
       run: |
         curl -sSL https://install.python-poetry.org | python3 -
-        poetry export --without-hashes --dev --extras pytesseract --output requirements.txt
-        python -m pip install --upgrade pip
-        pip install wheel
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip wheel setuptools
+    - name: Install dependencies
+      run: |
+        poetry install
     - name: Test with pytest
       run: |
-        pytest
+        poetry run pytest
