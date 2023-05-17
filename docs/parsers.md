@@ -90,42 +90,16 @@ doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
 
 ## Bring your own parser
 
-*spacypdfreader* allows your to bring your custom PDF parser. The only requirement is that the parser must have a way for you to specify which page of the PDF document you would like to extract.
+*spacypdfreader* allows your to bring your custom PDF parser. For examples of how to implement your own parser refer to:
 
-The code below demonstrates the implementation of a new custom parser:
+- <https://github.com/SamEdwardes/spacypdfreader/blob/main/spacypdfreader/parsers/pdfminer.py>, or
+- <https://github.com/SamEdwardes/spacypdfreader/blob/main/spacypdfreader/parsers/pytesseract.py>.
 
-```python
-from typing import Any
+To work with spacypdfreader a parser must be a function that:
 
-import spacy
-from pdfminer.high_level import extract_text
+- Has an argument named `pdf_path`.
+- Has an argument named `page_number`. This argument should use *1 based indexing*. E.g. the value 1 refers to the first page of the PDF.
+- The function should return the text only for a single page of the PDF. This allows spacypdfreader to execute faster with multi-processing.
 
-from spacypdfreader import pdf_reader
-from spacypdfreader.parsers.base import BaseParser # (1)
-
-
-class CustomParser(BaseParser): # (2)
-    name: str = "custom" # (3)
-
-    def pdf_to_text(self, **kwargs: Any) -> str: # (4)
-        # pdfminer uses zero indexed page numbers. Therefore need to remove 1
-        # from the page count.
-        self.page_number -= 1
-        text = extract_text(self.pdf_path, page_numbers=[self.page_number], **kwargs)
-        return text
-
-
-nlp = spacy.load("en_core_web_sm")
-doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, CustomParser)
-print(doc._.page_range)  # (1, 4)
-```
-
-1. `BaseParser` is the base class that all parsers inherit from in *spacypdfreader*.
-2. When creating a new class it must inherit from the `BaseParser` class.
-3. The new class must have a `name` attribute.
-4. The new class must have a method called `pdf_to_text`. This method should only convert one pdf page at a time.
-
-
-!!! note
-
-    *spacypdfreader* uses "1 based indexing". The first page of the PDF is considered page 1, as opposed to page 0.
+!!! warning
+    Version `0.3.0` changed how parsers are implemented. If you have created a custom parser that works with an older version of spacypdfreader it will need to be reimplemented.

@@ -55,6 +55,8 @@ def pdf_reader(
             more details. Defaults to pdfminer.parser.
         verbose: If True details will be printed to the terminal. By default,
             False.
+        n_processes: The number of process to use for multi-processing. If `None`,
+            multi-processing will not be used.
         **kwargs: Arbitrary keyword arguments to pass to the underlying functions
             that extract text from the PDFs. If using pdfminer (the default) 
             `**kwargs` will be passed to 
@@ -104,6 +106,15 @@ def pdf_reader(
         >>> nlp = spacy.load("en_core_web_sm")
         >>> params = {"nice": 1}
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, **params)
+        
+        You can speed up spacypdfreader by using multiple processes.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers import pytesseract
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4)
     """
     # For backwards compatibility, if someone passes in PdfMinerParser or 
     # PyTesseractParser replace with the correct function
