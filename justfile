@@ -12,3 +12,6 @@ publish-docs:
     rm -rf site
     mkdocs build
     mkdocs gh-deploy
+
+publish:
+    poetry publish --build
