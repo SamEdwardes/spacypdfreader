@@ -8,7 +8,7 @@ theme:
   name: material
   icon:
     logo: fontawesome/solid/user-astronaut
-  favicon: fontawesome/solid/user-astronaut
+  favicon: assets/images/user-astronaut-solid.svg
   features:
     - search.suggest
     - search.highlight
