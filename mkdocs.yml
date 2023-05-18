@@ -68,6 +68,7 @@ extra:
 nav:
   - Home: 'index.md'
   - parsers.md
+  - multiprocessing.md
   - changelog.md
   - contributing.md
   - API reference:

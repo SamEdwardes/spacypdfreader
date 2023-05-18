@@ -5,22 +5,22 @@
 Before merging changes into main the following must be completed:
 
 - [ ] Bump the version number in *pyproject.toml* and *spacypdfreader.__init__.py*
-- [ ] Format the code: `black spacypdfreader`
-- [ ] Run pytest: `pytest`
-- [ ] Check the docs locally: `mkdocs serve`
+- [ ] Format the code: `just format`
+- [ ] Run pytest: `just test`
+- [ ] Check the docs locally: `just preview-docs`
 
 After merging the pull request:
 
 - [ ] Create a new release on GitHub
-- [ ] Publish latest docs to GitHub pages: `rm -rf site; mkdocs build; mkdocs gh-deploy;`
-- [ ] Publish latest package to PyPi: `poetry publish --build`
+- [ ] Publish latest docs to GitHub pages: `just publish-docs`
+- [ ] Publish latest package to PyPi: `just publish`
 
 ## Code style
 
 The black code formatter should be run against all code.
 
 ```bash
-black spacypdfreader
+just format
 ```
 
 ## Documentation
@@ -32,7 +32,7 @@ Documentation is built using [Material for mkdocs](https://squidfunk.github.io/m
 To test the docs locally run the following command:
 
 ```bash
-mkdocs serve
+just preview-docs
 ```
 
 ### Publish the docs
@@ -42,7 +42,5 @@ The docs are hosted on using GitHub pages at [https://samedwardes.github.io/spaC
 Run the following to update the docs:
 
 ```bash
-rm -rf site
-mkdocs build
-mkdocs gh-deploy
+just publish-docs
 ```

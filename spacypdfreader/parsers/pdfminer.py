@@ -1,22 +1,27 @@
 from pdfminer.high_level import extract_text
 
-from .base import BaseParser
-from typing import Any
 
-
-class PdfminerParser(BaseParser):
+def parser(pdf_path: str, page_number: int, **kwargs):
     """Convert PDFs to text using pdfminer.
 
     The pdfminer library is "pure python" library for converting PDF into text.
     pdfminer is relatively fast, but has low accuracy than other parsers such as
     [pytesseract](/parsers/#pytesseract).
 
-    Refer to [spacypdfreader.parsers.base.BaseParser][] for a list of attributes
-    and the `__init__` method.
+    Parameters:
+        pdf_path: Path to a PDF file.
+        page_number: The page number of the PDF to convert from PDF to text. Must be one
+            digit based indexing (e.g. the first page of the PDF is page 1, as
+            opposed to page 0).
+        **kwargs: `**kwargs` will be passed to
+            [`pdfminer.high_level.extract_text`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text).
+
+    Returns:
+        str: The PDF page as a string.
 
     Examples:
-        `PdfminerParser` is the default PDF to text parser and will be
-        automatically used unless otherwise specificied.
+        pdfminer is the default PDF to text parser and will be automatically
+        used unless otherwise specified.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
@@ -24,49 +29,40 @@ class PdfminerParser(BaseParser):
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 
-        To be more explicit import `PdfminerParser` and pass it into the
+        To be more explicit import the parser and pass it into the
         `pdf_reader` function.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
+        >>> from spacypdfreader.parsers.pdfminer import parser
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, parser)
 
         For more fine tuning you can pass in additional parameters to pdfminer.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
+        >>> from spacypdfreader.parsers.pdfminer import parser
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
         >>> params = {"caching": False}
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser, **params)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, parser, **params)
 
     Info:
         See the [pdfminer section](/parsers/#pdfminer) in the docs for more
         details on the implementation of pdfminer. For more details on pdfminer
-        refer to the
-        [pdfminer docs](https://pdfminersix.readthedocs.io/en/latest/).
+        refer to the [pdfminer docs](https://pdfminersix.readthedocs.io/en/latest/).
     """
+    # pdfminer uses zero indexed page numbers. Therefore need to remove 1
+    # from the page count.
+    page_number -= 1
+    text = extract_text(pdf_path, page_numbers=[page_number], **kwargs)
+    return text
 
-    name: str = "pdfminer"
 
-    def pdf_to_text(self, **kwargs: Any) -> str:
-        """Convert a PDF page to text using the `extract_text` function from
-        pdfminer.
+class PdfminerParser:
+    """This class has bee included for backwards compatibility. Do not use."""
 
-        Args:
-            **kwargs: Arbitrary keyword arguments. See the pdfminer docs for the
-                [extract_text](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text)
-                function for the available keywork arguments.
-
-        Returns:
-            A string respresentation of the PDF page.
-        """
-        # pdfminer uses zero indexed page numbers. Therefore need to remove 1
-        # from the page count.
-        self.page_number -= 1
-        text = extract_text(self.pdf_path, page_numbers=[self.page_number], **kwargs)
-        return text
+    def __init__(self):
+        return None

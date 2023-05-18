@@ -1,18 +1,15 @@
 import os
-from dataclasses import dataclass, field
-from typing import Any, Callable
+import warnings
+from functools import partial
+from multiprocessing.pool import ThreadPool as Pool
+from typing import Any, Callable, Optional
 
 import spacy
-from pdfminer.high_level import extract_text
+from spacy.tokens import Doc, Token
 
-from rich.progress import track
-from spacy.tokens import Doc, Token, Span
-
-from .console import console
-from .parsers import pdfminer
-from .parsers.base import BaseParser
 from ._utils import _filter_doc_by_page, _get_number_of_pages
-
+from .console import console
+from .parsers import pdfminer, pytesseract
 
 # Set up the spacy custom extensions.
 
@@ -40,8 +37,9 @@ if not Doc.has_extension("page_range"):
 def pdf_reader(
     pdf_path: str,
     nlp: spacy.Language,
-    pdf_parser: BaseParser = pdfminer.PdfminerParser,
+    pdf_parser: Callable = pdfminer.parser,
     verbose: bool = False,
+    n_processes: Optional[int] = None,
     **kwargs: Any,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
@@ -51,10 +49,18 @@ def pdf_reader(
         nlp: A spaCy Language object with a loaded pipeline. For example
             `spacy.load("en_core_web_sm")`.
         pdf_parser: The parser to convert PDF file to text. Read the docs for
-            more detailsDefaults to pdfminer.Parser.
+            more details. Defaults to pdfminer.parser.
         verbose: If True details will be printed to the terminal. By default,
             False.
-        **kwargs: Arbitrary keyword arguments.
+        n_processes: The number of process to use for multi-processing. If `None`,
+            multi-processing will not be used.
+        **kwargs: Arbitrary keyword arguments to pass to the underlying functions
+            that extract text from the PDFs. If using pdfminer (the default)
+            `**kwargs` will be passed to
+            [`pdfminer.high_level.extract_text`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text). If using
+            `spacypdfreader.parsers.pytesseract.parser` `**kwargs` will
+            be passed to
+            [`pytesseract.image_to_string`](https://github.com/madmaze/pytesseract/blob/8fe7cd1faf4abc0946cb69813d535198772dbb6c/pytesseract/pytesseract.py#L409-L426).
 
     Returns:
         A spacy Doc object with the custom extensions.
@@ -68,50 +74,89 @@ def pdf_reader(
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 
-        To be more explicit import `PdfminerParser` and pass it into the
+        To be more explicit import `pdfminer.parser` and pass it into the
         `pdf_reader` function.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pdfminer import PdfminerParser
+        >>> from spacypdfreader.parsers import pdfminer
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pdfminer.parser)
 
         Alternative parsers can be used as well such as pytesseract.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
+        >>> from spacypdfreader.parsers import pytesseract
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser)
 
         For more fine tuning you can pass in additional parameters to
         pytesseract.
 
         >>> import spacy
         >>> from spacypdfreader import pdf_reader
-        >>> from spacypdfreader.parsers.pytesseract import PytesseractParser
+        >>> from spacypdfreader.parsers import pytesseract
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
         >>> params = {"nice": 1}
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser, **params)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, **params)
+
+        You can speed up spacypdfreader by using multiple processes.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers import pytesseract
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4)
     """
+    # For backwards compatibility, if someone passes in PdfMinerParser or
+    # PyTesseractParser replace with the correct function
+    if pdf_parser.__name__ == "PdfminerParser":
+        warnings.warn(
+            "`spacypdfreader.parser.pdfminer.PdfminerParser` has been depreciated "
+            "in favour of `spacypdfreader.parser.pdfminer.parser`. Please use "
+            "`spacypdfreader.parser.pdfminer.parser` in the future.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        pdf_parser = pdfminer.parser
+    elif pdf_parser.__name__ == "PytesseractParser":
+        warnings.warn(
+            "`spacypdfreader.parser.pdfminer.PytesseractParser` has been depreciated "
+            "in favour of `spacypdfreader.parser.pytesseract.parser`. Please use "
+            "`spacypdfreader.parser.pytesseract.parser` in the future.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        pdf_parser = pytesseract.parser
+
     if verbose:
-        console.print(f"PDF to text engine: [blue bold]{pdf_parser.name}[/]...")
+        console.print(
+            f"PDF to text engine: [blue bold]{pdf_parser.__module__}.{pdf_parser.__name__}[/]..."
+        )
 
     pdf_path = os.path.normpath(pdf_path)
     num_pages = _get_number_of_pages(pdf_path)
-
-    # Convert pdf to text.
     if verbose:
         console.print(f"Extracting text from {num_pages} pdf pages...")
-    texts = []
-    for page_num in range(1, num_pages + 1):
-        parser = pdf_parser(pdf_path, page_num)
-        text = parser.pdf_to_text(**kwargs)
-        texts.append(text)
+
+    # Handle multiprocessing
+    if n_processes:
+        with Pool(n_processes) as p:
+            partial_worker = partial(pdf_parser, pdf_path, **kwargs)
+            args = list(range(1, num_pages + 1))
+            texts = p.map(partial_worker, args)
+
+    # Handle non-multiprocessing
+    else:
+        texts = []
+        for page_num in range(1, num_pages + 1):
+            text = pdf_parser(pdf_path=pdf_path, page_number=page_num, **kwargs)
+            texts.append(text)
 
     # Convert text to spaCy Doc objects.
     if verbose:

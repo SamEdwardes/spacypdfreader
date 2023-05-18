@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.3.0 (2023-05-17)
+
+**Changes**
+
+- Added support for multi-processing. For example:
+
+    ```python
+    import spacy
+
+    from spacypdfreader.parsers import pytesseract
+    from spacypdfreader.spacypdfreader import pdf_reader
+
+    nlp = spacy.load("en_core_web_sm")
+    doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4)
+    print(doc._.first_page)
+    print(doc._.last_page)
+    print(doc[12].text)
+    print(doc[12]._.page_number)
+    ```
+
+- Changed the way in which parsers are implemented. They are now implemented with a function as opposed to a class. See <https://github.com/SamEdwardes/spacypdfreader/tree/feature/multi-processing/spacypdfreader/parsers> for examples.
+
+**Fixes**
+
+None
+
 ## 0.2.1 (2022-01-09)
 
 - Added examples to the API docs.
