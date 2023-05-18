@@ -27,9 +27,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install OCR and PDF dependencies
       run: |
-        sudo apt-get install -y poppler-utils
-        sudo apt install tesseract-ocr -y
-        sudo apt install libtesseract-dev -y
+        sudo apt-get update
+        sudo apt-get install -y poppler-utils tesseract-ocr libtesseract-dev
     - name: Setup poetry
       run: |
         python -m pip install --upgrade pip wheel setuptools
