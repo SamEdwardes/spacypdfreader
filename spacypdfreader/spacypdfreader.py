@@ -2,7 +2,7 @@ import os
 import warnings
 from functools import partial
 from multiprocessing.pool import ThreadPool as Pool
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 import spacy
 from spacy.tokens import Doc, Token
@@ -39,7 +39,7 @@ def pdf_reader(
     nlp: spacy.Language,
     pdf_parser: Callable = pdfminer.parser,
     verbose: bool = False,
-    n_processes: int | None = None,
+    n_processes: Optional[int] = None,
     **kwargs: Any,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
