@@ -272,6 +272,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../multiprocessing/" class="md-nav__link">
+        Multiprocessing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../changelog/" class="md-nav__link">
         Changelog
       </a>
@@ -382,17 +397,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
       
-        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
           API reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           API reference
         </label>
@@ -533,32 +548,30 @@
 <p>Before merging changes into main the following must be completed:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Bump the version number in <em>pyproject.toml</em> and <em>spacypdfreader.<strong>init</strong>.py</em></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Format the code: <code>black spacypdfreader</code></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run pytest: <code>pytest</code></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the docs locally: <code>mkdocs serve</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Format the code: <code>just format</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Run pytest: <code>just test</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Check the docs locally: <code>just preview-docs</code></li>
 </ul>
 <p>After merging the pull request:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Create a new release on GitHub</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest docs to GitHub pages: <code>rm -rf site; mkdocs build; mkdocs gh-deploy;</code></li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest package to PyPi: <code>poetry publish --build</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest docs to GitHub pages: <code>just publish-docs</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Publish latest package to PyPi: <code>just publish</code></li>
 </ul>
 <h2 id="code-style">Code style</h2>
 <p>The black code formatter should be run against all code.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>black<span class="w"> </span>spacypdfreader
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>just<span class="w"> </span>format
 </code></pre></div>
 <h2 id="documentation">Documentation</h2>
 <p>Documentation is built using <a href="https://squidfunk.github.io/mkdocs-material/">Material for mkdocs</a>. All of the documentations lives within the <code>docs/</code> directory.</p>
 <h3 id="test-the-docs-locally">Test the docs locally</h3>
 <p>To test the docs locally run the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdocs<span class="w"> </span>serve
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>just<span class="w"> </span>preview-docs
 </code></pre></div>
 <h3 id="publish-the-docs">Publish the docs</h3>
 <p>The docs are hosted on using GitHub pages at <a href="https://samedwardes.github.io/spaCyPDFreader/contributing/">https://samedwardes.github.io/spaCyPDFreader/contributing/</a>.</p>
 <p>Run the following to update the docs:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>site
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>mkdocs<span class="w"> </span>build
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>mkdocs<span class="w"> </span>gh-deploy
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>just<span class="w"> </span>publish-docs
 </code></pre></div>
 
 

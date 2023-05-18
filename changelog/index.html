@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="../parsers/">
+        <link rel="prev" href="../multiprocessing/">
       
       
         <link rel="next" href="../contributing/">
@@ -270,6 +270,21 @@
 
   
   
+  
+    <li class="md-nav__item">
+      <a href="../multiprocessing/" class="md-nav__link">
+        Multiprocessing
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -304,6 +319,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#030-2023-05-17" class="md-nav__link">
+    0.3.0 (2023-05-17)
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#021-2022-01-09" class="md-nav__link">
@@ -362,17 +384,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
       
-        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
           API reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_5">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           API reference
         </label>
@@ -453,6 +475,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#030-2023-05-17" class="md-nav__link">
+    0.3.0 (2023-05-17)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#021-2022-01-09" class="md-nav__link">
     0.2.1 (2022-01-09)
   </a>
@@ -489,6 +518,30 @@
 
 
 <h1 id="changelog">Changelog</h1>
+<h2 id="030-2023-05-17">0.3.0 (2023-05-17)</h2>
+<p><strong>Changes</strong></p>
+<ul>
+<li>
+<p>Added support for multi-processing. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">spacy</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span> <span class="nn">spacypdfreader.parsers</span> <span class="kn">import</span> <span class="n">pytesseract</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span> <span class="nn">spacypdfreader.spacypdfreader</span> <span class="kn">import</span> <span class="n">pdf_reader</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">doc</span> <span class="o">=</span> <span class="n">pdf_reader</span><span class="p">(</span><span class="s2">&quot;tests/data/test_pdf_01.pdf&quot;</span><span class="p">,</span> <span class="n">nlp</span><span class="p">,</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">parser</span><span class="p">,</span> <span class="n">n_processes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">first_page</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">last_page</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">page_number</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>Changed the way in which parsers are implemented. They are now implemented with a function as opposed to a class. See <a href="https://github.com/SamEdwardes/spacypdfreader/tree/feature/multi-processing/spacypdfreader/parsers">https://github.com/SamEdwardes/spacypdfreader/tree/feature/multi-processing/spacypdfreader/parsers</a> for examples.</p>
+</li>
+</ul>
+<p><strong>Fixes</strong></p>
+<p>None</p>
 <h2 id="021-2022-01-09">0.2.1 (2022-01-09)</h2>
 <ul>
 <li>Added examples to the API docs.</li>
