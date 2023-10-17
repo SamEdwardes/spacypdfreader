@@ -124,7 +124,7 @@ def pdf_reader(
         >>> from spacypdfreader.parsers import pytesseract
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
-        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4, page_range=(1, 2)
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4, page_range=(1, 2))
     """
     # For backwards compatibility, if someone passes in PdfMinerParser or
     # PyTesseractParser replace with the correct function
