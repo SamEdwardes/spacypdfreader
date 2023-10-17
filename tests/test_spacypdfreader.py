@@ -3,7 +3,7 @@ from spacypdfreader._utils import _get_number_of_pages
 
 
 def test_version():
-    assert __version__ == "0.3.0"
+    assert __version__ == "0.3.1"
 
 
 def test_get_number_of_pages():
