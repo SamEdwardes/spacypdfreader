@@ -2,7 +2,7 @@ import os
 import warnings
 from functools import partial
 from multiprocessing.pool import ThreadPool as Pool
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Iterable, Optional
 
 import spacy
 from spacy.tokens import Doc, Token
@@ -40,6 +40,7 @@ def pdf_reader(
     pdf_parser: Callable = pdfminer.parser,
     verbose: bool = False,
     n_processes: Optional[int] = None,
+    page_range: Optional[Iterable[int]] = None,
     **kwargs: Any,
 ) -> spacy.tokens.Doc:
     """Convert a PDF document to a spaCy Doc object.
@@ -54,6 +55,9 @@ def pdf_reader(
             False.
         n_processes: The number of process to use for multi-processing. If `None`,
             multi-processing will not be used.
+        page_range: The page range of the PDF to convert from PDF to text. Must be
+            one digit based indexing (e.g. the first page of the PDF is page 1, as
+            opposed to page 0). If `None` all pages will be converted.
         **kwargs: Arbitrary keyword arguments to pass to the underlying functions
             that extract text from the PDFs. If using pdfminer (the default)
             `**kwargs` will be passed to
@@ -112,6 +116,15 @@ def pdf_reader(
         >>>
         >>> nlp = spacy.load("en_core_web_sm")
         >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4)
+
+        To extract a specific range of pages, use the `page_range` argument.
+
+        >>> import spacy
+        >>> from spacypdfreader import pdf_reader
+        >>> from spacypdfreader.parsers import pytesseract
+        >>>
+        >>> nlp = spacy.load("en_core_web_sm")
+        >>> doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4, page_range=(2, 3))
     """
     # For backwards compatibility, if someone passes in PdfMinerParser or
     # PyTesseractParser replace with the correct function
@@ -141,20 +154,39 @@ def pdf_reader(
 
     pdf_path = os.path.normpath(pdf_path)
     num_pages = _get_number_of_pages(pdf_path)
+
+    # Get page range:
+    if page_range:
+        start_page, end_page = page_range
+    else:
+        start_page = 1
+        end_page = num_pages
+
+    # Validate the page_range argument.
+    if start_page > end_page:
+        raise ValueError("The start page must be less than or equal to the end page.")
+    elif start_page < 1:
+        raise ValueError("The start page must be greater than or equal to 1.")
+    elif end_page > num_pages:
+        raise ValueError(
+            f"The end page must be less than or equal to the number of pages in the PDF ({num_pages})."
+        )
+
     if verbose:
-        console.print(f"Extracting text from {num_pages} pdf pages...")
+        console.print(f"PDF contains {num_pages} pages.")
+        console.print(f"Extracting text from {start_page} to {end_page}...")
 
     # Handle multiprocessing
     if n_processes:
         with Pool(n_processes) as p:
             partial_worker = partial(pdf_parser, pdf_path, **kwargs)
-            args = list(range(1, num_pages + 1))
+            args = list(range(start_page, end_page + 1))
             texts = p.map(partial_worker, args)
 
     # Handle non-multiprocessing
     else:
         texts = []
-        for page_num in range(1, num_pages + 1):
+        for page_num in range(start_page, end_page + 1):
             text = pdf_parser(pdf_path=pdf_path, page_number=page_num, **kwargs)
             texts.append(text)
 
@@ -164,7 +196,7 @@ def pdf_reader(
 
     docs = [doc for doc in nlp.pipe(texts)]
     for idx, doc in enumerate(docs):
-        page_num = idx + 1
+        page_num = idx + start_page
         for token in doc:
             token._.page_number = page_num
 

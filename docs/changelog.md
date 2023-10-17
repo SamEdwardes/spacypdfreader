@@ -4,11 +4,20 @@
 
 **Changes**
 
-Nonepo
+- Support for `page_range` argument ([#16](https://github.com/SamEdwardes/spacypdfreader/issues/16), [#18](https://github.com/SamEdwardes/spacypdfreader/issues/18)).
+
+    ```python
+    import spacy
+    from spacypdfreader import pdf_reader
+    from spacypdfreader.parsers import pytesseract
+
+    nlp = spacy.load("en_core_web_sm")
+    doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pytesseract.parser, n_processes=4, page_range=(2, 3))
+    ```
 
 **Fixes**
 
-- Remove `shed` as a depdency. It was removing unused imports that were required ([#17](https://github.com/SamEdwardes/spacypdfreader/issues/17)).
+- Remove `shed` as a dependency. It was removing unused imports that were required ([#17](https://github.com/SamEdwardes/spacypdfreader/issues/17)).
 
 ## 0.3.0 (2023-05-17)
 
