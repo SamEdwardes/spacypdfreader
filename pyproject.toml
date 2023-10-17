@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spacypdfreader"
-version = "0.3.0"
+version = "0.3.1"
 description = "A PDF to text extraction pipeline component for spaCy."
 authors = ["SamEdwardes <edwardes.s@gmail.com>"]
 license = "MIT"
@@ -27,7 +27,9 @@ en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/down
 mkdocs-material = "^9.1.1"
 mkdocs-include-markdown-plugin = "^4.0.3"
 mkdocstrings = {extras = ["python"], version = "^0.20.0"}
-shed = "^2023.3.1"
+ipykernel = "^6.25.2"
+black = "^23.9.1"
+isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

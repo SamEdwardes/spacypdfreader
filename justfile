@@ -1,5 +1,10 @@
 format:
-    poetry run shed
+    # Source code
+    poetry run black spacypdfreader
+    poetry run isort spacypdfreader
+    # Tests
+    poetry run black tests
+    poetry run isort tests
 
 test:
     poetry run pytest

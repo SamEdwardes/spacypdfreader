@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.1 (2023-10-17)
+
+**Changes**
+
+Nonepo
+
+**Fixes**
+
+- Remove `shed` as a depdency. It was removing unused imports that were required ([#17](https://github.com/SamEdwardes/spacypdfreader/issues/17)).
+
 ## 0.3.0 (2023-05-17)
 
 **Changes**
@@ -48,4 +58,3 @@ None
 ## 0.1.1 (2021-12-10)
 
 - 0.1.1 Python ^3.7 support by @SamEdwardes in [https://github.com/SamEdwardes/spaCyPDFreader/pull/2](https://github.com/SamEdwardes/spaCyPDFreader/pull/2)
-
