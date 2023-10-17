@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.2 (2023-10-17)
+
+**Changes**
+
+- Support for Python 3.12 and all future 3.0 versions of Python ([#16](https://github.com/SamEdwardes/spacypdfreader/issues/16), [#21](https://github.com/SamEdwardes/spacypdfreader/issues/21))
+
+**Fixes**
+
+None
+
 ## 0.3.1 (2023-10-17)
 
 **Changes**

@@ -9,7 +9,7 @@ repository = "https://github.com/SamEdwardes/spaCyPDFreader"
 keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.8,<4.0"
 spacy = "^3.4"
 rich = "^10.15.2"
 "pdfminer.six" = "^20211012"
