@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "spacypdfreader"
-version = "0.3.1"
+version = "0.3.2"
 description = "A PDF to text extraction pipeline component for spaCy."
 authors = ["SamEdwardes <edwardes.s@gmail.com>"]
 license = "MIT"
