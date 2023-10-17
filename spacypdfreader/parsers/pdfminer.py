@@ -54,6 +54,15 @@ def parser(pdf_path: str, page_number: int, **kwargs):
         details on the implementation of pdfminer. For more details on pdfminer
         refer to the [pdfminer docs](https://pdfminersix.readthedocs.io/en/latest/).
     """
+    # Check to see if the users has provided the `page_numbers` kwarg. This is not
+    # valid. So raise an error. See: https://github.com/SamEdwardes/spacypdfreader/issues/16
+    if "page_numbers" in kwargs:
+        raise ValueError(
+            "The `page_numbers` kwarg is not valid when using the pdfminer parser. "
+            "Please use `page_range` instead. For example: ",
+            "``"
+        )
+
     # pdfminer uses zero indexed page numbers. Therefore need to remove 1
     # from the page count.
     page_number -= 1

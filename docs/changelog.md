@@ -4,7 +4,11 @@
 
 **Changes**
 
-Nonepo
+- Support for `page_range` argument.
+
+```python
+# TODO: add example
+```
 
 **Fixes**
 
