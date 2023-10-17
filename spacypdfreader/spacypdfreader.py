@@ -168,7 +168,9 @@ def pdf_reader(
     elif start_page < 1:
         raise ValueError("The start page must be greater than or equal to 1.")
     elif end_page > num_pages:
-        raise ValueError(f"The end page must be less than or equal to the number of pages in the PDF ({num_pages}).")
+        raise ValueError(
+            f"The end page must be less than or equal to the number of pages in the PDF ({num_pages})."
+        )
 
     if verbose:
         console.print(f"PDF contains {num_pages} pages.")

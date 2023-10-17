@@ -60,7 +60,7 @@ def parser(pdf_path: str, page_number: int, **kwargs):
         raise ValueError(
             "The `page_numbers` kwarg is not valid when using the pdfminer parser. "
             "Please use `page_range` instead. For example: ",
-            "``"
+            "``",
         )
 
     # pdfminer uses zero indexed page numbers. Therefore need to remove 1

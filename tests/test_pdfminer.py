@@ -65,4 +65,6 @@ def test_pdfminer_multi_same_as_single():
 def test_pdfminer_rejects_n_pages():
     nlp = spacy.load("en_core_web_sm")
     with pytest.raises(ValueError):
-        doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, pdfminer.parser, page_numbers=[1, 2])
+        doc = pdf_reader(
+            "tests/data/test_pdf_01.pdf", nlp, pdfminer.parser, page_numbers=[1, 2]
+        )
