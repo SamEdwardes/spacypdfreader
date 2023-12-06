@@ -49,11 +49,7 @@ Install *spacypdfreader* using pip:
 pip install spacypdfreader
 ```
 
-To install with the required pytesseract dependencies:
-
-```bash
-pip install 'spacypdfreader[pytesseract]'
-```
+For details on how to install and use *spacypdfreader* with pytesseract see the docs: [https://samedwardes.github.io/spacypdfreader/parsers/#pytesseract](https://samedwardes.github.io/spacypdfreader/parsers/#pytesseract).
 
 ## Usage
 
