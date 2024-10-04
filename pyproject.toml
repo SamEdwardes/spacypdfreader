@@ -4,6 +4,9 @@ version = "0.3.2"
 description = "A PDF to text extraction pipeline component for spaCy."
 license = "MIT"
 readme = "README.md"
+maintainers = [
+  {name = "Sam Edwardes", email = "edwardes.s@gmail.com"}
+]
 keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
 requires-python = ">=3.9"
 dependencies = [
@@ -11,6 +14,13 @@ dependencies = [
     "rich>=13.9.2",
     "spacy>=3.8.2",
 ]
+
+[project.urls]
+Homepage = "https://samedwardes.github.io/spacypdfreader"
+Documentation = "https://samedwardes.github.io/spacypdfreader"
+Repository = "https://github.com/SamEdwardes/spaCyPDFreader.git"
+Issues = "https://github.com/SamEdwardes/spaCyPDFreader/issues"
+Changelog = "https://github.com/SamEdwardes/spacypdfreader/blob/main/docs/changelog.md"
 
 [project.optional-dependencies]
 pytesseract = [
