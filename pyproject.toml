@@ -29,44 +29,6 @@ pytesseract = [
     "pytesseract>=0.3.13",
 ]
 
-
-# [tool.poetry]
-# name = "spacypdfreader"
-# version = "0.3.2"
-# description = "A PDF to text extraction pipeline component for spaCy."
-# authors = ["SamEdwardes <edwardes.s@gmail.com>"]
-# license = "MIT"
-# readme = "README.md"
-# repository = "https://github.com/SamEdwardes/spaCyPDFreader"
-# keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
-
-# [tool.poetry.dependencies]
-# python = ">=3.9,<4.0"
-# spacy = "^3.7.6"
-# rich = "^10.15.2"
-# "pdfminer.six" = "^20211012"
-# pytesseract = {version = "^0.3.8", optional = true}
-# pdf2image = {version = "^1.16.0", optional = true}
-# numpy = "^1.25.0"
-# Pillow = {version = "^9.4.0", optional = true}
-
-# [tool.poetry.extras]
-# pytesseract = ["pytesseract", "Pillow", "pdf2image"]
-
-# [tool.poetry.group.dev.dependencies]
-# pytest = "^6.2.5"
-# en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.1/en_core_web_sm-3.4.1-py3-none-any.whl"}
-# mkdocs-material = "^9.1.1"
-# mkdocs-include-markdown-plugin = {version = "^4.0.3",  python = "<=3.11"}
-# mkdocstrings = {extras = ["python"], version = "^0.20.0"}
-# ipykernel = "^6.25.2"
-# black = "^23.9.1"
-# isort = "^5.12.0"
-
-# [build-system]
-# requires = ["poetry-core>=1.0.0"]
-# build-backend = "poetry.core.masonry.api"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
