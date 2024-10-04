@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.2 (2024-10-04)
+
+**Changes**
+
+- Support for Python 3.8 to 3.12 and all future 3.0 versions of Python ([#16](https://github.com/SamEdwardes/spacypdfreader/issues/16), [#21](https://github.com/SamEdwardes/spacypdfreader/issues/21))
+- Added local testing to test matrix of supported Python versions.
+- Switch from poetry to uv for managing project dependencies and building project.
+- Update dependencies.
+
+**Fixes**
+
+None
+
 ## 0.3.1 (2023-10-17)
 
 **Changes**

@@ -6,7 +6,13 @@ Before merging changes into main the following must be completed:
 
 - [ ] Bump the version number in *pyproject.toml* and *spacypdfreader.__init__.py*
 - [ ] Format the code: `just format`
-- [ ] Run pytest: `just test`
+- [ ] Run pytest:
+
+    ```bash
+    just test-matrix
+    just test-docs
+    ```
+- Test publishing to test PyPI: `just publish-test`
 - [ ] Check the docs locally: `just preview-docs`
 
 After merging the pull request:
@@ -17,7 +23,7 @@ After merging the pull request:
 
 ## Code style
 
-The black code formatter should be run against all code.
+The ruff code formatter should be run against all code.
 
 ```bash
 just format

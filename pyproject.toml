@@ -1,36 +1,48 @@
-[tool.poetry]
+[project]
 name = "spacypdfreader"
-version = "0.3.1"
+version = "0.3.2"
 description = "A PDF to text extraction pipeline component for spaCy."
-authors = ["SamEdwardes <edwardes.s@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/SamEdwardes/spaCyPDFreader"
+maintainers = [
+  {name = "Sam Edwardes", email = "edwardes.s@gmail.com"}
+]
 keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
+requires-python = ">=3.9"
+dependencies = [
+    "pdfminer-six>=20240706",
+    "rich>=13.9.2",
+    "spacy>=3.8.2",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.8,<3.12"
-spacy = "^3.4"
-rich = "^10.15.2"
-"pdfminer.six" = "^20211012"
-pytesseract = {version = "^0.3.8", optional = true}
-pdf2image = {version = "^1.16.0", optional = true}
-numpy = "^1.24.2"
-Pillow = {version = "^9.4.0", optional = true}
+[project.urls]
+Homepage = "https://samedwardes.github.io/spacypdfreader"
+Documentation = "https://samedwardes.github.io/spacypdfreader"
+Repository = "https://github.com/SamEdwardes/spaCyPDFreader.git"
+Issues = "https://github.com/SamEdwardes/spaCyPDFreader/issues"
+Changelog = "https://github.com/SamEdwardes/spacypdfreader/blob/main/docs/changelog.md"
 
-[tool.poetry.extras]
-pytesseract = ["pytesseract", "Pillow", "pdf2image"]
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^6.2.5"
-en-core-web-sm = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.1/en_core_web_sm-3.4.1-py3-none-any.whl"}
-mkdocs-material = "^9.1.1"
-mkdocs-include-markdown-plugin = "^4.0.3"
-mkdocstrings = {extras = ["python"], version = "^0.20.0"}
-ipykernel = "^6.25.2"
-black = "^23.9.1"
-isort = "^5.12.0"
+[project.optional-dependencies]
+pytesseract = [
+    "pdf2image>=1.17.0",
+    "pillow>=10.4.0",
+    "pytesseract>=0.3.13",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "mkdocs>=1.6.1",
+    "mkdocs-include-markdown-plugin>=6.2.2",
+    "mkdocs-material>=9.5.39",
+    "pytest>=8.3.3",
+    "en-core-web-sm",
+    "mkdocstrings>=0.26.1",
+    "mkdocstrings-python>=1.11.1",
+]
+
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
