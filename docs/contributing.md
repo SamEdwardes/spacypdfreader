@@ -12,6 +12,7 @@ Before merging changes into main the following must be completed:
     just test-matrix
     just test-docs
     ```
+
 - Test publishing to test PyPI: `just publish-test`
 - [ ] Check the docs locally: `just preview-docs`
 
