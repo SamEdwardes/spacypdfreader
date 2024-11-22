@@ -73,7 +73,34 @@ You can install most of the dependencies by pip installing *spacypdfreader* with
 pip install 'spacypdfreader[pytesseract]'
 ```
 
-Unfortunately this will not always install all of the dependencies because some of them are non-python related. I find that installing pytesseract can be a little bit tricky for beginners. Please refer to [https://github.com/madmaze/pytesseract#installation](https://github.com/madmaze/pytesseract#installation) for details on how to install *pytesseract* if the above does not work.
+For pytesseract to work you have to install some additional tools. Installing pytesseract can be a little bit tricky for beginners. Please refer to [https://github.com/madmaze/pytesseract#installation](https://github.com/madmaze/pytesseract#installation) for details on how to install *pytesseract* if the above does not work.
+
+### Linux
+
+```bash
+sudo apt-get install poppler-utils
+sudo apt install tesseract-ocr
+sudo apt install libtesseract-dev
+```
+
+### Mac
+
+```bash
+brew install poppler
+brew install tesseract
+```
+
+### Windows
+
+To install poppler see the instructions here [https://stackoverflow.com/a/53960829](https://stackoverflow.com/a/53960829).
+
+Then install tesseract with:
+
+```bash
+scoop install tesseract
+```
+
+Or you can follow the instructions here to install tesseract using the windows installer: [https://github.com/UB-Mannheim/tesseract/wiki](https://github.com/UB-Mannheim/tesseract/wiki).
 
 **Usage**
 
