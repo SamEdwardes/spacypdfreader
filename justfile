@@ -33,7 +33,7 @@ lint:
 
 [group('tests')]
 test version="3.12":
-    uv run --python {{version}} --all-extras pytest
+    UV_PROJECT_ENVIRONMENT="./.venv-{{version}}" uv run --python {{version}} --all-extras pytest
 
 [group('tests')]
 test-matrix:
@@ -41,10 +41,6 @@ test-matrix:
     just test 3.10
     just test 3.11
     just test 3.12
-
-[group('tests')]
-test-pre-release-python:
-    # As of 2024-10-04 3.13 is failing
     just test 3.13
 
 [group('tests')]
@@ -63,4 +59,4 @@ publish-docs:
 
 [group('docs')]
 test-docs:
-    uv run --python 3.12 --all-extras pytest --doctest-modules spacypdfreader/
+    uv run --all-extras pytest --doctest-modules src/spacypdfreader/
