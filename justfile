@@ -32,7 +32,7 @@ lint:
     uvx ruff check .
 
 [group('tests')]
-test version="3.12":
+test version="3.13":
     UV_PROJECT_ENVIRONMENT="./.venv-{{version}}" uv run --python {{version}} --all-extras pytest
 
 [group('tests')]
