@@ -4,14 +4,15 @@
 
 Before merging changes into main the following must be completed:
 
-- [ ] Bump the version number in *pyproject.toml* and *spacypdfreader.__init__.py*
+- [ ] Bump the version number in _pyproject.toml_ and _spacypdfreader.**init**.py_
 - [ ] Format the code: `just format`
+- [ ] Lint: `just lint`
 - [ ] Run pytest:
 
-    ```bash
-    just test-matrix
-    just test-docs
-    ```
+  ```bash
+  just test-matrix
+  just test-docs
+  ```
 
 - Test publishing to test PyPI: `just publish-test`
 - [ ] Check the docs locally: `just preview-docs`
@@ -51,3 +52,4 @@ Run the following to update the docs:
 ```bash
 just publish-docs
 ```
+
