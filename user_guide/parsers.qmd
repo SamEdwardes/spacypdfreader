@@ -1,4 +1,6 @@
-# Parsers
+---
+title: Parsers
+---
 
 Extracting text from PDF documents can be challenging. There are several different options in the python ecosystem. *spacypdfreader* makes it easy to extract text from PDF documents. At this time *spacypdfreader* has built in support for two options:
 
@@ -7,13 +9,13 @@ Extracting text from PDF documents can be challenging. There are several differe
 
 You can also bring your own custom PDF to text parser to use in *spacypdfreader*.
 
-!!! tip
+::: {.callout-tip}
+💁‍♂️ Would you like to see another parser added? Please submit an issue on [GitHub](https://github.com/SamEdwardes/spaCyPDFreader/issues/new/choose) and the maintainer will look into adding support.
+:::
 
-    💁‍♂️ Would you like to see another parser added? Please submit an issue on [GitHub](https://github.com/SamEdwardes/spaCyPDFreader/issues/new/choose) and the maintainer will look into adding support.
-
-!!! tip
-
-    Parsing big PDFs can be slow. For example, parsing a 166 page PDF document on an M1 mac took 166 seconds. If you are working with larger documents try breaking them into smaller documents and use multiprocessing.
+::: {.callout-tip}
+Parsing big PDFs can be slow. For example, parsing a 166 page PDF document on an M1 mac took 166 seconds. If you are working with larger documents try breaking them into smaller documents and use multiprocessing.
+:::
 
 ## Comparison of built in parsers
 
@@ -31,7 +33,7 @@ All PDF to text parsers have their tradeoffs. The table below summaries the pros
 
 A pure Python library for extracting text from PDFs.
 
-**Installation** 
+**Installation**
 
 No action required, *pdfminer* will automatically be installed when you install *spacypdfreader*.
 
@@ -48,17 +50,17 @@ nlp = spacy.load("en_core_web_sm")
 doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp)
 ```
 
-You could also be more verbose and pass in additional parameters. For a list of available parameters please refer to the pdfminer documentation for the [`extract_function`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text) function.
+You could also be more verbose and pass in additional parameters. For a list of available parameters please refer to the pdfminer documentation for the [`extract_text`](https://pdfminersix.readthedocs.io/en/latest/reference/highlevel.html#extract-text) function.
 
 ```python
 import spacy
 
 from spacypdfreader import pdf_reader
-from spacypdfreader.parsers.pdfminer import PdfminerParser
+from spacypdfreader.parsers.pdfminer import parser
 
 nlp = spacy.load("en_core_web_sm")
 params = {"caching": False}
-doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PdfminerParser, **params)
+doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, parser, **params)
 ```
 
 ## *pytesseract*
@@ -83,18 +85,18 @@ To use *pytesseract* you must pass the *pytesseract* parser into the `pdf_parser
 import spacy
 
 from spacypdfreader import pdf_reader
-from spacypdfreader.parsers.pytesseract import PytesseractParser
+from spacypdfreader.parsers.pytesseract import parser
 
 nlp = spacy.load("en_core_web_sm")
-doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, PytesseractParser)
+doc = pdf_reader("tests/data/test_pdf_01.pdf", nlp, parser)
 ```
 
 ## Bring your own parser
 
 *spacypdfreader* allows your to bring your custom PDF parser. For examples of how to implement your own parser refer to:
 
-- <https://github.com/SamEdwardes/spacypdfreader/blob/main/spacypdfreader/parsers/pdfminer.py>, or
-- <https://github.com/SamEdwardes/spacypdfreader/blob/main/spacypdfreader/parsers/pytesseract.py>.
+- <https://github.com/SamEdwardes/spacypdfreader/blob/main/src/spacypdfreader/parsers/pdfminer.py>, or
+- <https://github.com/SamEdwardes/spacypdfreader/blob/main/src/spacypdfreader/parsers/pytesseract.py>.
 
 To work with spacypdfreader a parser must be a function that:
 
@@ -102,5 +104,6 @@ To work with spacypdfreader a parser must be a function that:
 - Has an argument named `page_number`. This argument should use *1 based indexing*. E.g. the value 1 refers to the first page of the PDF.
 - The function should return the text only for a single page of the PDF. This allows spacypdfreader to execute faster with multi-processing.
 
-!!! warning
-    Version `0.3.0` changed how parsers are implemented. If you have created a custom parser that works with an older version of spacypdfreader it will need to be reimplemented.
+::: {.callout-warning}
+Version `0.3.0` changed how parsers are implemented. If you have created a custom parser that works with an older version of spacypdfreader it will need to be reimplemented.
+:::

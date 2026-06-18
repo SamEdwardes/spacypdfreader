@@ -38,13 +38,22 @@ just lint
 
 ### Documentation
 
+The docs site is built with [Great Docs](https://posit-dev.github.io/great-docs/)
+(a Quarto-based generator). Great Docs requires Python 3.11+ and the Quarto CLI, and
+is run via `uvx` so it stays separate from the package's own dependencies. Content lives
+in `great-docs.yml`, the `user_guide/` directory, and the package docstrings. The
+landing page is generated automatically from `README.md`.
+
 ```bash
-# Preview docs locally
+# Preview docs locally (http://localhost:3000)
 just preview-docs
 
-# Publish docs to GitHub Pages
-just publish-docs
+# Build the static site into great-docs/_site
+just build-docs
 ```
+
+Docs are published to GitHub Pages automatically by the `CI Docs` workflow
+(`.github/workflows/docs.yml`) on every push to `main` — there is no manual publish step.
 
 ### Building and Publishing
 

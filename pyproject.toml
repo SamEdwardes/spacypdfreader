@@ -27,7 +27,7 @@ Homepage = "https://samedwardes.github.io/spacypdfreader"
 Documentation = "https://samedwardes.github.io/spacypdfreader"
 Repository = "https://github.com/SamEdwardes/spaCyPDFreader.git"
 Issues = "https://github.com/SamEdwardes/spaCyPDFreader/issues"
-Changelog = "https://github.com/SamEdwardes/spacypdfreader/blob/main/docs/changelog.md"
+Changelog = "https://samedwardes.github.io/spacypdfreader/user-guide/changelog.html"
 
 [project.optional-dependencies]
 pytesseract = ["pdf2image>=1.17.0", "pillow>=10.4.0", "pytesseract>=0.3.13"]
@@ -42,11 +42,6 @@ en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/dow
 
 [dependency-groups]
 dev = [
-  "mkdocs>=1.6.1",
-  "mkdocs-include-markdown-plugin>=6.2.2",
-  "mkdocs-material>=9.5.39",
   "pytest>=8.3.3",
   "en-core-web-sm",
-  "mkdocstrings>=0.26.1",
-  "mkdocstrings-python>=1.11.1",
 ]

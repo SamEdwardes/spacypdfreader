@@ -1,0 +1,73 @@
+# Great Docs Configuration
+# See https://posit-dev.github.io/great-docs/user-guide/configuration.html
+
+# Display Name
+# ------------
+display_name: spacypdfreader
+
+# Docstring Parser
+# ----------------
+# The docstring format used in your package (numpy, google, or sphinx)
+parser: google
+
+# Dynamic Introspection
+# ---------------------
+# Use runtime introspection for more accurate documentation (default: true)
+dynamic: true
+
+# Logo & Favicon
+# --------------
+logo: assets/user-astronaut-solid.svg
+
+# GitHub Integration
+# ------------------
+# GitHub link style: "widget" (shows stars count) or "icon" (simple icon)
+github_style: widget
+
+# Site URL
+# --------
+# Canonical address of the deployed documentation site.
+site_url: "https://samedwardes.github.io/spacypdfreader/"
+
+# Author Information
+# ------------------
+authors:
+  - name: Sam Edwardes
+    role: Maintainer
+    email: edwardes.s@gmail.com
+    github: SamEdwardes
+    homepage: https://www.linkedin.com/in/samedwardes
+
+# User Guide
+# ----------
+# Section ordering for the User Guide .qmd files in user_guide/.
+user_guide:
+  - section: "Guides"
+    contents:
+      - parsers.qmd
+      - multiprocessing.qmd
+      - spacy-extensions.qmd
+  - section: "Project"
+    contents:
+      - changelog.qmd
+      - contributing.qmd
+
+# Jupyter Kernel
+# --------------
+jupyter: python3
+
+# API Reference Structure
+# -----------------------
+reference:
+  - title: Functions
+    desc: The main entry point for converting a PDF into a spaCy Doc.
+    contents:
+      - spacypdfreader.pdf_reader
+
+  - title: Parsers
+    desc: >-
+      Built-in PDF-to-text parsers. Pass one of these to the `pdf_parser`
+      argument of `pdf_reader`, or bring your own.
+    contents:
+      - parsers.pdfminer.parser
+      - parsers.pytesseract.parser

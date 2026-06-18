@@ -1,3 +1,0 @@
-# spacypdfreader.spacypdfreader
-
-::: spacypdfreader.spacypdfreader

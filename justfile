@@ -47,15 +47,18 @@ test-matrix:
 test-gha:
     gh workflow run pytest.yml --ref $(git branch --show-current)
 
-[group('docs')]
-preview-docs:
-    uv run mkdocs serve
+# great-docs requires Python 3.11+ and is run via uvx, separate from the
+# package's own dependencies (which support Python 3.9+). The pytesseract
+# extras are included so the API reference can introspect every parser module.
+docs_cmd := "uvx --python 3.12 --with-editable . --with pdf2image --with pillow --with pytesseract --with great-docs great-docs"
 
 [group('docs')]
-publish-docs:
-    rm -rf site
-    uv run mkdocs build
-    uv run mkdocs gh-deploy
+preview-docs:
+    {{docs_cmd}} preview
+
+[group('docs')]
+build-docs:
+    {{docs_cmd}} build
 
 [group('docs')]
 test-docs:

@@ -127,5 +127,5 @@ dmypy.json
 .vscode/settings.json
 tmp.py
 
-# Added by Sam Edwardes
-site
+# Great Docs build output (ephemeral)
+great-docs/

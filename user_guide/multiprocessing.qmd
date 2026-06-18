@@ -1,4 +1,6 @@
-# Multiprocessing
+---
+title: Multiprocessing
+---
 
 As of version `0.3.0` spacypdfreader has built in support for multi-processing. This can dramatically improve the time it takes to convert a PDF to text.
 
@@ -6,7 +8,7 @@ As of version `0.3.0` spacypdfreader has built in support for multi-processing. 
 
 You can use multiprocessing with an parser.
 
-**pdfminder**
+**pdfminer**
 
 ```python
 import spacy
@@ -71,4 +73,3 @@ bench(None)
 bench(8)
 # Took 9.051591 seconds to complete
 ```
-
