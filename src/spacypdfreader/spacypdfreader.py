@@ -1,7 +1,7 @@
 import os
 import warnings
 from functools import partial
-from multiprocessing.pool import ThreadPool as Pool
+from multiprocessing.pool import ThreadPool
 from typing import Any, Callable, Iterable, Optional
 
 import spacy
@@ -176,25 +176,37 @@ def pdf_reader(
         console.print(f"PDF contains {num_pages} pages.")
         console.print(f"Extracting text from {start_page} to {end_page}...")
 
-    # Handle multiprocessing
-    if n_processes:
-        with Pool(n_processes) as p:
+    # Extract the text from each page.
+    page_numbers = list(range(start_page, end_page + 1))
+    batch_parser = getattr(pdf_parser, "batch_parser", None)
+
+    if batch_parser is not None:
+        # Single-pass parsers (e.g. pdfminer) parse the whole PDF once instead
+        # of re-opening and re-parsing it for every page. This is faster than
+        # parallelising the per-page calls, so multiprocessing is not needed
+        # for extraction here.
+        texts = batch_parser(pdf_path, page_numbers, **kwargs)
+    elif n_processes:
+        # Per-page parsers (e.g. pytesseract OCR) that release the GIL during
+        # subprocess / native calls benefit from a thread pool. Note that pure
+        # python, CPU-bound parsers will see little benefit due to the GIL.
+        with ThreadPool(n_processes) as pool:
             partial_worker = partial(pdf_parser, pdf_path, **kwargs)
-            args = list(range(start_page, end_page + 1))
-            texts = p.map(partial_worker, args)
-
-    # Handle non-multiprocessing
+            texts = pool.map(partial_worker, page_numbers)
     else:
-        texts = []
-        for page_num in range(start_page, end_page + 1):
-            text = pdf_parser(pdf_path=pdf_path, page_number=page_num, **kwargs)
-            texts.append(text)
+        texts = [
+            pdf_parser(pdf_path=pdf_path, page_number=page_num, **kwargs)
+            for page_num in page_numbers
+        ]
 
-    # Convert text to spaCy Doc objects.
+    # Convert text to spaCy Doc objects. `nlp.pipe` is kept single process on
+    # purpose: spaCy's multiprocessing has a large static cost and only pays
+    # off for thousands of texts, whereas a PDF yields just one text per page,
+    # so `n_process > 1` would slow down typical documents.
     if verbose:
         console.print("Converting text to [blue bold]spaCy[/] Doc...")
 
-    docs = [doc for doc in nlp.pipe(texts)]
+    docs = list(nlp.pipe(texts))
     for idx, doc in enumerate(docs):
         page_num = idx + start_page
         for token in doc:
