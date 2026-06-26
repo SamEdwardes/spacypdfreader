@@ -23,4 +23,4 @@ hooks = [
 [[repos]]
 repo = "https://github.com/rvben/rumdl-pre-commit"
 rev = "v0.0.222"
-hooks = [{ id = "rumdl-fmt", args = ["--disable=MD013"] }]
+hooks = [{ id = "rumdl-fmt", args = [] }]
