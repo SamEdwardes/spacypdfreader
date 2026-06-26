@@ -107,6 +107,8 @@ The library uses a pluggable parser architecture in `spacypdfreader/parsers/`:
 
 Each parser implements a `parser(pdf_path: str, page_number: int, **kwargs)` function that returns text for a single page.
 
+A parser may optionally expose a `batch_parser(pdf_path: str, pages: Iterable[int], **kwargs)` function (attached as `parser.batch_parser`) that returns text for many pages in a single pass. pdfminer provides one to avoid re-parsing the whole PDF once per page (which is O(n^2) work). When a `batch_parser` is available, `pdf_reader()` prefers it over per-page calls.
+
 ### spaCy Custom Extensions
 
 The library registers several custom attributes on spaCy tokens and docs:
@@ -124,8 +126,10 @@ These extensions are registered in `spacypdfreader/spacypdfreader.py` at module 
 
 1. PDF path and spaCy Language object provided to `pdf_reader()`
 2. PDF page count determined using pdfminer's `PDFParser`
-3. Pages extracted in parallel (if `n_processes` specified) or sequentially
-4. Each page text converted to a spaCy `Doc` via `nlp.pipe()`
+3. Text extracted from the requested pages:
+   - If the parser exposes a `batch_parser` (e.g. pdfminer), the PDF is parsed once in a single pass.
+   - Otherwise pages are extracted per-page, in parallel via a `ThreadPool` when `n_processes` is set (this only helps parsers that release the GIL, such as the pytesseract OCR parser), or sequentially.
+4. Each page text converted to a spaCy `Doc` via `nlp.pipe()` (single process)
 5. Page numbers assigned to all tokens
 6. Individual page `Doc` objects combined using `Doc.from_docs()`
 7. Custom extensions set on the combined doc
@@ -135,7 +139,8 @@ These extensions are registered in `spacypdfreader/spacypdfreader.py` at module 
 - This library breaks spaCy convention: it does NOT use `nlp.add_pipe()` because text extraction must happen before spaCy processing
 - Page numbers use 1-based indexing in the public API (but pdfminer uses 0-based internally)
 - When using pdfminer parser, do NOT pass `page_numbers` kwarg - use `page_range` instead
-- Multiprocessing uses `ThreadPool` not `ProcessPool` (see imports in spacypdfreader.py:4)
+- Per-page parsing uses `ThreadPool` (not `ProcessPool`) when `n_processes` is set; this only speeds up parsers that release the GIL (e.g. pytesseract). The default pdfminer parser instead uses a single-pass `batch_parser` and ignores `n_processes` for extraction.
+- `nlp.pipe()` is intentionally run single-process: spaCy's `n_process` has a large static cost that only pays off for thousands of texts, but a PDF yields just one text per page, so parallelizing it would slow down typical documents.
 
 ## Testing Notes
 
