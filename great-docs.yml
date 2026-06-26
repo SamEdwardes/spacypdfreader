@@ -17,7 +17,11 @@ dynamic: true
 
 # Logo & Favicon
 # --------------
-logo: assets/user-astronaut-solid.svg
+# show_title displays the package name next to the logo in the navbar; the
+# name links to the homepage.
+logo:
+  light: assets/user-astronaut-solid.svg
+  show_title: true
 
 # GitHub Integration
 # ------------------
