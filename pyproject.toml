@@ -1,23 +1,23 @@
 [project]
 name = "spacypdfreader"
-version = "0.4.0"
+version = "0.5.0"
 description = "A PDF to text extraction pipeline component for spaCy."
 license = "MIT"
 readme = "README.md"
 maintainers = [{ name = "Sam Edwardes", email = "edwardes.s@gmail.com" }]
 keywords = ["python", "spacy", "nlp", "pdf", "pdfs"]
-requires-python = ">=3.9, <3.14"
-dependencies = ["pdfminer-six>=20240706", "rich>=13.9.2", "spacy>=3.8.7"]
+requires-python = ">=3.10, <3.15"
+dependencies = ["pdfminer-six>=20240706", "rich>=13.9.2", "spacy>=3.8.13"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Topic :: Text Processing",
 ]
@@ -33,7 +33,7 @@ Changelog = "https://samedwardes.github.io/spacypdfreader/user-guide/changelog.h
 pytesseract = ["pdf2image>=1.17.0", "pillow>=10.4.0", "pytesseract>=0.3.13"]
 
 [build-system]
-requires = ["uv_build>=0.9.5,<0.10.0"]
+requires = ["uv_build>=0.11.24,<0.12.0"]
 build-backend = "uv_build"
 
 

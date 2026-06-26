@@ -32,30 +32,28 @@ lint:
     uvx ruff check .
 
 [group('tests')]
-test version="3.13":
+test version="3.14":
     UV_PROJECT_ENVIRONMENT="./.venv-{{version}}" uv run --python {{version}} --all-extras pytest
 
 [group('tests')]
 test-matrix:
-    just test 3.9
     just test 3.10
     just test 3.11
     just test 3.12
     just test 3.13
+    just test 3.14
 
 [group('tests')]
 test-gha:
     gh workflow run pytest.yml --ref $(git branch --show-current)
 
-# great-docs requires Python 3.11+. The pytesseract extras are included so the
-# API reference can introspect every parser module.
 [group('docs')]
 preview-docs:
-    uv run --python 3.12 --all-extras great-docs preview
+    uv run --all-extras great-docs preview
 
 [group('docs')]
 build-docs:
-    uv run --python 3.12 --all-extras great-docs build
+    uv run --all-extras great-docs build
 
 [group('docs')]
 test-docs:
