@@ -1,0 +1,12 @@
+[global]
+line-length = 100
+disable = [
+  "MD013", # Keep lines short for better readability
+  "MD041", # Show command output in documentation
+  "MD036", # No emphasis as heading
+  "MD033", # Inline html
+]
+
+# Keep list indentation consistent
+[MD007]
+indent = 4

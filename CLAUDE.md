@@ -36,15 +36,39 @@ just format
 just lint
 ```
 
-### Documentation
+### Pre-commit hooks
+
+Git pre-commit hooks are managed with [prek](https://github.com/j178/prek), a
+drop-in replacement for `pre-commit`. Configuration lives in `prek.toml`. prek is
+part of the `dev` dependency group. Install the hooks once, then run them on
+demand as needed:
 
 ```bash
-# Preview docs locally
+# Install the Git hooks (one time after cloning)
+uv run prek install
+
+# Run all hooks against every file
+uv run prek run --all-files
+```
+
+### Documentation
+
+The docs site is built with [Great Docs](https://posit-dev.github.io/great-docs/)
+(a Quarto-based generator). Great Docs requires Python 3.11+ and the Quarto CLI, and
+is run via `uvx` so it stays separate from the package's own dependencies. Content lives
+in `great-docs.yml`, the `user_guide/` directory, and the package docstrings. The
+landing page is generated automatically from `README.md`.
+
+```bash
+# Preview docs locally (http://localhost:3000)
 just preview-docs
 
-# Publish docs to GitHub Pages
-just publish-docs
+# Build the static site into great-docs/_site
+just build-docs
 ```
+
+Docs are published to GitHub Pages automatically by the `CI Docs` workflow
+(`.github/workflows/docs.yml`) on every push to `main` — there is no manual publish step.
 
 ### Building and Publishing
 
@@ -64,22 +88,22 @@ just publish
 ### Core Components
 
 - **`spacypdfreader.spacypdfreader.pdf_reader()`**: Main entry point function that converts a PDF to a spaCy `Doc` object
-  - Takes a PDF path and a spaCy `Language` object
-  - Returns a `Doc` object with custom extensions
-  - Supports multiprocessing via `n_processes` parameter
-  - Supports page range extraction via `page_range` parameter
+    - Takes a PDF path and a spaCy `Language` object
+    - Returns a `Doc` object with custom extensions
+    - Supports multiprocessing via `n_processes` parameter
+    - Supports page range extraction via `page_range` parameter
 
 ### Parser System
 
 The library uses a pluggable parser architecture in `spacypdfreader/parsers/`:
 
 - **pdfminer** (`parsers/pdfminer.py`): Default parser, fast but lower accuracy
-  - Uses `pdfminer.high_level.extract_text()`
-  - Zero-indexed internally but converts from 1-indexed API
+    - Uses `pdfminer.high_level.extract_text()`
+    - Zero-indexed internally but converts from 1-indexed API
 
 - **pytesseract** (`parsers/pytesseract.py`): OCR-based parser, slower but higher accuracy
-  - Converts PDF pages to images first
-  - Requires optional dependencies: `pip install 'spacypdfreader[pytesseract]'`
+    - Converts PDF pages to images first
+    - Requires optional dependencies: `pip install 'spacypdfreader[pytesseract]'`
 
 Each parser implements a `parser(pdf_path: str, page_number: int, **kwargs)` function that returns text for a single page.
 

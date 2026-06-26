@@ -47,15 +47,15 @@ test-matrix:
 test-gha:
     gh workflow run pytest.yml --ref $(git branch --show-current)
 
+# great-docs requires Python 3.11+. The pytesseract extras are included so the
+# API reference can introspect every parser module.
 [group('docs')]
 preview-docs:
-    uv run mkdocs serve
+    uv run --python 3.12 --all-extras great-docs preview
 
 [group('docs')]
-publish-docs:
-    rm -rf site
-    uv run mkdocs build
-    uv run mkdocs gh-deploy
+build-docs:
+    uv run --python 3.12 --all-extras great-docs build
 
 [group('docs')]
 test-docs:
