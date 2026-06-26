@@ -44,4 +44,5 @@ en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/dow
 dev = [
   "pytest>=8.3.3",
   "en-core-web-sm",
+  "great-docs>=0.14.1; python_version >= '3.11'",
 ]
