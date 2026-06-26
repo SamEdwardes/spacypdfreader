@@ -1,0 +1,18 @@
+# spacypdfreader
+
+> A PDF to text extraction pipeline component for spaCy.
+
+## Docs
+
+### API Reference
+
+#### Functions
+> The main entry point for converting a PDF into a spaCy Doc.
+
+- [spacypdfreader.pdf_reader](https://samedwardes.github.io/spacypdfreader/reference/spacypdfreader.pdf_reader.html)
+
+#### Parsers
+> Built-in PDF-to-text parsers. Pass one of these to the `pdf_parser` argument of `pdf_reader`, or bring your own.
+
+- [parsers.pdfminer.parser](https://samedwardes.github.io/spacypdfreader/reference/parsers.pdfminer.parser.html)
+- [parsers.pytesseract.parser](https://samedwardes.github.io/spacypdfreader/reference/parsers.pytesseract.parser.html)

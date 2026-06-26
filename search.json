@@ -1,0 +1,260 @@
+[
+  {
+    "objectID": "skill.html",
+    "href": "skill.html",
+    "title": "spacypdfreader",
+    "section": "",
+    "text": "A PDF to text extraction pipeline component for spaCy."
+  },
+  {
+    "objectID": "skill.html#functions",
+    "href": "skill.html#functions",
+    "title": "spacypdfreader",
+    "section": "Functions",
+    "text": "Functions\nThe main entry point for converting a PDF into a spaCy Doc.\n\nspacypdfreader.pdf_reader"
+  },
+  {
+    "objectID": "skill.html#parsers",
+    "href": "skill.html#parsers",
+    "title": "spacypdfreader",
+    "section": "Parsers",
+    "text": "Parsers\nBuilt-in PDF-to-text parsers. Pass one of these to the pdf_parser argument of pdf_reader, or bring your own.\n\nparsers.pdfminer.parser\nparsers.pytesseract.parser"
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Functions\n\nThe main entry point for converting a PDF into a spaCy Doc.\n\n\nspacypdfreader.pdf_reader()\n\nConvert a PDF document to a spaCy Doc object.\n\n\n\n\nParsers\n\nBuilt-in PDF-to-text parsers. Pass one of these to the pdf_parser argument of pdf_reader, or bring your own.\n\n\nparsers.pdfminer.parser()\n\nConvert PDFs to text using pdfminer.\n\nparsers.pytesseract.parser()\n\nConvert a single PDF page to text using pytesseract.",
+    "crumbs": [
+      "Reference",
+      "API Index"
+    ]
+  },
+  {
+    "objectID": "reference/spacypdfreader.pdf_reader.html",
+    "href": "reference/spacypdfreader.pdf_reader.html",
+    "title": "spacypdfreader.pdf_reader()",
+    "section": "",
+    "text": "Convert a PDF document to a spaCy Doc object.\n\n\nUsage\nSource\n\n\nspacypdfreader.pdf_reader(\n    pdf_path,\n    nlp,\n    pdf_parser=pdfminer.parser,\n    verbose=False,\n    n_processes=None,\n    page_range=None,\n    **kwargs\n)\n\n\nParameters\n\n\npdf_path: str\n\nPath to a PDF file.\n\nnlp: spacy.Language\n\nA spaCy Language object with a loaded pipeline. For example spacy.load(\"en_core_web_sm\").\n\npdf_parser: Callable = pdfminer.parser\n\nThe parser to convert PDF file to text. Read the docs for more details. Defaults to pdfminer.parser.\n\nverbose: bool = False\n\nIf True details will be printed to the terminal. By default, False.\n\nn_processes: Optional[int] = None\n\nThe number of process to use for multi-processing. If None, multi-processing will not be used.\n\npage_range: Optional[Iterable[int]] = None\n\nThe page range of the PDF to convert from PDF to text. Must be one digit based indexing (e.g. the first page of the PDF is page 1, as opposed to page 0). If None all pages will be converted.\n\n**kwargs: Any\n\nArbitrary keyword arguments to pass to the underlying functions that extract text from the PDFs. If using pdfminer (the default) **kwargs will be passed to pdfminer.high_level.extract_text. If using spacypdfreader.parsers.pytesseract.parser **kwargs will be passed to pytesseract.image_to_string.\n\n\n\n\n\nReturns\n\n\n spacy.tokens.Doc\n\nA spacy Doc object with the custom extensions.\n\n\n\n\n\nExamples\nBy default pdfminer is used to extract text from the PDF.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp)\nTo be more explicit import pdfminer.parser and pass it into the pdf_reader function.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers import pdfminer\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pdfminer.parser)\nAlternative parsers can be used as well such as pytesseract.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers import pytesseract\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser)\nFor more fine tuning you can pass in additional parameters to pytesseract.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers import pytesseract\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; params = {\"nice\": 1}\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser, **params)\nYou can speed up spacypdfreader by using multiple processes.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers import pytesseract\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser, n_processes=4)\nTo extract a specific range of pages, use the page_range argument.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers import pytesseract\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser, n_processes=4, page_range=(2, 3))",
+    "crumbs": [
+      "Reference",
+      "Functions",
+      "[spacypdfreader.pdf_reader()]{.doc-object-name .doc-function .doc-label .doc-label-function}"
+    ]
+  },
+  {
+    "objectID": "skills.html",
+    "href": "skills.html",
+    "title": "Skills",
+    "section": "",
+    "text": "A skill is a package of structured files that teaches an AI coding agent how to work with a specific tool or framework. The skill below was generated by Great Docs from this project’s documentation. Install it in your agent and it will be able to run commands, edit configuration, write content, and troubleshoot problems without step-by-step guidance from you.\n\n  \n    ▶    Install this skill\n  \n  \n    \n      \nAny agent — install with npx:\nnpx skills add https://samedwardes.github.io/spacypdfreader/\nCodex / OpenCode\nTell the agent:Fetch the skill file at https://samedwardes.github.io/spacypdfreader/skill.md and follow the instructions.\nManual — download the skill file:\ncurl -O https://samedwardes.github.io/spacypdfreader/skill.md\nOr browse the SKILL.md file.\n      \n    \n  \n\n\nSKILL.md\n---\nname: spacypdfreader\ndescription: &gt;\n  A PDF to text extraction pipeline component for spaCy. Use when writing Python code that uses the spacypdfreader package.\nlicense: MIT\ncompatibility: Requires Python &gt;=3.9, &lt;3.14.\n---\n\n# spacypdfreader\n\nA PDF to text extraction pipeline component for spaCy.\n\n## Installation\n\n```bash\npip install spacypdfreader\n```\n\n## API overview\n\n### Functions\n\nThe main entry point for converting a PDF into a spaCy Doc.\n\n- `spacypdfreader.pdf_reader`\n\n### Parsers\n\nBuilt-in PDF-to-text parsers. Pass one of these to the `pdf_parser` argument of `pdf_reader`, or bring your own.\n\n- `parsers.pdfminer.parser`\n- `parsers.pytesseract.parser`\n\n## Resources\n\n- [Full documentation](https://samedwardes.github.io/spacypdfreader/)\n- [llms.txt](llms.txt) — Indexed API reference for LLMs\n- [llms-full.txt](llms-full.txt) — Comprehensive documentation for LLMs\n- [Source code](https://github.com/SamEdwardes/spaCyPDFreader.git)"
+  },
+  {
+    "objectID": "user-guide/parsers.html",
+    "href": "user-guide/parsers.html",
+    "title": "Parsers",
+    "section": "",
+    "text": "Extracting text from PDF documents can be challenging. There are several different options in the python ecosystem. spacypdfreader makes it easy to extract text from PDF documents. At this time spacypdfreader has built in support for two options:\n\npdfminer: the default option (GitHub | PyPi | Docs)\npytesseract: alternative option (GitHub | PyPi)\n\nYou can also bring your own custom PDF to text parser to use in spacypdfreader.\n\n\n\n\n\n\nTip\n\n\n\n💁‍♂️ Would you like to see another parser added? Please submit an issue on GitHub and the maintainer will look into adding support.\n\n\n\n\n\n\n\n\nTip\n\n\n\nParsing big PDFs can be slow. For example, parsing a 166 page PDF document on an M1 mac took 166 seconds. If you are working with larger documents try breaking them into smaller documents and use multiprocessing.\n\n\n\nComparison of built in parsers\nAll PDF to text parsers have their tradeoffs. The table below summaries the pros and cons of the built in parsers.\n\n\n\n\n\n\n\n\n\npdfminer\npytesseract\n\n\n\n\nWhen to use\n⚡️ When speed is more important than accuracy.\n🎓 When accuracy is more important than speed.\n\n\nAccuracy\n👌 Medium: from my experience pdfminer struggles with documents where the text is in one or more columns.\n👍 High: very good. Performs well on messy documents (e.g hand written text, PDFs with multiple columns of text on a single page).\n\n\nSpeed\n👌 Medium: the text extraction is not instant, but it does not take forever.\n👎 Slow: the text extraction is very slow and will take hours on hundreds of pages.\n\n\nInstallation\n👍 Easy: pure python, if you have installed spacypdfreader you already have everything you need.\n👎 Complicated: relies on additional non-python dependencies that can be complicated for beginners to install.\n\n\nHow it works\nText is extracted directly from PDF using only Python.\nEach pdf page is converted into an image. Optical character recognition is then run on each image.\n\n\n\n\n\npdfminer\nA pure Python library for extracting text from PDFs.\nInstallation\nNo action required, pdfminer will automatically be installed when you install spacypdfreader.\nUsage\npdfminer is the default PDF to text extraction parser for spacypdfreader:\nimport spacy\n\nfrom spacypdfreader import pdf_reader\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp)\nYou could also be more verbose and pass in additional parameters. For a list of available parameters please refer to the pdfminer documentation for the extract_text function.\nimport spacy\n\nfrom spacypdfreader import pdf_reader\nfrom spacypdfreader.parsers.pdfminer import parser\n\nnlp = spacy.load(\"en_core_web_sm\")\nparams = {\"caching\": False}\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, parser, **params)\n\n\npytesseract\nA PDf to text extraction engine that uses Googles tesseract OCR engine.\nInstallation\nYou can install most of the dependencies by pip installing spacypdfreader with some optional dependencies:\npip install 'spacypdfreader[pytesseract]'\nUnfortunately this will not always install all of the dependencies because some of them are non-python related. I find that installing pytesseract can be a little bit tricky for beginners. Please refer to https://github.com/madmaze/pytesseract#installation for details on how to install pytesseract if the above does not work.\nUsage\nTo use pytesseract you must pass the pytesseract parser into the pdf_parser argument. For a list of available parameters you can pass in refer the documentation for the image_to_string function from pytesseract.\nimport spacy\n\nfrom spacypdfreader import pdf_reader\nfrom spacypdfreader.parsers.pytesseract import parser\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, parser)\n\n\nBring your own parser\nspacypdfreader allows your to bring your custom PDF parser. For examples of how to implement your own parser refer to:\n\nhttps://github.com/SamEdwardes/spacypdfreader/blob/main/src/spacypdfreader/parsers/pdfminer.py, or\nhttps://github.com/SamEdwardes/spacypdfreader/blob/main/src/spacypdfreader/parsers/pytesseract.py.\n\nTo work with spacypdfreader a parser must be a function that:\n\nHas an argument named pdf_path.\nHas an argument named page_number. This argument should use 1 based indexing. E.g. the value 1 refers to the first page of the PDF.\nThe function should return the text only for a single page of the PDF. This allows spacypdfreader to execute faster with multi-processing.\n\n\n\n\n\n\n\nWarning\n\n\n\nVersion 0.3.0 changed how parsers are implemented. If you have created a custom parser that works with an older version of spacypdfreader it will need to be reimplemented.",
+    "crumbs": [
+      "User Guide",
+      "Guides",
+      "Parsers"
+    ]
+  },
+  {
+    "objectID": "user-guide/spacy-extensions.html",
+    "href": "user-guide/spacy-extensions.html",
+    "title": "spaCy custom extensions",
+    "section": "",
+    "text": "When using pdf_reader custom attributes and methods are added to spacy objects.",
+    "crumbs": [
+      "User Guide",
+      "Guides",
+      "spaCy custom extensions"
+    ]
+  },
+  {
+    "objectID": "user-guide/spacy-extensions.html#extension-attributes",
+    "href": "user-guide/spacy-extensions.html#extension-attributes",
+    "title": "spaCy custom extensions",
+    "section": "Extension attributes",
+    "text": "Extension attributes\n\n\n\n\n\n\n\n\nExtension\nType\nDescription\n\n\n\n\ndoc._.pdf_file_name\nstr\nThe file name of the PDF document.\n\n\ndoc._.first_page\nint\nThe first page number of the PDF.\n\n\ndoc._.last_page\nint\nThe last page number of the PDF.\n\n\ndoc._.page_range\n(int, int)\nThe range of pages from the PDF.\n\n\ndoc._.page(int)\nint\nReturn the span of text related to the page.",
+    "crumbs": [
+      "User Guide",
+      "Guides",
+      "spaCy custom extensions"
+    ]
+  },
+  {
+    "objectID": "user-guide/spacy-extensions.html#extension-methods",
+    "href": "user-guide/spacy-extensions.html#extension-methods",
+    "title": "spaCy custom extensions",
+    "section": "Extension methods",
+    "text": "Extension methods\n\nDoc._.page\nParameters:\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\npage_number\nint\nThe PDF page number of the doc to filter on.\nrequired\n\n\n\nReturns:\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nspacy.Span\nThe span of text from the corresponding PDF page number.",
+    "crumbs": [
+      "User Guide",
+      "Guides",
+      "spaCy custom extensions"
+    ]
+  },
+  {
+    "objectID": "user-guide/spacy-extensions.html#extension-attributes-1",
+    "href": "user-guide/spacy-extensions.html#extension-attributes-1",
+    "title": "spaCy custom extensions",
+    "section": "Extension attributes",
+    "text": "Extension attributes\n\n\n\n\n\n\n\n\nExtension\nType\nDescription\n\n\n\n\ntoken._.page_number\nint\nThe PDF page number in which the token was extracted from. The first page is 1.",
+    "crumbs": [
+      "User Guide",
+      "Guides",
+      "spaCy custom extensions"
+    ]
+  },
+  {
+    "objectID": "user-guide/changelog.html",
+    "href": "user-guide/changelog.html",
+    "title": "Changelog",
+    "section": "",
+    "text": "0.4.0 (2025-10-30)\nChanges\n\nSupport for Python 3.9 to Python 3.13\nUse uv_build back end instead of hatchling.\n\nFixes\nNone\n\n\n0.3.2 (2024-10-04)\nChanges\n\nSupport for Python 3.8 to 3.12 and all future 3.0 versions of Python (#16, #21)\nAdded local testing to test matrix of supported Python versions.\nSwitch from poetry to uv for managing project dependencies and building project.\nUpdate dependencies.\n\nFixes\nNone\n\n\n0.3.1 (2023-10-17)\nChanges\n\nSupport for page_range argument (#16, #18).\nimport spacy\nfrom spacypdfreader import pdf_reader\nfrom spacypdfreader.parsers import pytesseract\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser, n_processes=4, page_range=(2, 3))\n\nFixes\n\nRemove shed as a dependency. It was removing unused imports that were required (#17).\n\n\n\n0.3.0 (2023-05-17)\nChanges\n\nAdded support for multi-processing. For example:\nimport spacy\n\nfrom spacypdfreader.parsers import pytesseract\nfrom spacypdfreader.spacypdfreader import pdf_reader\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser, n_processes=4)\nprint(doc._.first_page)\nprint(doc._.last_page)\nprint(doc[12].text)\nprint(doc[12]._.page_number)\nChanged the way in which parsers are implemented. They are now implemented with a function as opposed to a class. See https://github.com/SamEdwardes/spacypdfreader/tree/feature/multi-processing/spacypdfreader/parsers for examples.\n\nFixes\nNone\n\n\n0.2.1 (2022-01-09)\n\nAdded examples to the API docs.\nAdded continuous deployment for GitHub pages.\n\n\n\n0.2.0 (2021-12-10)\n\nAdded support for additional pdf to text extraction engines:\n\npytesseract\ntextract\n\nAdded the ability to bring your own pdf to text extraction engine.\nAdded new spacy extension attributes and methods:\n\ndoc._.page_range\ndoc._.first_page\ndoc._.last_page\ndoc._.pdf_file_name\ndoc._.page(int)\n\nBuilt a new documentation site: https://samedwardes.github.io/spaCyPDFreader/\n\n\n\n0.1.1 (2021-12-10)\n\n0.1.1 Python ^3.7 support by @SamEdwardes in https://github.com/SamEdwardes/spaCyPDFreader/pull/2",
+    "crumbs": [
+      "User Guide",
+      "Project",
+      "Changelog"
+    ]
+  },
+  {
+    "objectID": "changelog.html",
+    "href": "changelog.html",
+    "title": "Changelog",
+    "section": "",
+    "text": "This changelog is generated automatically from GitHub Releases."
+  },
+  {
+    "objectID": "changelog.html#whats-changed",
+    "href": "changelog.html#whats-changed",
+    "title": "Changelog",
+    "section": "What’s Changed",
+    "text": "What’s Changed\n\n0.1.1 Python ^3.7 support by @SamEdwardes in https://github.com/SamEdwardes/spaCyPDFreader/pull/2"
+  },
+  {
+    "objectID": "changelog.html#new-contributors",
+    "href": "changelog.html#new-contributors",
+    "title": "Changelog",
+    "section": "New Contributors",
+    "text": "New Contributors\n\n@SamEdwardes made their first contribution in https://github.com/SamEdwardes/spaCyPDFreader/pull/2\n\nFull Changelog: https://github.com/SamEdwardes/spaCyPDFreader/commits/v0.1.1"
+  },
+  {
+    "objectID": "user-guide/contributing.html",
+    "href": "user-guide/contributing.html",
+    "title": "Contributing",
+    "section": "",
+    "text": "Before merging changes into main the following must be completed:\n\nBump the version number in pyproject.toml and spacypdfreader.__init__.py_\nFormat the code: just format\nLint: just lint\nRun pytest:\njust test-matrix\njust test-docs\nTest publishing to test PyPI: just publish-test\nCheck the docs locally: just preview-docs\n\nAfter merging the pull request:\n\nCreate a new release on GitHub\nPublish latest package to PyPi: just publish\n\nThe documentation is published automatically to GitHub Pages by the CI Docs GitHub Actions workflow on every push to main, so no manual docs deployment step is required.",
+    "crumbs": [
+      "User Guide",
+      "Project",
+      "Contributing"
+    ]
+  },
+  {
+    "objectID": "user-guide/contributing.html#test-the-docs-locally",
+    "href": "user-guide/contributing.html#test-the-docs-locally",
+    "title": "Contributing",
+    "section": "Test the docs locally",
+    "text": "Test the docs locally\nTo preview the docs locally run the following command:\njust preview-docs",
+    "crumbs": [
+      "User Guide",
+      "Project",
+      "Contributing"
+    ]
+  },
+  {
+    "objectID": "user-guide/contributing.html#publish-the-docs",
+    "href": "user-guide/contributing.html#publish-the-docs",
+    "title": "Contributing",
+    "section": "Publish the docs",
+    "text": "Publish the docs\nThe docs are hosted using GitHub Pages at https://samedwardes.github.io/spacypdfreader/. They are rebuilt and published automatically by the CI Docs workflow (.github/workflows/docs.yml) on every push to the main branch.",
+    "crumbs": [
+      "User Guide",
+      "Project",
+      "Contributing"
+    ]
+  },
+  {
+    "objectID": "user-guide/multiprocessing.html",
+    "href": "user-guide/multiprocessing.html",
+    "title": "Multiprocessing",
+    "section": "",
+    "text": "As of version 0.3.0 spacypdfreader has built in support for multi-processing. This can dramatically improve the time it takes to convert a PDF to text.\n\nUsage\nYou can use multiprocessing with an parser.\npdfminer\nimport spacy\n\nfrom spacypdfreader.spacypdfreader import pdf_reader\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, n_processes=4)\npytesseract\nimport spacy\n\nfrom spacypdfreader.parsers import pytesseract\nfrom spacypdfreader.spacypdfreader import pdf_reader\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, pytesseract.parser, n_processes=4)\n\n\nBenchmark\nimport time\nfrom functools import wraps\n\nimport spacy\n\nfrom spacypdfreader import pdf_reader\nfrom spacypdfreader.parsers import pytesseract\n\n\ndef timeit(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.perf_counter()\n        result = func(*args, **kwargs)\n        end = time.perf_counter()\n        print(f\"Took {end - start:.6f} seconds to complete\")\n        return result\n\n    return wrapper\n\n\nnlp = spacy.load(\"en_core_web_sm\")\nfile_name = \"tests/data/wikipedia.pdf\"\n\n\n@timeit\ndef bench(n_processes):\n    doc = pdf_reader(file_name, nlp, pytesseract.parser, n_processes=n_processes)\n    return doc\n\n\n# With no multiprocessing\nbench(None)\n# Took 42.286371 seconds to complete\n\n# With multiprocessing\nbench(8)\n# Took 9.051591 seconds to complete",
+    "crumbs": [
+      "User Guide",
+      "Guides",
+      "Multiprocessing"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "▶\n    License features — MIT License\n\n\n\n\n\nPermissions\n\nCommercial use\nModification\nDistribution\nPrivate use\n\n\nConditions\n\nLicense and copyright notice\n\n\nLimitations\n\nLiability\nWarranty\n\n\n\n\nMIT License\n\nCopyright (c) 2021 Sam Edwardes\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  {
+    "objectID": "reference/parsers.pdfminer.parser.html",
+    "href": "reference/parsers.pdfminer.parser.html",
+    "title": "parsers.pdfminer.parser()",
+    "section": "",
+    "text": "Convert PDFs to text using pdfminer.\n\n\nUsage\nSource\n\n\nparsers.pdfminer.parser(pdf_path, page_number, **kwargs)\n\n\nThe pdfminer library is “pure python” library for converting PDF into text. pdfminer is relatively fast, but has low accuracy than other parsers such as pytesseract.\n\n\nParameters\n\n\npdf_path: str\n\nPath to a PDF file.\n\npage_number: int\n\nThe page number of the PDF to convert from PDF to text. Must be one digit based indexing (e.g. the first page of the PDF is page 1, as opposed to page 0).\n\n**kwargs\n\n**kwargs will be passed to pdfminer.high_level.extract_text.\n\n\n\n\n\nReturns\n\n\nstr\n\nThe PDF page as a string.\n\n\n\n\n\nExamples\npdfminer is the default PDF to text parser and will be automatically used unless otherwise specified.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp)\nTo be more explicit import the parser and pass it into the pdf_reader function.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers.pdfminer import parser\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, parser)\nFor more fine tuning you can pass in additional parameters to pdfminer.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers.pdfminer import parser\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; params = {\"caching\": False}\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, parser, **params)\n\n\nInfo\nSee the pdfminer section in the docs for more details on the implementation of pdfminer. For more details on pdfminer refer to the pdfminer docs.",
+    "crumbs": [
+      "Reference",
+      "Parsers",
+      "[parsers.pdfminer.parser()]{.doc-object-name .doc-function .doc-label .doc-label-function}"
+    ]
+  },
+  {
+    "objectID": "reference/parsers.pytesseract.parser.html",
+    "href": "reference/parsers.pytesseract.parser.html",
+    "title": "parsers.pytesseract.parser()",
+    "section": "",
+    "text": "Convert a single PDF page to text using pytesseract.\n\n\nUsage\nSource\n\n\nparsers.pytesseract.parser(pdf_path, page_number, **kwargs)\n\n\nThe pytesseract library has the highest accuracy of all the PDF to text parsers included in spacypdfreader. It takes a different approach than other parsers. It first converts the PDF to an image, then runs an OCR engine on the image to extract the text. pytesseract results in the best quality but can be very slow compared to other parsers.\n\n\nParameters\n\n\npdf_path: str\n\nPath to a PDF file.\n\npage_number: int\n\nThe page number of the PDF to convert from PDF to text. Must be one digit based indexing (e.g. the first page of the PDF is page 1, as opposed to page 0).\n\n**kwargs\n\n**kwargs will be passed to pytesseract.image_to_string.\n\n\n\n\n\nReturns\n\n\nstr\n\nThe PDF page as a string.\n\n\n\n\n\nExamples\nTo use pytesseract it must be explicitly imported and passed into the pdf_reader function.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers.pytesseract import parser\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, parser)\nFor more fine tuning you can pass in additional parameters to pytesseract.\n&gt;&gt;&gt; import spacy\n&gt;&gt;&gt; from spacypdfreader import pdf_reader\n&gt;&gt;&gt; from spacypdfreader.parsers.pytesseract import parser\n&gt;&gt;&gt;\n&gt;&gt;&gt; nlp = spacy.load(\"en_core_web_sm\")\n&gt;&gt;&gt; params = {\"nice\": 1}\n&gt;&gt;&gt; doc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp, parser, **params)\n\n\nInfo\nSee the pytesseract section in the docs for more details on the implementation of pytesseract. For more details on pytesseract see the pytesseract docs.",
+    "crumbs": [
+      "Reference",
+      "Parsers",
+      "[parsers.pytesseract.parser()]{.doc-object-name .doc-function .doc-label .doc-label-function}"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "spacypdfreader",
+    "section": "",
+    "text": "spacypdfreader\nA PDF to text extraction pipeline component for spaCy.\nEasy PDF to text to spaCy text extraction in Python.\nDocumentation: https://samedwardes.github.io/spacypdfreader/\nSource code: https://github.com/SamEdwardes/spacypdfreader\nPyPi: https://pypi.org/project/spacypdfreader/\nspaCy universe: https://spacy.io/universe/project/spacypdfreader\nspacypdfreader is a python library for extracting text from PDF documents into spaCy Doc objects. When you use spacypdfreader the token and doc objects from spacy are annotated with additional information about the pdf.\nThe key features are:"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "spacypdfreader",
+    "section": "Installation",
+    "text": "Installation\nInstall spacypdfreader using pip:\npip install spacypdfreader\nTo install with the required pytesseract dependencies:\npip install 'spacypdfreader[pytesseract]'"
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "spacypdfreader",
+    "section": "Usage",
+    "text": "Usage\nimport spacy\n\nfrom spacypdfreader import pdf_reader\n\nnlp = spacy.load(\"en_core_web_sm\")\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp)\n\n## Get the page number of any token.\nprint(doc[0]._.page_number)  # 1\nprint(doc[-1]._.page_number)  # 4\n\n## Get page meta data about the PDF document.\nprint(doc._.pdf_file_name)  # \"tests/data/test_pdf_01.pdf\"\nprint(doc._.page_range)  # (1, 4)\nprint(doc._.first_page)  # 1\nprint(doc._.last_page)  # 4\n\n## Get all of the text from a specific PDF page.\nprint(doc._.page(4))  # \"able to display the destination page (unless...\""
+  },
+  {
+    "objectID": "index.html#what-is-spacy",
+    "href": "index.html#what-is-spacy",
+    "title": "spacypdfreader",
+    "section": "What is spaCy?",
+    "text": "What is spaCy?\nspaCy is a natural language processing (NLP) tool. It can be used to perform a variety of NLP tasks. For more information check out the excellent documentation at https://spacy.io."
+  },
+  {
+    "objectID": "index.html#implementation-notes",
+    "href": "index.html#implementation-notes",
+    "title": "spacypdfreader",
+    "section": "Implementation Notes",
+    "text": "Implementation Notes\nspaCyPDFreader behaves a little bit different than your typical spaCy custom component. Typically a spaCy component should receive and return a spacy.tokens.Doc object.\nspaCyPDFreader breaks this convention because the text must first be extracted from the PDF. Instead pdf_reader takes a path to a PDF file and a spacy.Language object as parameters and returns a spacy.tokens.Doc object. This allows users an easy way to extract text from PDF files while still allowing them use and customize all of the features spacy has to offer by allowing you to pass in the spacy.Language object.\nExample of a “traditional” spaCy pipeline component negspaCy:\nimport spacy\nfrom negspacy.negation import Negex\n\nnlp = spacy.load(\"en_core_web_sm\")\nnlp.add_pipe(\"negex\", config={\"ent_types\": [\"PERSON\", \"ORG\"]})\ndoc = nlp(\"She does not like Steve Jobs but likes Apple products.\")\nExample of spaCyPDFreader usage:\nimport spacy\n\nfrom spacypdfreader import pdf_reader\n\nnlp = spacy.load(\"en_core_web_sm\")\n\ndoc = pdf_reader(\"tests/data/test_pdf_01.pdf\", nlp)\nNote that the nlp.add_pipe is not used by spaCyPDFreader."
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "build_time": "2026-06-26T22:41:44Z",
+  "total_seconds": 11.996,
+  "pages": [
+    {
+      "page": "skill.md",
+      "seconds": 3.906,
+      "frozen": false
+    },
+    {
+      "page": "changelog.qmd",
+      "seconds": 2.814,
+      "frozen": false
+    },
+    {
+      "page": "user-guide/parsers.qmd",
+      "seconds": 0.553,
+      "frozen": false
+    },
+    {
+      "page": "index.qmd",
+      "seconds": 0.502,
+      "frozen": false
+    },
+    {
+      "page": "reference/spacypdfreader.pdf_reader.qmd",
+      "seconds": 0.47,
+      "frozen": false
+    },
+    {
+      "page": "reference/parsers.pdfminer.parser.qmd",
+      "seconds": 0.44,
+      "frozen": false
+    },
+    {
+      "page": "reference/parsers.pytesseract.parser.qmd",
+      "seconds": 0.434,
+      "frozen": false
+    },
+    {
+      "page": "user-guide/changelog.qmd",
+      "seconds": 0.433,
+      "frozen": false
+    },
+    {
+      "page": "user-guide/contributing.qmd",
+      "seconds": 0.424,
+      "frozen": false
+    },
+    {
+      "page": "user-guide/spacy-extensions.qmd",
+      "seconds": 0.421,
+      "frozen": false
+    },
+    {
+      "page": "skills.qmd",
+      "seconds": 0.421,
+      "frozen": false
+    },
+    {
+      "page": "user-guide/multiprocessing.qmd",
+      "seconds": 0.401,
+      "frozen": false
+    },
+    {
+      "page": "reference/index.qmd",
+      "seconds": 0.398,
+      "frozen": false
+    },
+    {
+      "page": "license.qmd",
+      "seconds": 0.379,
+      "frozen": false
+    }
+  ]
+}

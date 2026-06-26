@@ -1,0 +1,11 @@
+{
+  "skills": [
+    {
+      "name": "spacypdfreader",
+      "description": "A PDF to text extraction pipeline component for spaCy. Use when writing Python code that uses the spacypdfreader package.",
+      "files": [
+        "SKILL.md"
+      ]
+    }
+  ]
+}
