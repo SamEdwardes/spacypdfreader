@@ -1,0 +1,26 @@
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-yaml" },
+  { id = "check-toml" },
+  { id = "check-added-large-files" },
+]
+
+[[repos]]
+repo = "https://github.com/astral-sh/ruff-pre-commit"
+rev = "v0.15.6"
+hooks = [
+  { id = "ruff-check", args = [
+    "--fix",
+    "--select",
+    "I,F401",
+  ] },
+  { id = "ruff-format" },
+]
+
+[[repos]]
+repo = "https://github.com/rvben/rumdl-pre-commit"
+rev = "v0.0.222"
+hooks = [{ id = "rumdl-fmt", args = ["--disable=MD013"] }]

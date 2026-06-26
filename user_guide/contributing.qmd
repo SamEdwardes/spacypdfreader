@@ -16,7 +16,7 @@ Before merging changes into main the following must be completed:
   just test-docs
   ```
 
-- Test publishing to test PyPI: `just publish-test`
+- [ ] Test publishing to test PyPI: `just publish-test`
 - [ ] Check the docs locally: `just preview-docs`
 
 After merging the pull request:
@@ -34,6 +34,28 @@ The ruff code formatter should be run against all code.
 
 ```bash
 just format
+```
+
+## Pre-commit hooks
+
+This project uses [prek](https://github.com/j178/prek) to manage Git
+pre-commit hooks. prek is a drop-in replacement for `pre-commit` and reads
+its configuration from `prek.toml`. The hooks run ruff (import sorting,
+linting, and formatting), rumdl (Markdown formatting), and a set of basic
+file checks.
+
+prek is included in the `dev` dependency group, so no separate install is
+required. Enable the hooks once after cloning the repository:
+
+```bash
+uv run prek install
+```
+
+The hooks then run automatically on every `git commit`. To run them against
+all files on demand:
+
+```bash
+uv run prek run --all-files
 ```
 
 ## Documentation
