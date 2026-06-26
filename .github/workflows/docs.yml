@@ -49,26 +49,19 @@ jobs:
     needs: "build-docs"
     if: github.ref == 'refs/heads/main'
     permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
     steps:
       - uses: actions/download-artifact@v7
         with:
           name: docs-html
           path: great-docs/_site
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: great-docs/_site
-          include-hidden-files: true
-
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: great-docs/_site
+          exclude_assets: ''
 
   preview-docs:
     name: "Preview Docs"
